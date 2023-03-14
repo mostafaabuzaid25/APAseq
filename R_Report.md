@@ -1,12 +1,10 @@
----
+
 title: "Analyses of APA dynamics accross human line"
 ---------------------------------------------------
 author: "Mostafa Abouzaid"
 --------------------------
 date: "Last modified 2020-07-25"
 --------------------------------
-
----
 
 ```{r warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(
