@@ -1,21 +1,7 @@
-
-title: "Analyses of APA dynamics accross human line"
+Analyses of APA dynamics accross human line
 ---------------------------------------------------
-author: "Mostafa Abouzaid"
---------------------------
-date: "Last modified 2020-07-25"
---------------------------------
-
-```{r warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-  fig.width = 6,
-  fig.height = 5.5,
-  collapse = TRUE,
-  warning = FALSE,
-  echo = FALSE,
-  comment = "#>"
-)
-```
+Mostafa Abouzaid
+-----------------
 
 # Overview
 
