@@ -2,24 +2,7 @@
 title: "Analyses of APA dynamics accross human line"
 author: "Mostafa Abouzaid"
 date: "Last modified 2020-07-25"
-output: 
-  html_notebook:
-    code_folding: hide
-    toc:  true
-    toc_depth: 6
-    number_sections: true
-    theme: cerulean
-    hightlight: tango
-    fig_width: 5
-    fig_height: 4
-    df_print: paged
-vignette: >
-  %\VignetteIndexEntry{Report}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::html_notebook}
-editor_options: 
-  markdown: 
-    wrap: sentence
+
 ---
 
 ```{r warning=FALSE, include=FALSE}
