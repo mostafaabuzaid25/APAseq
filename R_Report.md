@@ -1,7 +1,10 @@
 ---
 title: "Analyses of APA dynamics accross human line"
+---------------------------------------------------
 author: "Mostafa Abouzaid"
+--------------------------
 date: "Last modified 2020-07-25"
+--------------------------------
 
 ---
 
