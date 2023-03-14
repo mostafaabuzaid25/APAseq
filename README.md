@@ -113,7 +113,12 @@ After poly(A) tail trimming, we will use Trimmomatic to remove adapter sequences
 bash
 
 ```bash
-java –jar  /path/Trimmomatic-0.38/trimmomatic-0.38.jar SE -threads 16  -phred 33  ./sample_name.A.fq  ./sample_name.fq /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
+trimmomatic  SE \
+            -threads 16  \
+            -phred 33  \
+            ./sample_name.A.fq \
+            ./sample_name.fq \
+            /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
 ```
 
 3.Sequence Alignment with STAR
@@ -125,11 +130,11 @@ bash
 
 ```bash
 STAR --runMode genomeGenerate \
-   --runThreadN 16  \
-   --genomeFastaFiles ./ref.fa \
-   --sjdbGTFfile ./ref_annotation.gff3 \
-   --sjdbGTFtagExonParentTranscript Parent \
-   --genomeDir    ./index
+     --runThreadN 16  \
+     --genomeFastaFiles ./ref.fa \
+     --sjdbGTFfile ./ref_annotation.gff3 \
+     --sjdbGTFtagExonParentTranscript Parent \
+     --genomeDir    ./index
 ```
 
 Then we can map the clean PAC-seq data to the reference genome using the following command:
