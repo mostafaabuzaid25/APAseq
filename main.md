@@ -6,7 +6,7 @@ Introduction
 
 Poly(A) tail sequencing (PAC-seq) is a powerful method for genome-wide profiling of mRNA 3' ends. In this guide, we will illustrate the workflow for analyzing PAC-seq data in Homo sapian, which includes three replicates with reads containing a poly(A) tail.
 
-Data Processing
+1.Data Processing
 ---------------
 
 The first step is to identify reads with valid poly(A) tail and trim the tail. We will use the `MAP_findTailAT.pl` script, which is a Perl script developed in-house. The script can be executed with the following command:
@@ -40,7 +40,7 @@ bash
 java –jar  /path/Trimmomatic-0.38/trimmomatic-0.38.jar SE -threads 16  -phred 33  ./sample_name.A.fq  ./sample_name.fq /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
 ```
 
-Sequence Alignment with STAR
+2.Sequence Alignment with STAR
 ----------------------------
 
 We will use STAR, one of the most popular tools for sequence alignment, to map the clean PAC-seq data to the reference genome. First, we need to generate genome indices with the following command:
@@ -67,7 +67,7 @@ STAR --runThreadN 20 \
      --outFilterMultimapNmax 1
 ```
 
-Identification of Polyadenylation Sites
+3.Identification of Polyadenylation Sites
 ---------------------------------------
 
 `PAT2PA2PAC.sh` is a shell script that identifies poly(A) sites using in-house Perl scripts, bedtools, and bedmap. The script has two main steps:
@@ -88,7 +88,7 @@ For example,
 
 
 ```
-bash  /PAT2PA2PAC.sh  Arabidopsis_thaliana.TAIR10.dna.toplevel.fa /input-sam-file-path/  /output-path/  24  "*.out.sam"
+bash  /PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "*.out.sam"
 ```
 
 or
@@ -96,7 +96,7 @@ or
 
 
 ```
-bash  /PAT2PA2PAC.sh  Arabidopsis_thaliana.TAIR10.dna.toplevel.fa /input-sam-file-path/  /output-path/  24  "leaf-esf-rep1Aligned.out.sam  leaf-esf-rep2Aligned.out.sam   leaf-esf-rep3Aligned.out.sam "
+bash  /PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "sample_name1.out.sam  sample_name2.out.sam   sample_name.3out.sam "
 ```
 
 ### Output
@@ -119,7 +119,7 @@ Example:
 
 ```
 cat all.PAC.header
-chr	UPA_start	UPA_end	strand	PAnum	tot_tagnum	coord	refPAnum leaf-esf-rep1Aligned.out.sam  leaf-esf-rep2Aligned.out.sam   leaf-esf-rep3Aligned.out.sam
+chr	UPA_start	UPA_end	strand	PAnum	tot_tagnum	coord	refPAnum sample_name1.out.sam  sample_name2.out.sam   sample_name.3out.sam 
 ```
 
 b) `all.PAC.PATcount` – the PAC result, and the file "all.PAC.header" provides the corresponding column names.
@@ -139,8 +139,6 @@ head all.PAC.PATcount
 c) `all.PAC.info` – the part of "all.PAC.PATcount" with the first eight columns, including "chr", "UPA\_start", "UPA\_end", "strand", "PAnum", "tot\_tagnum", "coord", "refPAnum".
 
 Example:
-
-
 
 ```
 head all.PAC.info
