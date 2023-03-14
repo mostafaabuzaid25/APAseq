@@ -6,7 +6,83 @@ Introduction
 
 Poly(A) tail sequencing (PAC-seq) is a powerful method for genome-wide profiling of mRNA 3' ends. In this guide, we will illustrate the workflow for analyzing PAC-seq data in Homo sapian, which includes three replicates with reads containing a poly(A) tail.
 
-1.Data Processing
+1.A Software Installation
+-------------------------
+
+The following tools are required for this project, with their respective versions:
+
+*   fastq-dump
+*   FastQC
+*   multiqc
+*   Trimmomatic
+*   STAR
+*   bedtools
+*   bedmap
+*   samtools
+
+To install these tools, follow the instructions below:
+
+1.  Open the command prompt or terminal on your computer.
+    
+2.  Install mamba by running the following command:
+    
+```
+conda install -n base -c conda-forge mamba
+```
+
+3.  Once mamba is installed, you can use it to install the required tools by running the following command:
+```
+mamba install -n base -c bioconda fastqc multiqc trimmomatic star bedtools bedmap samtools
+```
+
+4.  This will install all the required tools in one line without creating an environment.
+    
+5.  Once the installation is complete, you can verify that the tools are installed correctly by running the following commands:
+    
+```
+fastqc --version
+multiqc --version
+trimmomatic -version
+STAR --version
+bedtools --version
+bedmap --version
+samtools --version
+```
+1.B Perl and related modules
+-------------------------
+
+```
+mamba install -n base -c conda-forge perl
+```
+Make sure Perl and related modules (details in our Perl scripts) are installed on your computer. To check the Perl version, run the following command:
+
+`perl –version`
+
+To install Perl modules on Linux/Unix/Mac OS, follow these steps:
+
+1.  Upgrade CPAN:
+
+`perl -MCPAN -e shell`
+
+2.  Install or upgrade Module::Build, and make it your preferred installer:
+
+shell
+
+```shell
+cpan>install Module::Build
+cpan>o conf prefer_installer MB
+cpan>o conf commit
+```
+
+3.  Install Bio::SeqIO module:
+
+```
+cpan>install Bio::SeqIO
+```
+
+This will display the version of each tool, indicating that it has been installed correctly.
+
+2.Data Processing
 ---------------
 
 The first step is to identify reads with valid poly(A) tail and trim the tail. We will use the `MAP_findTailAT.pl` script, which is a Perl script developed in-house. The script can be executed with the following command:
@@ -40,7 +116,7 @@ bash
 java –jar  /path/Trimmomatic-0.38/trimmomatic-0.38.jar SE -threads 16  -phred 33  ./sample_name.A.fq  ./sample_name.fq /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
 ```
 
-2.Sequence Alignment with STAR
+3.Sequence Alignment with STAR
 ----------------------------
 
 We will use STAR, one of the most popular tools for sequence alignment, to map the clean PAC-seq data to the reference genome. First, we need to generate genome indices with the following command:
@@ -67,7 +143,7 @@ STAR --runThreadN 20 \
      --outFilterMultimapNmax 1
 ```
 
-3.Identification of Polyadenylation Sites
+4.Identification of Polyadenylation Sites
 ---------------------------------------
 
 `PAT2PA2PAC.sh` is a shell script that identifies poly(A) sites using in-house Perl scripts, bedtools, and bedmap. The script has two main steps:
