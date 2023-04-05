@@ -107,6 +107,7 @@ Here is a brief description of the parameters:
 *   `-odir`: output directory (default is the same as input)
 *   `-suf`: output filename suffix (default: xx.suf.T/A.fq)
 *   `-debug`: debug mode (default: T)
+*   `-deep `: 
 
 After poly(A) tail trimming, we will use Trimmomatic to remove adapter sequences and low-quality reads. Here is the command:
 
