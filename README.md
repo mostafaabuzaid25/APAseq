@@ -162,7 +162,7 @@ Usage:
 
 
 ```
-bash  /PAT2PA2PAC.sh  genome   /input-path/ /output-path/   distance  input-file
+bash  PAT2PA2PAC.sh  genome   /input-path/ /output-path/   distance  input-file
 ```
 
 For example,
@@ -170,7 +170,7 @@ For example,
 
 
 ```
-bash  /PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "*.out.sam"
+bash  PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "*.out.sam"
 ```
 
 or
@@ -178,7 +178,7 @@ or
 
 
 ```
-bash  /PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "sample_name1.out.sam  sample_name2.out.sam   sample_name.3out.sam "
+bash  PAT2PA2PAC.sh  ref.fa /input-sam-file-path/  /output-path/  24  "sample_name1.out.sam  sample_name2.out.sam   sample_name.3out.sam "
 ```
 
 ### Output
