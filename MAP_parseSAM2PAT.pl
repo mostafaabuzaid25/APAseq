@@ -1,9 +1,10 @@
 #!/usr/bin/perl -w
 
-#´¦ÀíSAMÎÄ¼ş£¨ÒÑ¾­È¥³ı¹ıtailµÄ±È¶Ô½á¹û£©
-#µÃµ½PAT£¬¸ù¾İÌá¹©µÄpoly=A»òT£¬À´ÅĞ¶Ï·½Ïò¼°×ø±ê
-#¼ÆËã×ø±êÊ±¿¼ÂÇsoftclipping£¨S±ê¼Ç£©
-#²¢ÔÊĞí¸ù¾İSºÍMµÄÊıÁ¿ÅĞ¶ÏĞòÁĞ±È¶ÔµÄºÏÀíĞÔ£¨µ±S¹ı´ó£¬»òM¹ıĞ¡Ê±£¬ÈÏÎªĞòÁĞÃ»ÓĞ±È¶ÔºÃ£©
+#Process the SAM file (the comparison result of the tail has been removed)  
+#Get the PAT, judge the direction and coordinates according to the poly=A or T provided  
+#Consider softclipping (S mark) when calculating the coordinates 6 
+#And allow according to S and the number of M to judge the rationality of sequence alignment (when S is too large, or M is too small, 
+#it is considered that the sequence is not well aligned)
 
 use strict;
 use Getopt::Long;
@@ -17,13 +18,13 @@ my $USAGE=<< "_USAGE_";
 
 Usage: 
 
-  ½ö¸ù¾İflagÅĞ¶Ï,²»ÅĞ¶ÏMºÍSÎ»£¬×ø±ê½ö¸ù¾İĞòÁĞ³¤¶ÈÅĞ¶Ï
+  ä»…æ ¹æ®flagåˆ¤æ–­,ä¸åˆ¤æ–­Må’ŒSä½ï¼Œåæ ‡ä»…æ ¹æ®åºåˆ—é•¿åº¦åˆ¤æ–­
   MAP_parseSAM2PAT.pl -sam oxt.sam 
 
-  ÔÊĞíÓÃcigarÎ»µÄMºÍS½øÒ»²½¹ıÂË
+  å…è®¸ç”¨cigarä½çš„Må’ŒSè¿›ä¸€æ­¥è¿‡æ»¤
   MAP_parseSAM2PAT.pl -sam oxt.sam -m 30 -s 10 
 
-  Êä³öMAPQ CIGAR CIGAR_M CIGAR_S XSÁĞ£¬ÇÒÓĞ¿¼ÂÇMºÍSÎ»È·¶¨×ø±ê
+  è¾“å‡ºMAPQ CIGAR CIGAR_M CIGAR_S XSåˆ—ï¼Œä¸”æœ‰è€ƒè™‘Må’ŒSä½ç¡®å®šåæ ‡
   MAP_parseSAM2PAT.pl -sam xx.sam -more T -ofile xx.sam.PAT
 
 -h=help
@@ -98,12 +99,12 @@ $chr=$strand='';
 
 open(OO,">$ofile");
 
-if ($more or $cigarM or $cigarS) { #2015/1/3 Èç¹ûÒªÅĞ¶Ï cigar
+if ($more or $cigarM or $cigarS) { #2015/1/3 å¦‚æœè¦åˆ¤æ–­ cigar
 	while ($line=<IN>) {
 	  @items=split(/\t/,$line);
 	  $flag=$items[$flagFld];
 	  #$chr=$chrs{$items[$chrFld]};  
-	  $chr=$items[$chrFld];  #2014/12/26 Èç¹ûSAMµÄchrÖ±½Ó¿ÉÓÃµÄ»°
+	  $chr=$items[$chrFld];  #2014/12/26 å¦‚æœSAMçš„chrç›´æ¥å¯ç”¨çš„è¯
 	  $pos=$items[$posFld]; 
 	  my $mapq=$items[$qFld];
   
@@ -150,12 +151,12 @@ if ($more or $cigarM or $cigarS) { #2015/1/3 Èç¹ûÒªÅĞ¶Ï cigar
 	  }
 	  next;
 	}
-} else { #Ö»¸ù¾İflag 
+} else { #åªæ ¹æ®flag 
 	while ($line=<IN>) {
 	  @items=split(/\t/,$line);
 	  $flag=$items[$flagFld];
 	  #$chr=$chrs{$items[$chrFld]};  
-	  $chr=$items[$chrFld];  #2014/12/26 Èç¹ûSAMµÄchrÖ±½Ó¿ÉÓÃµÄ»°
+	  $chr=$items[$chrFld];  #2014/12/26 å¦‚æœSAMçš„chrç›´æ¥å¯ç”¨çš„è¯
 	  $pos=$items[$posFld]; 
 	  if (($flag==0 and $poly eq 'A') or ($flag==16 and $poly eq 'T') ) {
 		 $flag0cnt++;
@@ -165,7 +166,7 @@ if ($more or $cigarM or $cigarS) { #2015/1/3 Èç¹ûÒªÅĞ¶Ï cigar
 		 $flag1cnt++;
 		 $strand='-';	
 		 $PATpos=$pos-1;
-	  } else { #flagÃ»ÓĞ
+	  } else { #flagæ²¡æœ‰
 		$noflagcnt++;
 		next;
 	  }
