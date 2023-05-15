@@ -31,7 +31,7 @@ do not output the original sequence
 -h=help
 -in=input fa or fq file
 -poly=A/T/A&T/A|T
-  A|T If there are both A and T£¬when tail_lenA>=lenT, keep the result of A; a sequence can only contain A or T, not both
+  A|T If there are both A and Tï¼Œwhen tail_lenA>=lenT, keep the result of A; a sequence can only contain A or T, not both
   A&T Find A and T at the same time, the two are irrelevant, a sequence may have both A and T at the same time
 -ml=min length after trim
 -mg=margin from the start (poly=T) or to the end (poly=A) (=5)
@@ -120,7 +120,7 @@ $findT=1 if ($poly=~ m/T/);
 #print "$findT\n";
 
 if ($deep & $findA) {
-  die "TODO: deepºÍfindAµÄ³ÌĞò»¹Ã»ÊµÏÖ...";
+  die "TODO: deepå’ŒfindAçš„ç¨‹åºè¿˜æ²¡å®ç°...";
 }
 
 die "only support fastq file" if seqFormat($in) ne 'fq';
@@ -131,7 +131,7 @@ $suf=".$suf" if $suf;
 my ($cntNotailT,$cntShortT,$cntTotal,$cntFinalT,$cntNotailA,$cntShortA,$cntFinalA,$cntMissA,$cntMissT,$cntBadT,$cntBadA)=(0,0,0,0,0,0,0,0,0,0,0);
 
 my $inpath=getDir($in,0); # x/y/
-my $infname=getFileName($in,1); #ÎÄ¼şÇ°×º
+my $infname=getFileName($in,1); #æ–‡ä»¶å‰ç¼€
 if (!$odir) {
   $odir=$inpath;
 }
@@ -148,7 +148,7 @@ if ($findA) {
 
 
 if ($findT) {
-  open OT,">$odir$infname$suf.T.fq";#ÓĞĞ§µÄ½á¹û£¬ÌŞ³ıÁËpolyTÎ²°ÍµÄ#seven
+  open OT,">$odir$infname$suf.T.fq";#Effective result, #seven with polyT tail removed
   if($debug){
   	open TESTT,">$odir$infname$suf.T.DEBUG.fq";
   	open BEDT,">$odir$infname$suf.badT.fq";
@@ -186,42 +186,42 @@ my ($md1,$md2,$md3)=(0,0,0);
 my @fqkeys = qw/id seq pl qual/;
 while(!eof $fh1) {
 	my (%e1);
-	@e1{@fqkeys} = readfq($fh1);#hashÍ¬Ê±´æ·ÅreadsµÄid¡¢seq¡¢pl¡¢qual
+	@e1{@fqkeys} = readfq($fh1);#hash stores the id of reads at the same timeã€seqã€plã€qual
 	$cntTotal++;
 	my ($seqT,$seqA,$qualT,$qualA)=('','','','');
 	my ($haveT,$haveA,$shortT,$notailT,$shortA,$notailA,$badTailT,$badTailA)=(0,0,0,0,0,0,0,0);
 	if ($findT) {
 	    $seqT=$e1{'seq'};
- 		if ($seqT=~s/$regT//) {#°ÑÆ¥ÅäµÄÄ£Ê½Ìæ»»ÁË
+ 		if ($seqT=~s/$regT//) {# Replace the matching pattern
 		  my $length=length($seqT);
-		  #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #½ØÈ¡ÏÂÀ´µÄTÆ¬¶Î#WXH
-		  my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#Ó¦¸ÃÌŞ³ıµôbarcode£¬adapter£¬Seven 
+		  #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #Intercepted T segment#WXH
+		  my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#åº”è¯¥å‰”é™¤æ‰barcodeï¼Œadapterï¼ŒSeven 
 		  #print "$Ts\n";#Seven test
-		  #my $Tcnt = $Ts =~ tr/T/T/; #¼ÆËãTÊı
-		  my $Tcnt = $Ts=~ tr/T/T/;#¼ÆËãTÊı£¬Seven
+		  #my $Tcnt = $Ts =~ tr/T/T/; #è®¡ç®—Tæ•°
+		  my $Tcnt = $Ts=~ tr/T/T/;#è®¡ç®—Tæ•°ï¼ŒSeven
 		  ##print "Yes: $Ts.$Tcnt\n";
-		  if ((length($e1{'seq'})-$length-$bar)<$mtail or $Tcnt/length($Ts)<$mper) { #tail¹ı¶Ì or T%<mper
+		  if ((length($e1{'seq'})-$length-$bar)<$mtail or $Tcnt/length($Ts)<$mper) { #tailè¿‡çŸ­ or T%<mper
 			$badTailT=1;
 			print TESTT $Ts."***BAD***".$seqT."\n"  if $debug;
-		  } elsif ($length<$ml) { #ĞòÁĞ¹ı¶Ì
+		  } elsif ($length<$ml) { #åºåˆ—è¿‡çŸ­
 			$shortT=1;
 			print TESTT $Ts."***SHR***".$seqT."\n"  if $debug;
 		  } else {
 		  	++$md1;
 			$haveT=1;
-		    $qualT=substr($e1{'qual'},length($e1{'qual'})-$length,$length);#Âú×ãÌõ¼şÄØseven
+		    $qualT=substr($e1{'qual'},length($e1{'qual'})-$length,$length);#æ»¡è¶³æ¡ä»¶å‘¢seven
 		  }
 		} 
 
-       if (!$haveT & $deep) { #Éî¶È²éÕÒ,ÅĞ¶Ï¹Ì¶¨µÄÕıÔòÊ½£¬ÕÒµ½ÔÙ½ØÈ¡µ½¿ªÍ·£¬ÔÙÅĞ¶Ïmper.. (TTTTTCTTTTCTCTTTTTTTT)
+       if (!$haveT & $deep) { #æ·±åº¦æŸ¥æ‰¾,åˆ¤æ–­å›ºå®šçš„æ­£åˆ™å¼ï¼Œæ‰¾åˆ°å†æˆªå–åˆ°å¼€å¤´ï¼Œå†åˆ¤æ–­mper.. (TTTTTCTTTTCTCTTTTTTTT)
           $seqT=$e1{'seq'};
 		      my $deepreg="^.{0,$mg}?(T{1,}[^T]{0,2})*T{$mp,}";
 		      if ($seqT=~s/$deepreg//){
 			   		 my $length=length($seqT);
-			 			 #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #½ØÈ¡ÏÂÀ´µÄTÆ¬¶Î WXH
-			 			 my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#Ó¦¸ÃÌŞ³ıµôbarcode£¬adapter£¬Seven
+			 			 #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #æˆªå–ä¸‹æ¥çš„Tç‰‡æ®µ WXH
+			 			 my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#åº”è¯¥å‰”é™¤æ‰barcodeï¼Œadapterï¼ŒSeven
 			 			   #print "$Ts\n";
-			  	  my $Tcnt = $Ts =~ tr/T/T/; #¼ÆËãTÊı
+			  	  my $Tcnt = $Ts =~ tr/T/T/; #è®¡ç®—Tæ•°
 		      		##print "Deep: $Ts.$Tcnt\n";
 			      if ((length($e1{'seq'})-$length-$bar)>=$mtail and $Tcnt/length($Ts)>=$mper and $length>=$ml) { 
 				      ++$md2;
@@ -234,23 +234,23 @@ while(!eof $fh1) {
 		     }
 	     }
 	     
-	     if(!$haveT & $review){#ÔÚ¶ÈÉî¶È²éÕÒ£¬Ö»ÒªÆ¥Åäµ½TTTTTTTTµÄ,ÅĞ¶Ïmper¡¢ml
+	     if(!$haveT & $review){#åœ¨åº¦æ·±åº¦æŸ¥æ‰¾ï¼Œåªè¦åŒ¹é…åˆ°TTTTTTTTçš„,åˆ¤æ–­mperã€ml
 	     	   $seqT=$e1{'seq'};
 	     	   my $deepmod="T{$mp,}([^T]{0,$mm}T{$mr,}){0,}";
 	     	   if($seqT=~ m/$deepmod/){
 	     	   	
 	     	     #print "1$seqT\n";
-	     	     my $pos_start=$-[0];#·µ»ØÆ¥ÅäµÄÊ×Î»ÖÃ£¬´Ó0¿ªÊ¼¼ÆÊı
-	     	     my $match_length =length$&;#·µ»ØµÚÒ»¸öÆ¥ÅäµÄ³¤¶È TTTTTT£¬»òTTTTTTXXTTTXXTTTT
-             my $pos_end = $pos_start+$match_length;#·µ»ØÊ×´ÎÆ¥ÅäµÄÄ©index£¬´Ó0¿ªÊ¼¼ÆÊı
+	     	     my $pos_start=$-[0];#è¿”å›åŒ¹é…çš„é¦–ä½ç½®ï¼Œä»0å¼€å§‹è®¡æ•°
+	     	     my $match_length =length$&;#è¿”å›ç¬¬ä¸€ä¸ªåŒ¹é…çš„é•¿åº¦ TTTTTTï¼Œæˆ–TTTTTTXXTTTXXTTTT
+             my $pos_end = $pos_start+$match_length;#è¿”å›é¦–æ¬¡åŒ¹é…çš„æœ«indexï¼Œä»0å¼€å§‹è®¡æ•°
   
 	     	   	 $seqT =substr($seqT,$pos_end,length($seqT)-$pos_end);
 	     	   	 #print "2$seqT\n";
 	     	   	 my $length=length($seqT);
 	     	   	 
-	     	   	 my $Ts=substr($e1{'seq'},$bar,$pos_end-$bar);#polyTµÄĞòÁĞ
+	     	   	 my $Ts=substr($e1{'seq'},$bar,$pos_end-$bar);#polyTçš„åºåˆ—
 	     	   	 #print "3$Ts\n";
-	     	   	 my $Tcnt = $Ts =~ tr/T/T/; #¼ÆËãTÊı
+	     	   	 my $Tcnt = $Ts =~ tr/T/T/; #è®¡ç®—Tæ•°
 	     	   	 #print "3$Tcnt\n";
 	     	   	 if(length($Ts)>=$mtail and $Tcnt/length($Ts)>=$mper and $length>=$ml){
 	     	   	 	  #print "####yes\n";
@@ -285,9 +285,9 @@ while(!eof $fh1) {
 		if ($seqA=~s/$regA//) {
 	      my $length=length($seqA);
 		  print TESTA "$seqA*******".substr($e1{'seq'},$length,length($e1{'seq'})-$length)."\n" if $debug;
-		  my $As=substr($e1{'seq'},$length,length($e1{'seq'})-$length); #½ØÈ¡ÏÂÀ´µÄAÆ¬¶Î
-		  my $Acnt = $As =~ tr/A/A/; #¼ÆËãAÊı
-		  if (length($e1{'seq'})-$length<$mtail or $Acnt/length($As)<$mper) { #tail¹ı¶Ì
+		  my $As=substr($e1{'seq'},$length,length($e1{'seq'})-$length); #æˆªå–ä¸‹æ¥çš„Aç‰‡æ®µ
+		  my $Acnt = $As =~ tr/A/A/; #è®¡ç®—Aæ•°
+		  if (length($e1{'seq'})-$length<$mtail or $Acnt/length($As)<$mper) { #tailè¿‡çŸ­
 			$badTailA=1;
 		  } elsif ($length<$ml) {
 			 $shortA=1;
@@ -302,9 +302,9 @@ while(!eof $fh1) {
 	} #~findA
 
 
-      #Êä³öreads½á¹û
+      #è¾“å‡ºreadsç»“æœ
       if ($poly eq 'A|T') {
-		  		if ($haveA and $haveT) { #ÈôÍ¬Ê±ÓĞAºÍT£¬ÔòlenA>=lenTÊ±£¬±£ÁôAµÄ½á¹û£»
+		  		if ($haveA and $haveT) { #è‹¥åŒæ—¶æœ‰Aå’ŒTï¼Œåˆ™lenA>=lenTæ—¶ï¼Œä¿ç•™Açš„ç»“æœï¼›
 			 				if (length($seqT)<length($seqA)) {
 									print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
 									$cntFinalT++;
@@ -320,20 +320,20 @@ while(!eof $fh1) {
 								$cntFinalA++;
 								$cntMissT++;
 						 }
-		  		}elsif ($shortA or $shortT) { #ÓĞA»òTÌ«¶Ì£¬Ôò¶¼²»Êä³ö
+		  		}elsif ($shortA or $shortT) { #æœ‰Aæˆ–Tå¤ªçŸ­ï¼Œåˆ™éƒ½ä¸è¾“å‡º
 			  				$cntShortA++;
 			 					$cntShortT++;
-		 			}elsif ($badTailT or $badTailA) { #ÓĞA»òTÌ«¶Ì£¬Ôò¶¼²»Êä³ö
+		 			}elsif ($badTailT or $badTailA) { #æœ‰Aæˆ–Tå¤ªçŸ­ï¼Œåˆ™éƒ½ä¸è¾“å‡º
 			 					 $cntBadA++;
 			  				 $cntBadT++;
-		      }elsif ($haveA and !$haveT) { #ÓĞÒ»·½Ã»ÓĞ£¬ÔòÖ»Êä³öÏàÓ¦·½
+		      }elsif ($haveA and !$haveT) { #æœ‰ä¸€æ–¹æ²¡æœ‰ï¼Œåˆ™åªè¾“å‡ºç›¸åº”æ–¹
 			  				 print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
 								if ($oraw) {
 				  					print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
 								}
 			   				$cntFinalA++;
 			          $cntNotailT++;
-		     }elsif ($haveT and !$haveA) { #ÓĞÒ»·½Ã»ÓĞ£¬ÔòÖ»Êä³öÏàÓ¦·½
+		     }elsif ($haveT and !$haveA) { #æœ‰ä¸€æ–¹æ²¡æœ‰ï¼Œåˆ™åªè¾“å‡ºç›¸åº”æ–¹
 			   				print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
 				        if ($oraw) {
 				  				print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
