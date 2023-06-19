@@ -120,7 +120,7 @@ $findT=1 if ($poly=~ m/T/);
 #print "$findT\n";
 
 if ($deep & $findA) {
-  die "TODO: deep和findA的程序还没实现...";
+  die "TODO: deepand findA's program has not yet been implemented...";
 }
 
 die "only support fastq file" if seqFormat($in) ne 'fq';
