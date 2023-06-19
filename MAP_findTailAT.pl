@@ -195,7 +195,7 @@ while(!eof $fh1) {
  		if ($seqT=~s/$regT//) {# Replace the matching pattern
 		  my $length=length($seqT);
 		  #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #Intercepted T segment#WXH
-		  my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#应该剔除掉barcode，adapter，Seven 
+		  my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#It should be called barcode，adapter，Seven 
 		  #print "$Ts\n";#Seven test
 		  #my $Tcnt = $Ts =~ tr/T/T/; #计算T数
 		  my $Tcnt = $Ts=~ tr/T/T/;#计算T数，Seven
@@ -203,17 +203,17 @@ while(!eof $fh1) {
 		  if ((length($e1{'seq'})-$length-$bar)<$mtail or $Tcnt/length($Ts)<$mper) { #tail过短 or T%<mper
 			$badTailT=1;
 			print TESTT $Ts."***BAD***".$seqT."\n"  if $debug;
-		  } elsif ($length<$ml) { #序列过短
+		  } elsif ($length<$ml) { #The sequence is too short
 			$shortT=1;
 			print TESTT $Ts."***SHR***".$seqT."\n"  if $debug;
 		  } else {
 		  	++$md1;
 			$haveT=1;
-		    $qualT=substr($e1{'qual'},length($e1{'qual'})-$length,$length);#满足条件呢seven
+		    $qualT=substr($e1{'qual'},length($e1{'qual'})-$length,$length);#Meet the conditions seven
 		  }
 		} 
 
-       if (!$haveT & $deep) { #深度查找,判断固定的正则式，找到再截取到开头，再判断mper.. (TTTTTCTTTTCTCTTTTTTTT)
+       if (!$haveT & $deep) { #Deep search, judgment fixed regular formula，Find and intercept to the beginning, and then judge mper.. (TTTTTCTTTTCTCTTTTTTTT)
           $seqT=$e1{'seq'};
 		      my $deepreg="^.{0,$mg}?(T{1,}[^T]{0,2})*T{$mp,}";
 		      if ($seqT=~s/$deepreg//){
