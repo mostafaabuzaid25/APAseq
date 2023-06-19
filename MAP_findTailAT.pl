@@ -131,7 +131,7 @@ $suf=".$suf" if $suf;
 my ($cntNotailT,$cntShortT,$cntTotal,$cntFinalT,$cntNotailA,$cntShortA,$cntFinalA,$cntMissA,$cntMissT,$cntBadT,$cntBadA)=(0,0,0,0,0,0,0,0,0,0,0);
 
 my $inpath=getDir($in,0); # x/y/
-my $infname=getFileName($in,1); #文件前缀
+my $infname=getFileName($in,1); #File prefix
 if (!$odir) {
   $odir=$inpath;
 }
@@ -218,8 +218,8 @@ while(!eof $fh1) {
 		      my $deepreg="^.{0,$mg}?(T{1,}[^T]{0,2})*T{$mp,}";
 		      if ($seqT=~s/$deepreg//){
 			   		 my $length=length($seqT);
-			 			 #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #截取下来的T片段 WXH
-			 			 my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#应该剔除掉barcode，adapter，Seven
+			 			 #my $Ts=substr($e1{'seq'},0,length($e1{'seq'})-$length); #Intercepted T fragment WXH
+			 			 my $Ts=substr($e1{'seq'},$bar,length($e1{'seq'})-$length-$bar);#It should be culled barcode，adapter，Seven
 			 			   #print "$Ts\n";
 			  	  my $Tcnt = $Ts =~ tr/T/T/; #计算T数
 		      		##print "Deep: $Ts.$Tcnt\n";
@@ -234,7 +234,7 @@ while(!eof $fh1) {
 		     }
 	     }
 	     
-	     if(!$haveT & $review){#在度深度查找，只要匹配到TTTTTTTT的,判断mper、ml
+	     if(!$haveT & $review){#Find in degree depth, as long as it matchesTTTTTTTT的,judgement mper、ml
 	     	   $seqT=$e1{'seq'};
 	     	   my $deepmod="T{$mp,}([^T]{0,$mm}T{$mr,}){0,}";
 	     	   if($seqT=~ m/$deepmod/){
