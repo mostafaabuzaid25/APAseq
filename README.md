@@ -130,12 +130,7 @@ We will use STAR, one of the most popular tools for sequence alignment, to map t
 bash
 
 ```bash
-STAR --runMode genomeGenerate \
-     --runThreadN 16  \
-     --genomeFastaFiles ./ref.fa \
-     --sjdbGTFfile ./ref_annotation.gff3 \
-     --sjdbGTFtagExonParentTranscript Parent \
-     --genomeDir    ./index
+STAR --runMode genomeGenerate --runThreadN 16  --genomeFastaFiles ./ref.fa --sjdbGTFfile ./ref_annotation.gff3 --sjdbGTFtagExonParentTranscript Parent --genomeDir ./index
 ```
 
 Then we can map the clean PAC-seq data to the reference genome using the following command:
