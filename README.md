@@ -114,12 +114,7 @@ After poly(A) tail trimming, we will use Trimmomatic to remove adapter sequences
 bash
 
 ```bash
-trimmomatic  SE \
-            -threads 16  \
-            -phred 33  \
-            ./sample_name.A.fq \
-            ./sample_name.fq \
-            /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
+trimmomatic  SE -threads 16  -phred 33  ./sample_name.A.fq  sample_name.fq /path/ILLUMINACLIP:TruSeq3-SE:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:10 MINLEN:25
 ```
 
 3.Sequence Alignment with STAR
@@ -136,12 +131,7 @@ STAR --runMode genomeGenerate --runThreadN 16  --genomeFastaFiles ./ref.fa --sjd
 Then we can map the clean PAC-seq data to the reference genome using the following command:
 
 ```bash
-STAR --runThreadN 20 \
-     --readFilesIn ./sample_name-rep1.fq
-     --genomeDir ./index \
-     --outFileNamePrefix   ./sample_name-rep1\
-     --outMultimapperOrder Random \
-     --outFilterMultimapNmax 1
+STAR --runThreadN 20 --readFilesIn ./sample_name-rep1.fq --genomeDir ./index --outFileNamePrefix   ./sample_name-rep1 --outMultimapperOrder Random --outFilterMultimapNmax 1
 ```
 
 4.Identification of Polyadenylation Sites
