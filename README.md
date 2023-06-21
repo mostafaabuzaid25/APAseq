@@ -77,7 +77,8 @@ cpan>o conf commit
 3.  Install Bio::SeqIO module:
 
 ```
-cpan>install Bio::SeqIO
+install Bio::SeqIO
+install Bio::Perl
 ```
 
 This will display the version of each tool, indicating that it has been installed correctly.
