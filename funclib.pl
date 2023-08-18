@@ -270,23 +270,23 @@ sub getPermute {
   return $ret;
 }
 
-#############################################################################
-## Fisher检验
-## $pval=fisherTest(n11,n12,n21,n22);
+############################################################################
+## Fisher Test
+## $pval = fisherTest($n11, $n12, $n21, $n22);
 #--------------------------------------
 #          word2   ~word2
-#  word1    *n11      n12 | *n1p
-# ~word1     n21      n22 |  n2p
+#  word1    *$n11     $n12 | *$n1p
+# ~word1     $n21     $n22 |  $n2p
 #           --------------
-#           *np1      np2   *npp
+#           *$np1     $np2   *$npp
 #############################################################################
-sub fisherTest { 
-  my ($n11,$n12,$n21,$n22)=@_;
-	my $n1p=$n11+$n12;
-	my $np1=$n11+$n21;
-	my $npp=$n11+$n12+$n21+$n22;
-    my $pvalue=calculateStatistic( n11=>$n11,n1p=>$n1p,np1=>$np1,npp=>$npp);
-	return($pvalue);
+sub fisherTest {
+    my ($n11, $n12, $n21, $n22) = @_;
+    my $n1p = $n11 + $n12;
+    my $np1 = $n11 + $n21;
+    my $npp = $n11 + $n12 + $n21 + $n22;
+    my $pvalue = calculateStatistic(n11 => $n11, n1p => $n1p, np1 => $np1, npp => $npp);
+    return ($pvalue);
 }
 
 #****************************************************************************
@@ -294,42 +294,42 @@ sub fisherTest {
 #****************************************************************************
 #############################################################################
 ## $mode=fileMode($file)
-## 取得文件的类型: win,unix,mac,none
-## 参考 http://www.phpfans.net/article/htmls/201003/MjgyMTk1.html 
+## Get the type of the file: win, unix, mac, none
+## Reference: http://www.phpfans.net/article/htmls/201003/MjgyMTk1.html
 #############################################################################
 sub fileMode {
-    my $file = shift;    
-    if ( -s $file and -T $file )  {
-        open (TEST, "$file") or return undef;
+    my $file = shift;
+    if (-s $file and -T $file) {
+        open(TEST, "$file") or return undef;
         binmode(TEST);
         my $stream = "\0" x 1024;
-        read ( TEST, $stream, 1024 );
+        read(TEST, $stream, 1024);
         close TEST;
-		return "win" if ( $stream =~ /\015\012/o );
-		return "unix" if ( $stream =~ /[^\015]\012/o );
-		return "mac" if ( $stream =~ /\015[^\012]/o );
-		return "NONE";
-    }  elsif ( ! -e $file )  {
+        return "win" if ($stream =~ /\015\012/o);
+        return "unix" if ($stream =~ /[^\015]\012/o);
+        return "mac" if ($stream =~ /\015[^\012]/o);
+        return "NONE";
+    } elsif (!-e $file) {
         return "NONE";
     }
- }
+}
 
-#############################################################################
-#mysep=getSep($aFileName)
-#取得文件的分隔符，是\s或\t
-#############################################################################
+##############################################################################
+# mysep = getSep($aFileName)
+# Obtain the delimiter of the file, either \s or \t
+##############################################################################
 sub getSep {
-  my($filename)=shift;
+  my ($filename) = shift;
   open(FILE, $filename) or die "Could not open file '$filename' $!";
-  my $line=<FILE>;
+  my $line = <FILE>;
   close(FILE);
   chomp($line);
-  my @seps=('\t','\s',';',',');
-  for my $sep(@seps) {
-	  my @elements = split ($sep, $line);
-	  if (scalar(@elements)>1) {
-		return($sep);
-	  }
+  my @seps = ('\t', '\s', ';', ',');
+  for my $sep (@seps) {
+      my @elements = split($sep, $line);
+      if (scalar(@elements) > 1) {
+        return ($sep);
+      }
   }
   die "getSep: cannot find sep for $filename\n";
 }
