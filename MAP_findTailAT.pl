@@ -18,15 +18,15 @@ Usage:
   -debug T -oraw T
 
   1) Recommended parameters for PATseq
-  MAP_findTailAT.pl -in E:/sys/code/testdata/arab1.fastq -poly T -ml 25 -mp 6 -mg 5 -mm 2 -mr 2 -mper 0.75 -mtail 8 -deep T -reg 1 -odir "f:/" -suf "" 
-  MAP_findTailAT.pl -in E:/sys/code/testdata/arab1.fastq -poly T -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "" -reg 1
-  MAP_findTailAT.pl -in E:/sys/code/testdata/arab1.fastq -poly "A|T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "AT" -reg 1
+  MAP_findTailAT.pl -in s1.fastq -poly T -ml 25 -mp 6 -mg 5 -mm 2 -mr 2 -mper 0.75 -mtail 8 -deep T -reg 1 -odir "f:/" -suf "" 
+  MAP_findTailAT.pl -in s1.fastq -poly T -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "" -reg 1
+  MAP_findTailAT.pl -in s1.fastq -poly "A|T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "AT" -reg 1
 
 do not output the original sequence
-  MAP_findTailAT.pl -in E:/sys/code/testdata/arab1.fastq -poly "A&T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "A&T" -reg 1 -oraw F
+  MAP_findTailAT.pl -in s1.fastq -poly "A&T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "A&T" -reg 1 -oraw F
 
   debug Output various situations
-  MAP_findTailAT.pl -in E:/sys/code/testdata/arab1.fastq -poly "A&T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "A&T" -reg 1 -oraw F -debug T
+  MAP_findTailAT.pl -in s1.fastq -poly "A&T" -ml 25 -mp 8 -mg 8 -mm 2 -odir "f:/" -suf "A&T" -reg 1 -oraw F -debug T
 
 -h=help
 -in=input fa or fq file
