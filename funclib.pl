@@ -7,79 +7,77 @@
 #  getPermute               
 #  fileMode                 
 #  ncolFile                 
-#  isFileEmptyOrNotExist      ËµÃ÷: ÎÄ¼şÎª¿Õ»ò²»´æÔÚÊ±·µ»Ø1
-#  getFileName                ËµÃ÷: ·µ»ØÎÄ¼şÃû
-#  getExt                     ËµÃ÷: ·µ»ØÀ©Õ¹Ãû,Ö»ÈÏ×îºóÒ»¸ö.
-#  getDir                     ËµÃ÷: ·µ»ØÂ·¾¶
+#  isFileEmptyOrNotExist      Description: Returns 1 when the file is empty or doesn't exist.
+#  getFileName                Description: Returns the filename.
+#  getExt                     Description: Returns the extension, only recognizes the last '.'.
+#  getDir                     Description: Returns the path.
 #  writeLog                 
-#  currTime                   ËµÃ÷: ·µ»Øµ±Ç°Ê±¼ä×Ö·û´®,¸ñÊ½2005-03-18 08:56:38
-#  NONPSSM                    ËµÃ÷: PSSMÖµ²»´æÔÚÊ±µÄÖµ
-#  getTmpPath                 ËµÃ÷: ½öÏŞÓÚ±¾»úµÄÁÙÊ±Â·¾¶. bar=1Ä©¶ËÓĞ/,0ÎŞ/
-#  value2key                  ËµÃ÷: ÓÉvalueµÃµ½keyÃû hash{key}=value
-#  hashlength                 ËµÃ÷: µÃµ½¹şÏ£±í³¤¶È
-#  insertLine2File            ËµÃ÷: ÔÚÎÄ¼şÖĞµÚ¼¸ĞĞ²åÈë,²åÈëºó¸ÃĞĞĞĞºÅÎªrow,Ê×1
+#  currTime                   Description: Returns the current time string in the format 2005-03-18 08:56:38.
+#  NONPSSM                    Description: Value when PSSM doesn't exist.
+#  getTmpPath                 Description: Temporary path limited to the local machine. bar=1 for trailing /, 0 for none.
+#  value2key                  Description: Gets key name from value, hash{key}=value.
+#  hashlength                 Description: Gets the length of the hash table.
+#  insertLine2File            Description: Inserts at a certain line in a file, row becomes the line number, starting from 1.
 #  trim                     
-#  replaceStr                 ËµÃ÷: ½«strÄÚµÄÄ³Ğ©×Ö·û¸ÄÎªĞÂ×Ö·û´®,ÈôÃ»ÕÒµ½,Ôò²»Ìæ»»
-#  shellSort                  ËµÃ÷: ÈôÎªascÔòÉıĞò,ÆäËü×Ö·û¶¼Îª½µĞò
-#  sortInt                    ËµÃ÷: ÈôÎªascÔòÉıĞò,ÆäËü×Ö·û¶¼Îª½µĞò
-#  getFileNames               ËµÃ÷: ·µ»ØÎÄ¼şÃû°üº¬Â·¾¶,ÊäÈëÂ·¾¶¿Éº¬/»ò²»º¬,Æ¥ÅäÀ©Õ¹ÃûÒªÓÃÈç"\.txt"»ò txt$;
-#  saveMtx2File               ËµÃ÷: ±£´æ¾ØÕóµ½ÎÄ¼ş,Ä¬ÈÏ¸²¸Ç,Èç¹û³É¹¦,·µ»Ø1.
-#  loadFile2Mtx               ËµÃ÷: ¼ÓÔØÎÄ¼şµ½¾ØÕóÖĞ,Ìø¹ıskipnĞĞ.
-#  loadFile2String            ËµÃ÷: ¼ÓÔØÎÄ¼şµ½×Ö·û´®ÖĞ,Ìø¹ıskipnĞĞ.
-#  sample                     ËµÃ÷: ½«ref²ğ·Ö³Énbin·İ,¶ÔÃ¿·İÔÚsourceÖĞ²ÉÑù.
-#  flipMatrix                 ËµÃ÷: ×ªÖÃ¾ØÕó,¶¼ÊÇ$ÀàĞÍµÄ¾ØÕó.
+#  replaceStr                 Description: Replaces certain characters in str with a new string. If not found, no replacement.
+#  shellSort                  Description: Ascending order if asc, otherwise descending order.
+#  sortInt                    Description: Ascending order if asc, otherwise descending order.
+#  getFileNames               Description: Returns filenames including the path. Path can have / or not. Use like "\.txt" or txt$ for extension matching;
+#  saveMtx2File               Description: Saves matrix to a file, default overwrite, returns 1 if successful.
+#  loadFile2Mtx               Description: Loads file into a matrix, skipping skipn lines.
+#  loadFile2String            Description: Loads file into a string, skipping skipn lines.
+#  sample                     Description: Splits ref into nbin parts, samples from source for each part.
+#  flipMatrix                 Description: Transposes matrix, both are $ type matrices.
 #  mtx2str                  
-#  findOverlaps               ËµÃ÷: ¶ÔÁ½¸ö¾ØÕó,²éÕÒÖØµşÇé¿ö, ²Î¿¼RÖĞµÄIRanges.findOverlaps()
-#  countOverlaps              ËµÃ÷: ¶ÔÁ½¸ö¾ØÕó,¼ÆËãqryÔÚsbjÖĞµÄ¸öÊı, ²Î¿¼RÖĞµÄIRanges.countOverlaps()
+#  findOverlaps               Description: Finds overlaps between two matrices, similar to R's IRanges.findOverlaps().
+#  countOverlaps              Description: Counts occurrences of qry in sbj, similar to R's IRanges.countOverlaps().
 #  getIntervals             
 #  fillGaps                 
-#  seqFormat                  ËµÃ÷: ÅĞ¶ÏĞòÁĞÎÄ¼şÊÇfa»òfq¸ñÊ½,Ö»Í¨¹ıµÚ1ĞĞµÄ±êÌâÊÇ>»¹ÊÇ@À´ÅĞ¶Ï¸ñÊ½
-#  isBad                      ËµÃ÷: qc,ÅĞ¶ÏĞòÁĞÊÇ·ñº¬ 10%µÄN »ò QT%µÄATCG..
+#  seqFormat                  Description: Determines if sequence file is in fa or fq format based on the > or @ symbol in the first line.
+#  isBad                      Description: Quality control, checks if sequence has 10% N or QT% ATCG.
 #  remove12                 
 #  splitRaw                 
 #  getUniqByCols            
 #  splitFileByCols          
-#  findTail                   ËµÃ÷: ´ÓseqµÄfrom(²»°üº¬fromÎ»ÖÃ,Ê×1)¿ªÊ¼Á¬ĞøµÄÕÒA»òT,ÔÊĞíÊ×¸öA/TÀëfromµÄ4¸öÎ»ÖÃÒÔÄÚ.
-#  trimseq                    ËµÃ÷: ´«longseqµÄÒıÓÃ,$isRC=1ĞèÒª·´×ª»¥²¹,0²»ĞèÒª
-#  reverseAndComplement       ËµÃ÷: $r=1 reverse $c=1 complement
-#  trimseqFromTo              ËµÃ÷: ´«longseqµÄÒıÓÃ,$isRC=1ĞèÒª·´×ª»¥²¹,0²»ĞèÒª
+#  findTail                   Description: Finds continuous A or T starting from seq's from (excluding from, starting from 1). First A/T allowed within 4 positions from from.
+#  trimseq                    Description: Reference to longseq. $isRC=1 for reverse complement, 0 for not.
+#  reverseAndComplement       Description: $r=1 for reverse, $c=1 for complement.
+#  trimseqFromTo              Description: Reference to longseq. $isRC=1 for reverse complement, 0 for not.
 #  grpSame                  
 #  grpByPos_I               
 #  grpByPos                 
-#  isIP                       ËµÃ÷:²»ÅĞ¶Ï±ß½ç,Ä¬ÈÏÎ»µã×óÓÒ¸÷ÓĞ9,10nt (-10~-1[PA],1~10)
-#  formatPatOutput            ËµÃ÷:¸ñÊ½»¯patronusµÄÊä³ö,²¢Ìæ»»Ô­ÎÄ¼ş
-#  getNt                      ËµÃ÷: ¸ù¾İ±³¾°¸ÅÂÊ(ÕûÊıµÄ),²úÉúÁª×Ó
-#  convertChrToIdx            ËµÃ÷: atcgATCG-->ÏÂ±ê
-#  convertIdxToChr            ËµÃ÷:ÏÂ±ê-->ATCG
-#  getKgramId                 ËµÃ÷:¸ù¾İkgram,µÃµ½ÏÂ±ê
-#  genOneKGram                ËµÃ÷:²úÉú1¸ö¿ÕµÄkÁª×Ó£¬idx±íÊ¾ÏÂ±ê
-#  genKgrams                  ËµÃ÷:²úÉú¿ÕµÄkÁª×Ó£¬withvalue±íÊ¾ÊÇ·ñÓÒ±ß²úÉú£½0
-#  cntKgramsByK               ËµÃ÷:Í³¼ÆÈ«²¿k-gramÔÚseqfileÖĞ³öÏÖ´ÎÊı,$from,$to<1ÔòÎªÍ³¼ÆÕûÌõĞòÁĞ
-#  cntKgrams                  ËµÃ÷:Í³¼Æ¸ø¶¨gramsÔÚseqfileÖĞ³öÏÖ´ÎÊı,$from,$to<1ÔòÎªÍ³¼ÆÕûÌõĞòÁĞ
-#  cntEachPosByK              ËµÃ÷:
-#  cntEachPosByGrams          ËµÃ÷:Í³¼ÆseqfileÖĞ´Ófrom~toµÄÎ»ÖÃµÄ¸÷kgram³öÏÖ´ÎÊı,±ØĞëÉèÖÃfrom,to
-#  kcnt2pssm                  ËµÃ÷:kcntÕó×ª»»ÎªpssmÕó
-#  sortKcnt                   ËµÃ÷:½µĞòÅÅĞòkcnt¾ØÕó,ÒÔËùÓĞÁĞµÄºÍÅÅĞò
-#  sortPssm                   ËµÃ÷:½µĞòÅÅĞòpssm¾ØÕó,ÒÔËùÓĞÁĞµÄ×î´óÖµÅÅĞò
-#  fas2tbl                    ËµÃ÷: ¶ÁÈëfas,Êä³ö2ÁĞmatrix(title,seq)
-#  mutateMotif                ËµÃ÷: ×îºó½á¹ûÔÚ@mutesÖĞ,Ã¿¸öÖµ1¸ömotif
-#  execSql                    ËµÃ÷:Ö´ĞĞsqlÓï¾ä
-#  cloneTblIndex              ËµÃ÷: ÔÚtotblÖĞ´´½¨fromtblµÄindex
-#  tblExists                  ËµÃ÷:ÅĞ¶ÏtableÊÇ·ñ´æÔÚ
-#  connectDB                  ËµÃ÷:Á¬½ÓDB
-#  getFldsIdx                 ËµÃ÷:·µ»Ø±íÖĞÖ¸¶¨×Ö¶ÎµÄÏÂ±ê
-#  getTblFlds                 ËµÃ÷:·µ»Ø±íÖĞËùÓĞ×Ö¶ÎÃû
-#  getFldValues               ËµÃ÷:È¡µÃÄ³ÁĞµÄÖµ,·µ»ØÊı×é. ncol from 0.
-#  loadFile2Tbl               ËµÃ÷:ÎÄ¼şµ¼ÈëÊı¾İ±í
-#  getTblFlds_lite            ËµÃ÷:·µ»Ø±íÖĞËùÓĞ×Ö¶ÎÃû
-#  getFldsIdx_lite            ËµÃ÷:·µ»Ø±íÖĞÖ¸¶¨×Ö¶ÎµÄÏÂ±ê
-#  file2LiteTbl               ËµÃ÷:ÎÄ¼şµ¼ÈëLiteÊı¾İ±í
+#  isIP                       Description: Doesn't check boundaries, default left and right of site have 9,10nt (-10~-1[PA],1~10).
+#  formatPatOutput            Description: Formats output from patronus and replaces the original file.
+#  getNt                      Description: Generates subsequence based on integer background probabilities.
+#  convertChrToIdx            Description: Converts atcgATCG to indices.
+#  convertIdxToChr            Description: Converts indices to ATCG.
+#  getKgramId                 Description: Gets index based on kgram.
+#  genOneKGram                Description: Generates an empty k-mer with idx representing index.
+#  genKgrams                  Description: Generates empty k-mers, withvalue determines if right side has =0.
+#  cntKgramsByK               Description: Counts occurrences of all k-grams in seqfile, $from,$to<1 for entire sequence.
+#  cntKgrams                  Description: Counts occurrences of given grams in seqfile, $from,$to<1 for entire sequence.
+#  cntEachPosByK              Description:
+#  cntEachPosByGrams          Description: Counts occurrences of each k-gram in positions from from~to in seqfile, from and to must be set.
+#  kcnt2pssm                  Description: Converts k-count matrix to pssm matrix.
+#  sortKcnt                   Description: Descending sorts k-count matrix by sum of all columns.
+#  sortPssm                   Description: Descending sorts pssm matrix by maximum value in each column.
+#  fas2tbl                    Description: Reads fas and outputs a 2-column matrix (title, seq).
+#  mutateMotif                Description: Results in @mutes, 1 motif per value.
+#  execSql                    Description: Executes SQL statement.
+#  cloneTblIndex              Description: Creates fromtbl's index in totbl.
+#  tblExists                  Description: Checks if table exists.
+#  connectDB                  Description: Connects to DB.
+#  getFldsIdx                 Description: Returns index of specified field in table.
+#  getTblFlds                 Description: Returns all field names in table.
+#  getFldValues               Description: Gets values of a column, returns array. ncol from 0.
+#  loadFile2Tbl               Description: Imports file data into table.
+#  getTblFlds_lite            Description: Returns all field names in table.
+#  getFldsIdx_lite            Description: Returns index of specified field in table.
+#  file2LiteTbl               Description: Imports file data into Lite table.
 #  sql2file                 
 #  getSqlFlds_Lite          
 #  createPAtbl              
 #  geneFromGff              
-
-
 
 use strict;
 use File::Basename;
@@ -93,31 +91,16 @@ use Time::Local;
 use Text::NSP::Measures::2D::Fisher::twotailed;
 
 
+
 #############################################################################
-#¹«¹²º¯Êı¿â require ("funclib.pl");
+# Public Function Library require ("funclib.pl");
 #############################################################################
 
 #****************************************************************************
-# ¹«¹²±äÁ¿ 
+# Public Variables
 #****************************************************************************
-#ÓÃÓÚfindOverlapÖĞµÄtype
-our ($ANY,$WITHIN,$CONTAIN,$EQUAL,$OVP)=(1,2,3,4,5);
-
-our $XMLDIR='E:/sys/code/XML_conf/';
-our $TMPDIR='E:/projectData/';
-
-##ÓÃour xxÔÚ½Å±¾ÖĞÉùÃ÷¡£
-our $PL_MAPGFF='E:/sys/code/PAT/PAT_mapGff.pl';
-our $PL_ALTERPAs='E:/sys/code/PAT/PAT_alterPAs.pl';
-our $PL_PA2PAC='E:/sys/code/PAT/PAT_PA2PAC.pl';
-our $PL_DOAMB='E:/sys/code/UTIL/UTIL_DoAMB.pl';
-
-our $RICEJPCOLS="dry_seed1:dry_seed2:dry_seed3;embryo1:embryo2;endosperm1:endosperm2:endosperm3;imbibed_seed1:imbibed_seed2:imbibed_seed3;shoot1:shoot2:shoot3;leaf_20days1:leaf_20days2:leaf_20days3;leaf_60days1:leaf_60days2:leaf_60days3;stem_60days1:stem_60days2:stem_60days3;root_5days1:root_5days2:root_5days3;root_60days1:root_60days2:root_60days3;husk1:husk2:husk3;anther1:anther2:anther3;mature_pollen1:mature_pollen2:mature_pollen3;pistil1:pistil2:pistil3";
-our $INDICACOLS="dry_seed1:dry_seed2:dry_seed3;embryo1:embryo2:embryo3;endosperm1:endosperm2:endosperm3;imbibed_seed1:imbibed_seed2:imbibed_seed3;shoot1:shoot2:shoot3;leaf_20days1:leaf_20days2:leaf_20days3;leaf_60days1:leaf_60days2:leaf_60days3;stem_60days1:stem_60days2:stem_60days3;root_5days1:root_5days2:root_5days3;root_60days1:root_60days2:root_60days3;husk1:husk2:husk3;anther1:anther2:anther3;mature_pollen1:mature_pollen2:mature_pollen3;pistil1:pistil2:pistil3";
-our $RICETWOCOLS="i_dry_seed1:i_dry_seed2:i_dry_seed3;i_embryo1:i_embryo2:i_embryo3;i_endosperm1:i_endosperm2:i_endosperm3;i_imbibed_seed1:i_imbibed_seed2:i_imbibed_seed3;i_shoot1:i_shoot2:i_shoot3;i_leaf_20days1:i_leaf_20days2:i_leaf_20days3;i_leaf_60days1:i_leaf_60days2:i_leaf_60days3;i_stem_60days1:i_stem_60days2:i_stem_60days3;i_root_5days1:i_root_5days2:i_root_5days3;i_root_60days1:i_root_60days2:i_root_60days3;i_husk1:i_husk2:i_husk3;i_anther1:i_anther2:i_anther3;i_mature_pollen1:i_mature_pollen2:i_mature_pollen3;i_pistil1:i_pistil2:i_pistil3;j_dry_seed1:j_dry_seed2:j_dry_seed3;j_embryo1:j_embryo2;j_endosperm1:j_endosperm2:j_endosperm3;j_imbibed_seed1:j_imbibed_seed2:j_imbibed_seed3;j_shoot1:j_shoot2:j_shoot3;j_leaf_20days1:j_leaf_20days2:j_leaf_20days3;j_leaf_60days1:j_leaf_60days2:j_leaf_60days3;j_stem_60days1:j_stem_60days2:j_stem_60days3;j_root_5days1:j_root_5days2:j_root_5days3;j_root_60days1:j_root_60days2:j_root_60days3;j_husk1:j_husk2:j_husk3;j_anther1:j_anther2:j_anther3;j_mature_pollen1:j_mature_pollen2:j_mature_pollen3;j_pistil1:j_pistil2:j_pistil3";
-our $RICEJPCOLSj="j_dry_seed1:j_dry_seed2:j_dry_seed3;j_embryo1:j_embryo2;j_endosperm1:j_endosperm2:j_endosperm3;j_imbibed_seed1:j_imbibed_seed2:j_imbibed_seed3;j_shoot1:j_shoot2:j_shoot3;j_leaf_20days1:j_leaf_20days2:j_leaf_20days3;j_leaf_60days1:j_leaf_60days2:j_leaf_60days3;j_stem_60days1:j_stem_60days2:j_stem_60days3;j_root_5days1:j_root_5days2:j_root_5days3;j_root_60days1:j_root_60days2:j_root_60days3;j_husk1:j_husk2:j_husk3;j_anther1:j_anther2:j_anther3;j_mature_pollen1:j_mature_pollen2:j_mature_pollen3;j_pistil1:j_pistil2:j_pistil3";
-our $INDICACOLSi="i_dry_seed1:i_dry_seed2:i_dry_seed3;i_embryo1:i_embryo2:i_embryo3;i_endosperm1:i_endosperm2:i_endosperm3;i_imbibed_seed1:i_imbibed_seed2:i_imbibed_seed3;i_shoot1:i_shoot2:i_shoot3;i_leaf_20days1:i_leaf_20days2:i_leaf_20days3;i_leaf_60days1:i_leaf_60days2:i_leaf_60days3;i_stem_60days1:i_stem_60days2:i_stem_60days3;i_root_5days1:i_root_5days2:i_root_5days3;i_root_60days1:i_root_60days2:i_root_60days3;i_husk1:i_husk2:i_husk3;i_anther1:i_anther2:i_anther3;i_mature_pollen1:i_mature_pollen2:i_mature_pollen3;i_pistil1:i_pistil2:i_pistil3";
-
+# Used for 'type' in findOverlap
+our ($ANY, $WITHIN, $CONTAIN, $EQUAL, $OVP) = (1, 2, 3, 4, 5);
 our %convertor = (
     'TCA' => 'S', # Serine
     'TCC' => 'S', # Serine
@@ -183,111 +166,112 @@ our %convertor = (
     'GGC' => 'G', # Glycine
     'GGG' => 'G', # Glycine
     'GGT' => 'G', # Glycine
-    );
+);
+
 
 
 #****************************************************************************
 # APA
 #****************************************************************************
-##ÓÉÑù±¾×Ö¶Î£¬ÅĞ¶ÏÊÇ·ñÊÇ RICEÏµ£¬²»ÊÇµÄ»°£¬Ö±½Ó·µ»ØÔ­´®
+## Determine whether it's the RICE series based on the sample field. If not, return the original string.
 sub getOptionSmp {
-  my $smp=shift;
-  #RICEJPCOLS,INDICACOLS,RICETWOCOLS
-  if ($smp=~/^RICEJPCOLS$/i) {
-	$smp=$RICEJPCOLS;
-  } elsif ($smp=~/^INDICACOLS$/i) {
-	$smp=$INDICACOLS;
-  } elsif ($smp=~/^RICETWOCOLS$/i) {
-	$smp=$RICETWOCOLS;
-  }elsif ($smp=~/^RICEJPCOLSj$/i) {
-	$smp=$RICEJPCOLSj;
-  }elsif ($smp=~/^INDICACOLSi$/i) {
-	$smp=$INDICACOLSi;
+  my $smp = shift;
+  # RICEJPCOLS, INDICACOLS, RICETWOCOLS
+  if ($smp =~ /^RICEJPCOLS$/i) {
+    $smp = $RICEJPCOLS;
+  } elsif ($smp =~ /^INDICACOLS$/i) {
+    $smp = $INDICACOLS;
+  } elsif ($smp =~ /^RICETWOCOLS$/i) {
+    $smp = $RICETWOCOLS;
+  } elsif ($smp =~ /^RICEJPCOLSj$/i) {
+    $smp = $RICEJPCOLSj;
+  } elsif ($smp =~ /^INDICACOLSi$/i) {
+    $smp = $INDICACOLSi;
   }
-  return($smp);
+  return ($smp);
 }
 
 #****************************************************************************
 # Stat
 #****************************************************************************
-##¼ÆËãlog2
+# Calculate log2
 sub log2 {
   my $n = shift;
   return log($n)/log(2);
 }
 
-## ¼ÆËã¾ùÖµ
-## $m=mean(\@data)
+## Calculate mean
+## $m = mean(\@data)
 sub mean {
-my ($a)=@_;
-return(0) if $#$a==-1;
-my ($i,$sum)=(0,0);
-for ($i=0;$i<=$#$a;$i++){
-  $sum=$sum+$$a[$i];
-}
-return($sum/($#$a+1));
+  my ($a) = @_;
+  return (0) if $#$a == -1;
+  my ($i, $sum) = (0, 0);
+  for ($i = 0; $i <= $#$a; $i++) {
+    $sum = $sum + $$a[$i];
+  }
+  return ($sum / ($#$a + 1));
 }
 
-## ¼ÆËã±ê×¼²î
-## $s=SS(\@data)
+## Calculate standard deviation
+## $s = SS(\@data)
 sub SS {
-my ($a)=@_;
-my ($i,$sum)=(0,0);
-my $m=mean($a);
-for ($i=0;$i<=$#$a;$i++){
-  $sum=$sum+($$a[$i]-$m)*($$a[$i]-$m);
-}
-return(sqrt(($sum/$#$a)));
+  my ($a) = @_;
+  my ($i, $sum) = (0, 0);
+  my $m = mean($a);
+  for ($i = 0; $i <= $#$a; $i++) {
+    $sum = $sum + ($$a[$i] - $m) * ($$a[$i] - $m);
+  }
+  return (sqrt(($sum / $#$a)));
 }
 
-## ¼ÆËãpearsonÏà¹ØĞÔ
-## $c=cor(\@x,\@y);
-## Èç¹ûx»òyµÄ±ê×¼²îÎª0,Ôò·µ»Ø-2
+## Calculate Pearson correlation
+## $c = cor(\@x, \@y);
+## Returns -2 if the standard deviation of x or y is 0
 sub cor {
-my($x,$y)=@_;
-die "not equal number for cor" if ($#$x!=$#$y or $#$x==-1);
-my $mx=mean($x);
-my $my=mean($y);
-my $sx=SS($x);
-my $sy=SS($y);
-return(-2) if ($sx==0 or $sy==0);
-my $sum=0;
-for my $i(0..$#$x) {
-  $sum+=($$x[$i]-$mx)*($$y[$i]-$my)/$sx/$sy;  
-}
-return ($sum/$#$x);
-}
-
-#############################################################################
-## ¸ø¶¨¾ØÕó£¬µÃµ½ËùÓĞÅÅÁĞÇé¿ö£¬Êä³ö¾ØÕó
-## ²Î¿¼£ºhttp://topic.csdn.net/u/20110324/13/5c108144-8b05-47ac-8853-cfd97c7ed8a6.html?seed=1145643556&r=72355220
-## $a=getPermute($mtx);
-## Èç$mtx=([1,2],[3,4,5])£¬ÔòµÃµ½ ([1,3],[1,4],...[2,5])
-#############################################################################
-sub getPermute { 
-  my $mtx=shift;
-  my ($i,$m,$k);
-  my $ret=[];
-  for $i (0..$#$mtx){
-    if($#$ret == -1 ){
-	  for my $ii(0..$#{$mtx->[$i]}) {
-		push(@$ret,[$mtx->[$i][$ii]]);
-	  }        
-       next;
-    }
-    my $temp =[];
-    for $m(0..$#$ret){
-	  for $k(0..$#{$mtx->[$i]}) {
-		push(@$temp,[@{$ret->[$m]},$mtx->[$i][$k]]);
-	  }
-    }
-    $ret = $temp;	
-  }#i
-return $ret;
+  my ($x, $y) = @_;
+  die "not equal number for cor" if ($#$x != $#$y or $#$x == -1);
+  my $mx = mean($x);
+  my $my = mean($y);
+  my $sx = SS($x);
+  my $sy = SS($y);
+  return (-2) if ($sx == 0 or $sy == 0);
+  my $sum = 0;
+  for my $i (0..$#$x) {
+    $sum += ($$x[$i] - $mx) * ($$y[$i] - $my) / $sx / $sy;
+  }
+  return ($sum / $#$x);
 }
 
 #############################################################################
-## Fisher¼ìÑé
+## Given a matrix, obtain all possible permutations and output the matrix
+## Reference: http://topic.csdn.net/u/20110324/13/5c108144-8b05-47ac-8853-cfd97c7ed8a6.html?seed=1145643556&r=72355220
+## $a = getPermute($mtx);
+## For example, if $mtx = ([1,2],[3,4,5]), then you get ([1,3],[1,4],...[2,5])
+#############################################################################
+sub getPermute {
+  my $mtx = shift;
+  my ($i, $m, $k);
+  my $ret = [];
+  for $i (0..$#$mtx) {
+    if ($#$ret == -1) {
+      for my $ii (0..$#{$mtx->[$i]}) {
+        push(@$ret, [$mtx->[$i][$ii]]);
+      }
+      next;
+    }
+    my $temp = [];
+    for $m (0..$#$ret) {
+      for $k (0..$#{$mtx->[$i]}) {
+        push(@$temp, [@{$ret->[$m]}, $mtx->[$i][$k]]);
+      }
+    }
+    $ret = $temp;
+  } # i
+  return $ret;
+}
+
+#############################################################################
+## Fisheræ£€éªŒ
 ## $pval=fisherTest(n11,n12,n21,n22);
 #--------------------------------------
 #          word2   ~word2
@@ -310,8 +294,8 @@ sub fisherTest {
 #****************************************************************************
 #############################################################################
 ## $mode=fileMode($file)
-## È¡µÃÎÄ¼şµÄÀàĞÍ: win,unix,mac,none
-## ²Î¿¼ http://www.phpfans.net/article/htmls/201003/MjgyMTk1.html 
+## å–å¾—æ–‡ä»¶çš„ç±»å‹: win,unix,mac,none
+## å‚è€ƒ http://www.phpfans.net/article/htmls/201003/MjgyMTk1.html 
 #############################################################################
 sub fileMode {
     my $file = shift;    
@@ -332,7 +316,7 @@ sub fileMode {
 
 #############################################################################
 #mysep=getSep($aFileName)
-#È¡µÃÎÄ¼şµÄ·Ö¸ô·û£¬ÊÇ\s»ò\t
+#å–å¾—æ–‡ä»¶çš„åˆ†éš”ç¬¦ï¼Œæ˜¯\sæˆ–\t
 #############################################################################
 sub getSep {
   my($filename)=shift;
@@ -352,12 +336,12 @@ sub getSep {
 
 #############################################################################
 ## $nc=ncolFile($file)
-## È¡µÃÎÄ¼şµÄÁĞÊı,Ö»ÅĞ¶ÏµÚ1ĞĞ
+## å–å¾—æ–‡ä»¶çš„åˆ—æ•°,åªåˆ¤æ–­ç¬¬1è¡Œ
 #############################################################################
 sub ncolFile {
   my $file=shift;
   return(0) if !defined($file);
-  ##È·¶¨ÁĞÊı
+  ##ç¡®å®šåˆ—æ•°
   my $ncol=0;
   open(ININ,"<$file") or die "Cannot read $file";
   my $line='';
@@ -374,8 +358,8 @@ sub ncolFile {
 #############################################################################
 #  isFileEmptyOrNotExist(afilename) 
 #  useage: isFileEmptyOrNotExist('xx/xx.txt'):0/1       
-#  ËµÃ÷: ÎÄ¼şÎª¿Õ»ò²»´æÔÚÊ±·µ»Ø1
-#  NOTE: ¼´Ê¹ÎÄ¼şÃûÖĞ´ø¿Õ¸ñ $f="c:/dir dir/h h.txt"Ò²¿ÉÒÔÅĞ¶ÏÕıÈ·.
+#  è¯´æ˜: æ–‡ä»¶ä¸ºç©ºæˆ–ä¸å­˜åœ¨æ—¶è¿”å›1
+#  NOTE: å³ä½¿æ–‡ä»¶åä¸­å¸¦ç©ºæ ¼ $f="c:/dir dir/h h.txt"ä¹Ÿå¯ä»¥åˆ¤æ–­æ­£ç¡®.
 #############################################################################
 sub isFileEmptyOrNotExist {
   my $f=shift;
@@ -386,7 +370,7 @@ sub isFileEmptyOrNotExist {
 #############################################################################
 #  getFileName(afilename,noExt=0/1) 
 #  useage: getFileName('xx/xx.txt'); getFileName('xx/xx.txt',1)        
-#  ËµÃ÷: ·µ»ØÎÄ¼şÃû£¨²»º¬Â·¾¶£©
+#  è¯´æ˜: è¿”å›æ–‡ä»¶åï¼ˆä¸å«è·¯å¾„ï¼‰
 #############################################################################
 sub getFileName {
   my $f=shift;
@@ -407,7 +391,7 @@ sub getFileName {
 #############################################################################
 #  getExt(afilename) 
 #  useage: getExt('xx/xx.txt')       
-#  ËµÃ÷: ·µ»ØÀ©Õ¹Ãû,Ö»ÈÏ×îºóÒ»¸ö.
+#  è¯´æ˜: è¿”å›æ‰©å±•å,åªè®¤æœ€åä¸€ä¸ª.
 #############################################################################
 sub getExt {
   my $f=shift;
@@ -422,7 +406,7 @@ sub getExt {
 #############################################################################
 #  getDir(afilename,nobar=0/1) 
 #  useage: getDir('xx/xx.txt'); getFileName('xx/xx.txt',1)        
-#  ËµÃ÷: ·µ»ØÂ·¾¶
+#  è¯´æ˜: è¿”å›è·¯å¾„
 #############################################################################
 sub getDir {
   my $f=shift;
@@ -451,8 +435,8 @@ sub writeLog {
 #############################################################################
 #  currTime
 #  useage: currTime()       
-#  ËµÃ÷: ·µ»Øµ±Ç°Ê±¼ä×Ö·û´®,¸ñÊ½2005-03-18 08:56:38
-#  2011/5/15 ÈôGMT£½1,Ôò·µ»ØGMTµÄÊ±¼ä´Á
+#  è¯´æ˜: è¿”å›å½“å‰æ—¶é—´å­—ç¬¦ä¸²,æ ¼å¼2005-03-18 08:56:38
+#  2011/5/15 è‹¥GMTï¼1,åˆ™è¿”å›GMTçš„æ—¶é—´æˆ³
 #############################################################################
 sub currTime {
   my $GMT=shift;
@@ -469,7 +453,7 @@ sub currTime {
 #############################################################################
 #  NONPSSM:-99
 #  useage: NONPSSM()       
-#  ËµÃ÷: PSSMÖµ²»´æÔÚÊ±µÄÖµ
+#  è¯´æ˜: PSSMå€¼ä¸å­˜åœ¨æ—¶çš„å€¼
 #############################################################################
 sub NONPSSM {
   return -99;
@@ -478,7 +462,7 @@ sub NONPSSM {
 #############################################################################
 #   getTmpPath($bar):str
 #  useage: $str=getTmpPath(1)       
-#  ËµÃ÷: ½öÏŞÓÚ±¾»úµÄÁÙÊ±Â·¾¶. bar=1Ä©¶ËÓĞ/,0ÎŞ/
+#  è¯´æ˜: ä»…é™äºæœ¬æœºçš„ä¸´æ—¶è·¯å¾„. bar=1æœ«ç«¯æœ‰/,0æ— /
 #############################################################################
 sub getTmpPath {
   my($bar)=shift;
@@ -497,8 +481,8 @@ sub getTmpPath {
 #############################################################################
 #  str2hash($str,$sep)
 #  useage: $hash=str2hash('x1=xx;x2=xx;',';')
-#  ËµÃ÷: ÓÉ'x1=xx;x2=xx;'´®£¬Éú³É¹şÏ£±äÁ¿ $hash{X1}=xx...
-#  2015/7/10 keyÈ«ÓÃ´óĞ´
+#  è¯´æ˜: ç”±'x1=xx;x2=xx;'ä¸²ï¼Œç”Ÿæˆå“ˆå¸Œå˜é‡ $hash{X1}=xx...
+#  2015/7/10 keyå…¨ç”¨å¤§å†™
 #############################################################################
 sub str2hash { 
   my $str=shift;
@@ -508,7 +492,7 @@ sub str2hash {
   my @items=split($sep,$str);
   for my $item(@items) {
 	my @x=();
-	if ($item=~/=/) { #xx=yyµÄĞÎÊ½
+	if ($item=~/=/) { #xx=yyçš„å½¢å¼
 	  @x=split('=',$item);
 	} else {
 	  @x=split('\s\"',$item); #genebiotype "protein_coding" (mm10.gtf)
@@ -526,7 +510,7 @@ sub str2hash {
 #############################################################################
 #  value2key($value,%fmap)
 #  useage: key=value2key('xx',%fmap)
-#  ËµÃ÷: ÓÉvalueµÃµ½keyÃû hash{key}=value
+#  è¯´æ˜: ç”±valueå¾—åˆ°keyå hash{key}=value
 #############################################################################
 sub value2key {
   my($value,%fmap)=@_;
@@ -539,7 +523,7 @@ sub value2key {
 #############################################################################
 #  l=hashlength(%fmap)
 #  useage: l=hashlength(%fmap)       
-#  ËµÃ÷: µÃµ½¹şÏ£±í³¤¶È
+#  è¯´æ˜: å¾—åˆ°å“ˆå¸Œè¡¨é•¿åº¦
 #############################################################################
 sub hashlength {
   my %fmap=@_;
@@ -549,7 +533,7 @@ sub hashlength {
 #############################################################################
 #  insertLine2File($file,$line,$rowNum)
 #  useage: insertLine2File('xx.txt','aaaa',1);       
-#  ËµÃ÷: ÔÚÎÄ¼şÖĞµÚ¼¸ĞĞ²åÈë,²åÈëºó¸ÃĞĞĞĞºÅÎªrow,Ê×1
+#  è¯´æ˜: åœ¨æ–‡ä»¶ä¸­ç¬¬å‡ è¡Œæ’å…¥,æ’å…¥åè¯¥è¡Œè¡Œå·ä¸ºrow,é¦–1
 #############################################################################
 sub insertLine2File {
   my($file,$line,$rowNum)=@_;
@@ -586,10 +570,10 @@ sub trim($)
 
 #############################################################################
 #line=readLastLine(file)
-#¶ÁÎÄ¼ş×îºóÒ»ĞĞ
-#°ÑÖ¸ÕëÒÆ¶¯µ½×îºóÃæ,Ò»¸öÒ»¸ö×Ö½ÚÍùÇ°¶Á,Ö±µ½¶Áµ½\NÎªÖ¹
-#ÎÄ¼şµÄÄ©Î²Ö»ÄÜÊÇº¬ÓĞ1¸ö¿ÕĞĞ£¬»òÕßÃ»ÓĞ¿ÕĞĞ£¬·ñÔò·µ»ØÊÇ¿ÕĞĞ£¡
-#·µ»ØµÄline²»º¬»Ø³µ
+#è¯»æ–‡ä»¶æœ€åä¸€è¡Œ
+#æŠŠæŒ‡é’ˆç§»åŠ¨åˆ°æœ€åé¢,ä¸€ä¸ªä¸€ä¸ªå­—èŠ‚å¾€å‰è¯»,ç›´åˆ°è¯»åˆ°\Nä¸ºæ­¢
+#æ–‡ä»¶çš„æœ«å°¾åªèƒ½æ˜¯å«æœ‰1ä¸ªç©ºè¡Œï¼Œæˆ–è€…æ²¡æœ‰ç©ºè¡Œï¼Œå¦åˆ™è¿”å›æ˜¯ç©ºè¡Œï¼
+#è¿”å›çš„lineä¸å«å›è½¦
 #############################################################################
 sub readLastLine {
 	my $file = shift or die;
@@ -631,7 +615,7 @@ sub readLastLine {
 #############################################################################
 #  replaceStr($str,$substr,$to):$newstr
 #  useage: $str=replaceStr($str,'.','.n')
-#  ËµÃ÷: ½«strÄÚµÄÄ³Ğ©×Ö·û¸ÄÎªĞÂ×Ö·û´®,ÈôÃ»ÕÒµ½,Ôò²»Ìæ»»
+#  è¯´æ˜: å°†strå†…çš„æŸäº›å­—ç¬¦æ”¹ä¸ºæ–°å­—ç¬¦ä¸²,è‹¥æ²¡æ‰¾åˆ°,åˆ™ä¸æ›¿æ¢
 #############################################################################
 sub replaceStr {
   my($str,$substr,$to)=@_;
@@ -643,7 +627,7 @@ sub replaceStr {
 #############################################################################
 #  round($number):$integer
 #  useage: round(2.4)=2
-#  ËµÃ÷: ËÄÉáÎåÈë
+#  è¯´æ˜: å››èˆäº”å…¥
 #############################################################################
 sub round {
 my($number) = shift;
@@ -653,7 +637,7 @@ return int($number + .5);
 #############################################################################
 #  shellSort($first,$last,$order,@list):@order
 #  useage: @order=shellSort(0,$#list,'desc',@list);
-#  ËµÃ÷: ÈôÎªascÔòÉıĞò,ÆäËü×Ö·û¶¼Îª½µĞò
+#  è¯´æ˜: è‹¥ä¸ºascåˆ™å‡åº,å…¶å®ƒå­—ç¬¦éƒ½ä¸ºé™åº
 #############################################################################
 sub shellSort {
   my($first,$last,$asc1,@list)=@_;	
@@ -687,8 +671,8 @@ sub shellSort {
 #############################################################################
 #  sortInt($mtx,$intCol,order):$omtx
 #  useage: $omtx =sortInt($mtx,0); $omtx =sortInt($mtx,1,'desc');
-#  ËµÃ÷: ÈôÎªascÔòÉıĞò,ÆäËü×Ö·û¶¼Îª½µĞò
-#  intColÎªĞèÒªÅÅĞòµÄÁĞ
+#  è¯´æ˜: è‹¥ä¸ºascåˆ™å‡åº,å…¶å®ƒå­—ç¬¦éƒ½ä¸ºé™åº
+#  intColä¸ºéœ€è¦æ’åºçš„åˆ—
 #############################################################################
 sub sortInt {
 	my ($in,$col,$order)=@_;
@@ -705,8 +689,8 @@ sub sortInt {
 #############################################################################
 #  sortStr($mtx,$strCol,order):$omtx
 #  useage: $omtx =sortStr($mtx,0); $omtx =sortStr($mtx,1,'desc');
-#  ËµÃ÷: ÈôÎªascÔòÉıĞò,ÆäËü×Ö·û¶¼Îª½µĞò
-#  intColÎªĞèÒªÅÅĞòµÄÁĞ
+#  è¯´æ˜: è‹¥ä¸ºascåˆ™å‡åº,å…¶å®ƒå­—ç¬¦éƒ½ä¸ºé™åº
+#  intColä¸ºéœ€è¦æ’åºçš„åˆ—
 #############################################################################
 sub sortStr {
 	my ($in,$col,$order)=@_;
@@ -723,11 +707,11 @@ sub sortStr {
 #############################################################################
 #  getFileNames($dir,$pattern,$NOTMATCH):@files
 #  useage: @files=getFileNames('.','\.pl'); @files=getFileNames('.','\.pl',1);      
-#  ËµÃ÷: ·µ»ØÎÄ¼şÃû°üº¬Â·¾¶,ÊäÈëÂ·¾¶¿Éº¬/»ò²»º¬,Æ¥ÅäÀ©Õ¹ÃûÒªÓÃÈç"\.txt"»ò txt$; 
-#       Èô$NOTMATCH·Ç£°,Ôò±íÊ¾²»Æ¥ÅäÄ£Ê½²ÅÊä³öÎÄ¼ş
-#  ÈôÒªÆ¥Åä xxtrain1.arff; train222.arff; ÔòÓÃ pat="train.*\.arff"
-#  ÈôÒªÆ¥ÅäÒÔtrain¿ªÍ·ÒÔ.arff½áÎ²µÄ;ÔòÓÃ pat="^train.*\.arff$"
-#  ÒÔarff½áÎ²µÄ arff$
+#  è¯´æ˜: è¿”å›æ–‡ä»¶ååŒ…å«è·¯å¾„,è¾“å…¥è·¯å¾„å¯å«/æˆ–ä¸å«,åŒ¹é…æ‰©å±•åè¦ç”¨å¦‚"\.txt"æˆ– txt$; 
+#       è‹¥$NOTMATCHéï¼,åˆ™è¡¨ç¤ºä¸åŒ¹é…æ¨¡å¼æ‰è¾“å‡ºæ–‡ä»¶
+#  è‹¥è¦åŒ¹é… xxtrain1.arff; train222.arff; åˆ™ç”¨ pat="train.*\.arff"
+#  è‹¥è¦åŒ¹é…ä»¥trainå¼€å¤´ä»¥.arffç»“å°¾çš„;åˆ™ç”¨ pat="^train.*\.arff$"
+#  ä»¥arffç»“å°¾çš„ arff$
 #############################################################################
 sub getFileNames{
 	my ($dir)=shift;
@@ -759,10 +743,10 @@ sub getFileNames{
 #############################################################################
 #  moveFiles($dir,$pattern,$destDir):0/1
 #  useage: $success=moveFiles('.','\.pl','E:/")  
-#  ËµÃ÷: ÒÆ¶¯ÎÄ¼ş  
-#  ÈôÒªÆ¥Åä xxtrain1.arff; train222.arff; ÔòÓÃ pat="train.*\.arff"
-#  ÈôÒªÆ¥ÅäÒÔtrain¿ªÍ·ÒÔ.arff½áÎ²µÄ;ÔòÓÃ pat="^train.*\.arff$"
-#  ·µ»Ø 1 ³É¹¦£» 0 Ê§°Ü
+#  è¯´æ˜: ç§»åŠ¨æ–‡ä»¶  
+#  è‹¥è¦åŒ¹é… xxtrain1.arff; train222.arff; åˆ™ç”¨ pat="train.*\.arff"
+#  è‹¥è¦åŒ¹é…ä»¥trainå¼€å¤´ä»¥.arffç»“å°¾çš„;åˆ™ç”¨ pat="^train.*\.arff$"
+#  è¿”å› 1 æˆåŠŸï¼› 0 å¤±è´¥
 #############################################################################
 sub moveFiles{
 	my ($dir)=shift;
@@ -782,10 +766,10 @@ sub moveFiles{
 #  saveMtx2File($mtx,$file,$append,$blankstr,$idxfrom,$idxto):sucess
 #  useage: if saveMtx2File($mtx,$file) {..} or saveMtx2File($mtx,$file,1)
 #  saveMtx2File($mtx,$file,1,'\N',100,1000)
-#  ËµÃ÷: ±£´æ¾ØÕóµ½ÎÄ¼ş,Ä¬ÈÏ¸²¸Ç,Èç¹û³É¹¦,·µ»Ø1.
-#  saveMtx2File($mtx,$file,1,'\N') --¶Ô¿ÕÖµÌî³ä\N
-#  ÕætmdÎ£ÏÕ,ÕâÀïµÄFH,¾ÓÈ»»áÒıÓÃµ½ÆäËüplµÄFHÈ¥.×îºÃÈ¡¸öBTµãµÄ¾ä±úÃû
-#  2012-09-10 Ôö¼Ó$idxfrom,$idxtoÑ¡Ïî£¬¿ÉÒÔÑ¡ÔñÊä³ömtxµÄÄ³Ğ©ĞĞ
+#  è¯´æ˜: ä¿å­˜çŸ©é˜µåˆ°æ–‡ä»¶,é»˜è®¤è¦†ç›–,å¦‚æœæˆåŠŸ,è¿”å›1.
+#  saveMtx2File($mtx,$file,1,'\N') --å¯¹ç©ºå€¼å¡«å……\N
+#  çœŸtmdå±é™©,è¿™é‡Œçš„FH,å±…ç„¶ä¼šå¼•ç”¨åˆ°å…¶å®ƒplçš„FHå».æœ€å¥½å–ä¸ªBTç‚¹çš„å¥æŸ„å
+#  2012-09-10 å¢åŠ $idxfrom,$idxtoé€‰é¡¹ï¼Œå¯ä»¥é€‰æ‹©è¾“å‡ºmtxçš„æŸäº›è¡Œ
 #############################################################################
 sub saveMtx2File {
   my($mtx,$file,$append,$blankstr,$idxfrom,$idxto)=@_;
@@ -822,9 +806,9 @@ sub saveMtx2File {
 #############################################################################
 #  loadFile2Mtx($file,$sep,$skipn):$mtx
 #  useage: $mtx=loadFile2Mtx($file,"\t",1)
-#  ËµÃ÷: ¼ÓÔØÎÄ¼şµ½¾ØÕóÖĞ,Ìø¹ıskipnĞĞ.
-#  ¼Ó¿ìËÙ¶È
-#  2016/11/21 ²»µÃ²»ÔÙÖØĞÂÓÃtrim -- ÒòÎªchomp¾ÍËã·ÅÁ½¸öÒ²Ã»·¨Ïû³ıwindowÏÂµÄ»»ĞĞ·û£¬Ææ¹ÖÁËb
+#  è¯´æ˜: åŠ è½½æ–‡ä»¶åˆ°çŸ©é˜µä¸­,è·³è¿‡skipnè¡Œ.
+#  åŠ å¿«é€Ÿåº¦
+#  2016/11/21 ä¸å¾—ä¸å†é‡æ–°ç”¨trim -- å› ä¸ºchompå°±ç®—æ”¾ä¸¤ä¸ªä¹Ÿæ²¡æ³•æ¶ˆé™¤windowä¸‹çš„æ¢è¡Œç¬¦ï¼Œå¥‡æ€ªäº†b
 #############################################################################
 sub loadFile2Mtx {
   my($file,$sep,$n)=@_;
@@ -849,7 +833,7 @@ sub loadFile2Mtx {
   while ( my $line=<$infh> ) {
 			$line=trim($line);
 		next unless length($line); 
-		push(@$mtx,[ split($sep,$line)]);#ÓÃ $sep±ÈÖ±½Ó'\tÂıÒ»±¶£¡
+		push(@$mtx,[ split($sep,$line)]);#ç”¨ $sepæ¯”ç›´æ¥'\tæ…¢ä¸€å€ï¼
   }
   return($mtx);
 }
@@ -858,7 +842,7 @@ sub loadFile2Mtx {
 #############################################################################
 #  loadFile2String($file,$skipn):$str
 #  useage: $str=loadFile2String($file,1)
-#  ËµÃ÷: ¼ÓÔØÎÄ¼şµ½×Ö·û´®ÖĞ,Ìø¹ıskipnĞĞ.
+#  è¯´æ˜: åŠ è½½æ–‡ä»¶åˆ°å­—ç¬¦ä¸²ä¸­,è·³è¿‡skipnè¡Œ.
 #############################################################################
 sub loadFile2String {
   my($file,$n)=@_;
@@ -876,12 +860,12 @@ sub loadFile2String {
 #############################################################################
 #  sample($ref,$source,$nbin):@index
 #  useage: @idx=sample(\@ref,\@source,5);
-#  ËµÃ÷: ½«ref²ğ·Ö³Énbin·İ,¶ÔÃ¿·İÔÚsourceÖĞ²ÉÑù. 
-#        ·µ»ØµÄidx¸öÊıÓërefÏàÍ¬,ÈôÄ³×éÎŞ·¨µÃµ½ÏàÍ¬¸öÊı,Ôò·µ»Ø¿Õ¼¯.
-#        !!ÊäÈëµÄrefºÍsource±ØĞëÊÇÒÑ¾­ÅÅºÃĞòµÄ. Êä³öµÄindexÊÇsourceµÄÏÂ±ê
+#  è¯´æ˜: å°†refæ‹†åˆ†æˆnbinä»½,å¯¹æ¯ä»½åœ¨sourceä¸­é‡‡æ ·. 
+#        è¿”å›çš„idxä¸ªæ•°ä¸refç›¸åŒ,è‹¥æŸç»„æ— æ³•å¾—åˆ°ç›¸åŒä¸ªæ•°,åˆ™è¿”å›ç©ºé›†.
+#        !!è¾“å…¥çš„refå’Œsourceå¿…é¡»æ˜¯å·²ç»æ’å¥½åºçš„. è¾“å‡ºçš„indexæ˜¯sourceçš„ä¸‹æ ‡
 #############################################################################
 sub sample {
-  my ($ref,$source,$nbin)=@_; #ÒÑ¾­ÅÅºÃĞòÁË
+  my ($ref,$source,$nbin)=@_; #å·²ç»æ’å¥½åºäº†
   my ($i,$j,$min,$max,@grp,$id);
   my(@idx)=();
   my($pi)=0;
@@ -889,7 +873,7 @@ sub sample {
   my ($ns)=scalar(@$source);
   return(@idx) if ($ns<$nr or $nbin==0);
   
-  #Ã¿×é¸öÊı
+  #æ¯ç»„ä¸ªæ•°
   my ($ng)=int($nr/$nbin);
   my ($ngs)=$ng;
   my ($res)=0;
@@ -898,16 +882,16 @@ sub sample {
 	$nbin++;
   }
 
-  #¶ÔÃ¿×éµÄref,È¡×îĞ¡ÖµºÍ×î´óÖµ,¶Ôsource±éÀúµÃµ½ÔÚ×îĞ¡Öµ×î´óÖµÖ®¼äµÄÖµ,Èç¹û¸öÊı>ÒªÇó,ÔòÔÙËæ»ú³éÈ¡
+  #å¯¹æ¯ç»„çš„ref,å–æœ€å°å€¼å’Œæœ€å¤§å€¼,å¯¹sourceéå†å¾—åˆ°åœ¨æœ€å°å€¼æœ€å¤§å€¼ä¹‹é—´çš„å€¼,å¦‚æœä¸ªæ•°>è¦æ±‚,åˆ™å†éšæœºæŠ½å–
   for $i(0..($nbin-1)) {
 	@grp=();
-    #×îºóÒ»×é
+    #æœ€åä¸€ç»„
     if ($res and $i==$nbin-1) {
 	  $ng=$res;
     }
 	$min=$max=$$ref[$i*$ngs];
 	for $j(1..($ng-1)) {
-	  #×î´ó×îĞ¡Öµ
+	  #æœ€å¤§æœ€å°å€¼
 	  $id=$i*$ngs+$j;
 	  if ($min>$$ref[$id]) {
 		$min=$$ref[$id];
@@ -916,23 +900,23 @@ sub sample {
 	  }
 	}
 	#print "$ng,$min,$max\n";
-	#±éÀú
+	#éå†
     while ($pi<$ns) {
 	  if ($$source[$pi]<$min) {
 		$pi++;
 	  } elsif ($$source[$pi]<=$max and $$source[$pi]>=$min) {
-		push(@grp,$pi); #±£´æindex
+		push(@grp,$pi); #ä¿å­˜index
 		$pi++;
       }elsif ($$source[$pi]>$max) {
         last;
       }	  
     }
-	#ÅĞ¶ÏÊÇ·ñÂú×ã¸öÊı
+	#åˆ¤æ–­æ˜¯å¦æ»¡è¶³ä¸ªæ•°
 	#print "max=$max,min=$min,grp=@grp\n";
-	if (scalar(@grp)<$ng) { #ÈôÉÙÓÚ,ÔòÍË³ö
+	if (scalar(@grp)<$ng) { #è‹¥å°‘äº,åˆ™é€€å‡º
 	  @idx=();
 	  return(@idx);
-	}elsif (scalar(@grp)>$ng) { #¶àÓÚ,ÔòËæ»úÈ¡
+	}elsif (scalar(@grp)>$ng) { #å¤šäº,åˆ™éšæœºå–
 	  @grp=shuffle(@grp);
 	  push(@idx,@grp[0..($ng-1)]);
 	}else {
@@ -946,7 +930,7 @@ sub sample {
 #############################################################################
 #  flipMatrix($matrix):$flipmatrix
 #  useage: $fliparray=flipMatrix($array);
-#  ËµÃ÷: ×ªÖÃ¾ØÕó,¶¼ÊÇ$ÀàĞÍµÄ¾ØÕó.
+#  è¯´æ˜: è½¬ç½®çŸ©é˜µ,éƒ½æ˜¯$ç±»å‹çš„çŸ©é˜µ.
 #############################################################################
 sub flipMatrix {
   my($array)=shift;
@@ -962,7 +946,7 @@ sub flipMatrix {
 #############################################################################
 #  mtx2str($mtx,$sep):$str
 #  useage: $str=mtx2str($mtx,"\t");
-#  ¾ØÕó×ª»»Îª×Ö·û´®,Ö÷ÒªÓÃÓÚµ÷ÊÔÓÃ
+#  çŸ©é˜µè½¬æ¢ä¸ºå­—ç¬¦ä¸²,ä¸»è¦ç”¨äºè°ƒè¯•ç”¨
 #############################################################################
 sub mtx2str {
   my($mtx)=shift;
@@ -978,26 +962,26 @@ sub mtx2str {
 
 #############################################################################
 #  findOverlaps($qry,$sbj,$qsCol,$qeCol,$ssCol,$seCol,$leftMargin,$rightMargin,$select,$drop,$type,$minOverlap,$outputType):$mtxIdx[qi,si]
-#  ×¢Òâ: ÊÇ°´qsColºÍssCol¶¼ÅÅĞòºóµÄ!!!!
-#  ËµÃ÷: ¶ÔÁ½¸ö¾ØÕó,²éÕÒÖØµşÇé¿ö, ²Î¿¼RÖĞµÄIRanges.findOverlaps()
-#  $qry,$sbj: ´ı±È½ÏµÄ2¸ö¾ØÕó,½«qry±È¶Ôµ½sbjÖĞ,·µ»ØµÄIDX¾ØÕóĞĞÊıÓëqryÏàÍ¬; ±ÈÈçqryÊÇPA,sbjÊÇGFF
-#  $qsCol,$qeCol,$ssCol,$seCol: start/endµÄÁĞºÅ(Ê×0),Èôstart=end,Ôò±íÊ¾ÊÇÒ»¸öµã,ÈçPA
-#  $leftMargin/rightMargin: ÔÊĞí½«sbjÊ×Î²À©Õ¹Ò»¶¨³¤¶È,Èô<0,Ôò±íÊ¾ËõĞ¡Ò»¶¨³¤¶È
-#  $select=('all','first') µ±Ò»¸öqry¿ÉÒÔ±È¶Ôµ½¶à¸ösbjÊ±(ÈçÒ»¸öPA±È¶Ôµ½¶à¸öGFF)
-#    first/last(Î´ÊµÏÖ)Ê±,Ñ¡ÔñµÄÊÇµÚ1¸ösbj»ò×îºó1¸ösbj,·µ»ØIDX¾ØÕóÁĞÊıÎª2; allÔòÊä³öËùÓĞsbjµÄID,ÕâÊ±·µ»ØIDX¾ØÕóµÄÁĞÊı²»Í¬.
-#  $drop=1/0(default): ÊÇ·ñ¶ªÆú±È¶Ô²»µ½µÄqry; 1Ôò¶ªÆú. ±ÈÈç½«PA±È¶Ôµ½GFF,Èô²»ĞèÒª±È¶Ô²»µ½µÄPA,Ôòdrop=1
-#  $type=('any','within','contain','equal') anyÔòµ±qryÓësbjÓĞÖØµşÊ±¶¼Ëã,withinÊÇqryÔÚsbjÖĞ,equalÊÇÍêÈ«ÏàÍ¬
-#  $minOverlap=1: ×îĞ¡ÖØµş³¤¶È,¶Ôtype¶¼ÓĞĞ§.
-#  $outputType=0(default)/1: Èô1,ÔòÊä³öoverlapType,Ö÷ÒªÓÃÓÚµ±type=anyµÄÊ±ºò,Êä³ö²»Í¬µÄtype
-#  ·µ»Ø$mtxIdx[qi,si]: ¾ØÕóĞĞÊıÈ¡¾öÓÚdrop=1/0,¾ØÕóÁĞÊıÈ¡¾öÓÚselect=all/first ÒÔ¼° outputType(=1,ÔòµÚ2ÁĞÊÇtypeÁĞ(Ê×1))
+#  æ³¨æ„: æ˜¯æŒ‰qsColå’ŒssColéƒ½æ’åºåçš„!!!!
+#  è¯´æ˜: å¯¹ä¸¤ä¸ªçŸ©é˜µ,æŸ¥æ‰¾é‡å æƒ…å†µ, å‚è€ƒRä¸­çš„IRanges.findOverlaps()
+#  $qry,$sbj: å¾…æ¯”è¾ƒçš„2ä¸ªçŸ©é˜µ,å°†qryæ¯”å¯¹åˆ°sbjä¸­,è¿”å›çš„IDXçŸ©é˜µè¡Œæ•°ä¸qryç›¸åŒ; æ¯”å¦‚qryæ˜¯PA,sbjæ˜¯GFF
+#  $qsCol,$qeCol,$ssCol,$seCol: start/endçš„åˆ—å·(é¦–0),è‹¥start=end,åˆ™è¡¨ç¤ºæ˜¯ä¸€ä¸ªç‚¹,å¦‚PA
+#  $leftMargin/rightMargin: å…è®¸å°†sbjé¦–å°¾æ‰©å±•ä¸€å®šé•¿åº¦,è‹¥<0,åˆ™è¡¨ç¤ºç¼©å°ä¸€å®šé•¿åº¦
+#  $select=('all','first') å½“ä¸€ä¸ªqryå¯ä»¥æ¯”å¯¹åˆ°å¤šä¸ªsbjæ—¶(å¦‚ä¸€ä¸ªPAæ¯”å¯¹åˆ°å¤šä¸ªGFF)
+#    first/last(æœªå®ç°)æ—¶,é€‰æ‹©çš„æ˜¯ç¬¬1ä¸ªsbjæˆ–æœ€å1ä¸ªsbj,è¿”å›IDXçŸ©é˜µåˆ—æ•°ä¸º2; allåˆ™è¾“å‡ºæ‰€æœ‰sbjçš„ID,è¿™æ—¶è¿”å›IDXçŸ©é˜µçš„åˆ—æ•°ä¸åŒ.
+#  $drop=1/0(default): æ˜¯å¦ä¸¢å¼ƒæ¯”å¯¹ä¸åˆ°çš„qry; 1åˆ™ä¸¢å¼ƒ. æ¯”å¦‚å°†PAæ¯”å¯¹åˆ°GFF,è‹¥ä¸éœ€è¦æ¯”å¯¹ä¸åˆ°çš„PA,åˆ™drop=1
+#  $type=('any','within','contain','equal') anyåˆ™å½“qryä¸sbjæœ‰é‡å æ—¶éƒ½ç®—,withinæ˜¯qryåœ¨sbjä¸­,equalæ˜¯å®Œå…¨ç›¸åŒ
+#  $minOverlap=1: æœ€å°é‡å é•¿åº¦,å¯¹typeéƒ½æœ‰æ•ˆ.
+#  $outputType=0(default)/1: è‹¥1,åˆ™è¾“å‡ºoverlapType,ä¸»è¦ç”¨äºå½“type=anyçš„æ—¶å€™,è¾“å‡ºä¸åŒçš„type
+#  è¿”å›$mtxIdx[qi,si]: çŸ©é˜µè¡Œæ•°å–å†³äºdrop=1/0,çŸ©é˜µåˆ—æ•°å–å†³äºselect=all/first ä»¥åŠ outputType(=1,åˆ™ç¬¬2åˆ—æ˜¯typeåˆ—(é¦–1))
 
 #  Usages:
-#  1) ½«PA±È¶Ôµ½GFFÖĞ,Ö»¿¼ÂÇ±È¶Ôµ½µÄPA,ÒÔ¼°Ö»È¡Ê×¸öGFF: select=first; drop=1; type=any
-#  PAT_mapGff.pl ÖĞµÄmode=1
+#  1) å°†PAæ¯”å¯¹åˆ°GFFä¸­,åªè€ƒè™‘æ¯”å¯¹åˆ°çš„PA,ä»¥åŠåªå–é¦–ä¸ªGFF: select=first; drop=1; type=any
+#  PAT_mapGff.pl ä¸­çš„mode=1
 #  idx=findOverlaps($PA,$GFF,3,3,3,4,0,0,'first',1,'any',1)
 
-#  2) ½«PA (start/end)±È¶Ôµ½GFFÖĞ,ÇÒ¼ÇÂ¼¸²¸ÇÀàĞÍ
-#  PAT_mapGff.pl ÖĞµÄmode=2
+#  2) å°†PA (start/end)æ¯”å¯¹åˆ°GFFä¸­,ä¸”è®°å½•è¦†ç›–ç±»å‹
+#  PAT_mapGff.pl ä¸­çš„mode=2
 #  idx=findOverlaps($PA,$GFF,3,4,3,4,0,0,'first',1,'any',1,1)
 #############################################################################
 sub findOverlaps {
@@ -1022,7 +1006,7 @@ sub findOverlaps {
   my $sLast=$#$sbj;
   my ($qi,$si)=(0,0);
   my ($qs,$qe,$ss,$se);
-  my ($have,$ovpType,$oType)=(0,-1); #(Î´ÕÒµ½,²»ÖØºÏ)
+  my ($have,$ovpType,$oType)=(0,-1); #(æœªæ‰¾åˆ°,ä¸é‡åˆ)
   my $ovpLen=0;
   my $lastSi=0;
   while ($qi<=$qLast) {
@@ -1030,7 +1014,7 @@ sub findOverlaps {
 	$have=0;
     $qs=$qry->[$qi][$qsCol];
 	$qe=$qry->[$qi][$qeCol];
-    $si=$lastSi; #µ±select=allÊ±,»áÌø¹ısi,ÕâÀïĞèÒª¸ù¾İÉÏÒ»¸öqiµÄÊ×¸ösi×÷ÎªlastSi
+    $si=$lastSi; #å½“select=allæ—¶,ä¼šè·³è¿‡si,è¿™é‡Œéœ€è¦æ ¹æ®ä¸Šä¸€ä¸ªqiçš„é¦–ä¸ªsiä½œä¸ºlastSi
 
 	while ($si<=$sLast) {
 	  $ss=$sbj->[$si][$ssCol];
@@ -1039,7 +1023,7 @@ sub findOverlaps {
 	  $se+=$rightMargin;
 	  if ($se<$qs) {
 		$si++;
-        while ($si>$sLast and !$drop and $qi<=$qLast) { ## 2011/10/13 ·ÇdropÊ±,ĞèÒª²¹ÉÏsiÍêÁËµ«qiÃ»ÍêµÄÇé¿ö!!
+        while ($si>$sLast and !$drop and $qi<=$qLast) { ## 2011/10/13 édropæ—¶,éœ€è¦è¡¥ä¸Šsiå®Œäº†ä½†qiæ²¡å®Œçš„æƒ…å†µ!!
           push(@$mtxIdx,[$qi]);
 	      $qi++;
 	      next;
@@ -1047,13 +1031,13 @@ sub findOverlaps {
 		next;
 	  }
 	  if ($ss>$qs) {
-		if (!$have and !$drop) { #drop=1,¼´Ê¹Ã»ÕÒ×Å,Ò²Êä³ö
+		if (!$have and !$drop) { #drop=1,å³ä½¿æ²¡æ‰¾ç€,ä¹Ÿè¾“å‡º
 		  push(@$mtxIdx,[$qi]);
 		}
         last;
 	  }
 	  $lastSi=$si if $ovpType==-1;
-	  #È¡µÃqryºÍsbjµÄÆ¥ÅäÇé¿ö
+	  #å–å¾—qryå’Œsbjçš„åŒ¹é…æƒ…å†µ
       if ($qs==$ss and $qe==$se) {
 		$ovpType=$EQUAL;
 		$ovpLen=$qe-$qs+1;
@@ -1073,7 +1057,7 @@ sub findOverlaps {
 	  $oType=$ovpType;
 	  $ovpType=$ANY if $ovpType!=-1 and $type==$ANY;
       
-	  #Êä³ö
+	  #è¾“å‡º
 	  if ($type==$ovpType and $ovpLen>=$minOverlap) {		
 		if ($select==$FIRST) {
 		  $have=1;
@@ -1098,7 +1082,7 @@ sub findOverlaps {
 		  next;
 	    }		
 	  } else {
-		push(@$mtxIdx,[$qi]) if !$drop; #ËäÈ»ÓĞÖØºÏ,µ«type²»¶Ô
+		push(@$mtxIdx,[$qi]) if !$drop; #è™½ç„¶æœ‰é‡åˆ,ä½†typeä¸å¯¹
 		$si++;
 		next;
 	  }
@@ -1119,21 +1103,21 @@ sub findOverlaps {
 
 #############################################################################
 #  countOverlaps($qry,$sbj,$qsCol,$qeCol,$ssCol,$seCol,$sumCols,$leftMargin,$rightMargin,$select,$drop,$type,$minOverlap):$mtxIdx
-#  ×¢Òâ: ÊÇ°´qsColºÍssCol¶¼ÅÅĞòºóµÄ!!!!
-#  ËµÃ÷: ¶ÔÁ½¸ö¾ØÕó,¼ÆËãqryÔÚsbjÖĞµÄ¸öÊı, ²Î¿¼RÖĞµÄIRanges.countOverlaps()
-#  $qry,$sbj: ´ı±È½ÏµÄ2¸ö¾ØÕó,½«qry±È¶Ôµ½sbjÖĞ,·µ»ØµÄIDX¾ØÕóĞĞÊıÓësbjÏàÍ¬; ±ÈÈçqryÊÇPA,sbjÊÇGFF
-#  $qsCol,$qeCol,$ssCol,$seCol: start/endµÄÁĞºÅ(Ê×0),Èôstart=end,Ôò±íÊ¾ÊÇÒ»¸öµã,ÈçPA
-#  $sumCols: ÓÃÓÚsumµÄÁĞ,ÈôÓĞ¶àÁĞÔòÈç 3:4:5, ±ÈÈç sum(leaf),sum(seed)
-#  $leftMargin/rightMargin: ÔÊĞí½«sbjÊ×Î²À©Õ¹Ò»¶¨³¤¶È,Èô<0,Ôò±íÊ¾ËõĞ¡Ò»¶¨³¤¶È
-#  $select=('all','first') µ±Ò»¸öqry¿ÉÒÔ±È¶Ôµ½¶à¸ösbjÊ±(ÈçÒ»¸öPA±È¶Ôµ½¶à¸öGFF)
-#    firstÊ±,Ò»¸öqryÖ»¼ÆÊıÒ»´Î;allÊ±,Ò»¸öqry¿ÉÖØ¸´¼ÆÊı.±ÈÈçPA±È¶Ôµ½gene,ÈôPA1Í¬Ê±ÔÚgene1ºÍgene2ÖĞ,ÔòPA1¿ÉÒÔ¼ÆÊı2´Î(Èç¹ûselect=all)
-#  $drop=1/0(default): ÊÇ·ñ¶ªÆúÎŞqryµÄsbj; 1Ôò¶ªÆú. ±ÈÈç½«PA±È¶Ôµ½GFF,Èô²»ĞèÒª±È¶Ô²»µ½µÄGFF,Ôòdrop=1
-#  $type=('any','within','contain','equal') anyÔòµ±qryÓësbjÓĞÖØµşÊ±¶¼Ëã,withinÊÇqryÔÚsbjÖĞ,equalÊÇÍêÈ«ÏàÍ¬
-#  $minOverlap=1: ×îĞ¡ÖØµş³¤¶È,¶Ôtype¶¼ÓĞĞ§.
-#  ·µ»Ø$mtxIdx[si,qryCnt,sumCols]: ¾ØÕóĞĞÊıÓësbjÍ¬ĞĞ£¬µ«È¡¾öÓÚdrop=1/0,¾ØÕóÁĞÊıÈ¡¾öÓÚsumCols,×¢ÒâµÚ2ÁĞÎªqryCnt,Èç±È¶Ôµ½geneµÄPA¸öÊı
+#  æ³¨æ„: æ˜¯æŒ‰qsColå’ŒssColéƒ½æ’åºåçš„!!!!
+#  è¯´æ˜: å¯¹ä¸¤ä¸ªçŸ©é˜µ,è®¡ç®—qryåœ¨sbjä¸­çš„ä¸ªæ•°, å‚è€ƒRä¸­çš„IRanges.countOverlaps()
+#  $qry,$sbj: å¾…æ¯”è¾ƒçš„2ä¸ªçŸ©é˜µ,å°†qryæ¯”å¯¹åˆ°sbjä¸­,è¿”å›çš„IDXçŸ©é˜µè¡Œæ•°ä¸sbjç›¸åŒ; æ¯”å¦‚qryæ˜¯PA,sbjæ˜¯GFF
+#  $qsCol,$qeCol,$ssCol,$seCol: start/endçš„åˆ—å·(é¦–0),è‹¥start=end,åˆ™è¡¨ç¤ºæ˜¯ä¸€ä¸ªç‚¹,å¦‚PA
+#  $sumCols: ç”¨äºsumçš„åˆ—,è‹¥æœ‰å¤šåˆ—åˆ™å¦‚ 3:4:5, æ¯”å¦‚ sum(leaf),sum(seed)
+#  $leftMargin/rightMargin: å…è®¸å°†sbjé¦–å°¾æ‰©å±•ä¸€å®šé•¿åº¦,è‹¥<0,åˆ™è¡¨ç¤ºç¼©å°ä¸€å®šé•¿åº¦
+#  $select=('all','first') å½“ä¸€ä¸ªqryå¯ä»¥æ¯”å¯¹åˆ°å¤šä¸ªsbjæ—¶(å¦‚ä¸€ä¸ªPAæ¯”å¯¹åˆ°å¤šä¸ªGFF)
+#    firstæ—¶,ä¸€ä¸ªqryåªè®¡æ•°ä¸€æ¬¡;allæ—¶,ä¸€ä¸ªqryå¯é‡å¤è®¡æ•°.æ¯”å¦‚PAæ¯”å¯¹åˆ°gene,è‹¥PA1åŒæ—¶åœ¨gene1å’Œgene2ä¸­,åˆ™PA1å¯ä»¥è®¡æ•°2æ¬¡(å¦‚æœselect=all)
+#  $drop=1/0(default): æ˜¯å¦ä¸¢å¼ƒæ— qryçš„sbj; 1åˆ™ä¸¢å¼ƒ. æ¯”å¦‚å°†PAæ¯”å¯¹åˆ°GFF,è‹¥ä¸éœ€è¦æ¯”å¯¹ä¸åˆ°çš„GFF,åˆ™drop=1
+#  $type=('any','within','contain','equal') anyåˆ™å½“qryä¸sbjæœ‰é‡å æ—¶éƒ½ç®—,withinæ˜¯qryåœ¨sbjä¸­,equalæ˜¯å®Œå…¨ç›¸åŒ
+#  $minOverlap=1: æœ€å°é‡å é•¿åº¦,å¯¹typeéƒ½æœ‰æ•ˆ.
+#  è¿”å›$mtxIdx[si,qryCnt,sumCols]: çŸ©é˜µè¡Œæ•°ä¸sbjåŒè¡Œï¼Œä½†å–å†³äºdrop=1/0,çŸ©é˜µåˆ—æ•°å–å†³äºsumCols,æ³¨æ„ç¬¬2åˆ—ä¸ºqryCnt,å¦‚æ¯”å¯¹åˆ°geneçš„PAä¸ªæ•°
 
 #  Usages:
-#  1) ½«PA±È¶Ôµ½GFFÖĞ,Ò»¸öPAÖ»ÄÜÊôÓÚÒ»¸öGFF,¼ÆÊıleaf/seed(2,3ÁĞ),È¥³ı±È¶Ô²»µ½µÄGFF: select=first; drop=1; type=any; sumCols=2:3
+#  1) å°†PAæ¯”å¯¹åˆ°GFFä¸­,ä¸€ä¸ªPAåªèƒ½å±äºä¸€ä¸ªGFF,è®¡æ•°leaf/seed(2,3åˆ—),å»é™¤æ¯”å¯¹ä¸åˆ°çš„GFF: select=first; drop=1; type=any; sumCols=2:3
 #  idx[si,qryCnt,sumCols]=countOverlaps($PA,$GFF,3,3,3,4,'2:3',0,0,'first',1,'any',1)
 #############################################################################
 sub countOverlaps {
@@ -1152,13 +1136,13 @@ sub countOverlaps {
   $select=$ALL if $select eq 'all';
   $select=$FIRST if $select eq 'first';
   #$select=$LAST if $select eq 'last';
-  my @sc=split(/:/,$sumCols); #ÒªÇóºÍµÄÁĞ
+  my @sc=split(/:/,$sumCols); #è¦æ±‚å’Œçš„åˆ—
   my $mtxIdx;
   my $qLast=$#$qry;
   my $sLast=$#$sbj;
   my ($qi,$si)=(0,0);
   my ($qs,$qe,$ss,$se);
-  my ($have,$ovpType,$cnt)=(0,-1); #(Î´ÕÒµ½,²»ÖØºÏ)
+  my ($have,$ovpType,$cnt)=(0,-1); #(æœªæ‰¾åˆ°,ä¸é‡åˆ)
   my $ovpLen=0;
   my $lastQi=0;
   my @noQry=@sc;
@@ -1174,7 +1158,7 @@ sub countOverlaps {
 	$se=$sbj->[$si][$seCol];
 	$ss-=$leftMargin;
 	$se+=$rightMargin;
-    if ($select == $ALL) { #Èç¹ûqry¿ÉÖØ¸´,ÔòÃ¿´Î´ÓÇ°Ò»¸ösbj¿ªÊ¼µÄqry¿ªÊ¼»¬¶¯
+    if ($select == $ALL) { #å¦‚æœqryå¯é‡å¤,åˆ™æ¯æ¬¡ä»å‰ä¸€ä¸ªsbjå¼€å§‹çš„qryå¼€å§‹æ»‘åŠ¨
 	  $qi=$lastQi;
     }	
 	@sums=@noQry;	
@@ -1190,7 +1174,7 @@ sub countOverlaps {
 	  if ($qs>$se) {
         last;
 	  }
-	  #È¡µÃqryºÍsbjµÄÆ¥ÅäÇé¿ö
+	  #å–å¾—qryå’Œsbjçš„åŒ¹é…æƒ…å†µ
       if ($qs==$ss and $qe==$se) {
 		$ovpType=$EQUAL;
 		$ovpLen=$qe-$qs+1;
@@ -1208,7 +1192,7 @@ sub countOverlaps {
 		$ovpLen=$qe-$ss+1;
 	  }
 	  $ovpType=$ANY if $ovpType!=-1 and $type==$ANY;      
-	  #Êä³ö
+	  #è¾“å‡º
 	  if ($type==$ovpType and $ovpLen>=$minOverlap) {
 		$have=1;
 		$cnt++;
@@ -1218,7 +1202,7 @@ sub countOverlaps {
 	  }
       $qi++;
 	} #while qi
-	if (!$have and !$drop) { #drop=1,¼´Ê¹Ã»ÕÒ×Å,Ò²Êä³ö
+	if (!$have and !$drop) { #drop=1,å³ä½¿æ²¡æ‰¾ç€,ä¹Ÿè¾“å‡º
 	  push(@$mtxIdx,[$si,0,@noQry]);
 	} elsif ($have) {
       push(@$mtxIdx,[$si,$cnt,@sums]);
@@ -1231,28 +1215,28 @@ sub countOverlaps {
 
 #############################################################################
 #  getIntervals($mtx/$ary,$col,$more):$mtx
-#  ×¢Òâ: ÊÇÅÅĞòºóµÄ!!!!
-#  ¿ÉÒÔµÃµ½Ò»´®µÄstart-end
-#  ary: ÒÑÅÅĞòµÄÊı×é,ÀïÃæº¬ÓĞÏàÍ¬µÄÔªËØ;
-#  mtx,col: ÒÑ°´colÁĞÅÅĞòµÄ¾ØÕó
-#  Èç¹ûÎ´¶¨Òåcol,ÔòÈÏÎª$ary=\@xĞÎÊ½
-#  Èç¹ûÓĞ¶¨Òåcol,ÔòÈÏÎª$mtxĞÎÊ½
-#  Êä³ö$mtx: Ã¿¸öÎ¨Ò»ÖµËùÔÚµÄÇø¼ä (startIdx,endIdx)
-#  2012-09-09 ¸Ä½ø£º$colÔÊĞí¶àÁĞ£¬ÒÔ1:2µÄĞÎÊ½Ìá¹©; Ôö¼ÓÑ¡Ïî$more=0(default)/1£¬Èç¹ûÊÇ1,ÔòÊä³öµÄµÚ3ÁĞÎªÈçchr1,-
-#  2016/3/23 ¸Ä½ø£ºÔö¼Ó $more=N1:N2µÄĞÎÊ½('0:10')£¬Èç¹ûÌá¹©£¬ÔòÖ»¶Ô N1~N2ĞĞ½øĞĞÇø¼ä»®·Ö£¬»ñµÃidx£¨±ÈÈçÔÊĞí¶ÔÄ³¸ögene·¶Î§ÄÚµÄtr½øĞĞÇø¼ä»®·Ö£¬¶ø²»ÊÇ¶ÔËùÓĞ»ùÒò£©
+#  æ³¨æ„: æ˜¯æ’åºåçš„!!!!
+#  å¯ä»¥å¾—åˆ°ä¸€ä¸²çš„start-end
+#  ary: å·²æ’åºçš„æ•°ç»„,é‡Œé¢å«æœ‰ç›¸åŒçš„å…ƒç´ ;
+#  mtx,col: å·²æŒ‰colåˆ—æ’åºçš„çŸ©é˜µ
+#  å¦‚æœæœªå®šä¹‰col,åˆ™è®¤ä¸º$ary=\@xå½¢å¼
+#  å¦‚æœæœ‰å®šä¹‰col,åˆ™è®¤ä¸º$mtxå½¢å¼
+#  è¾“å‡º$mtx: æ¯ä¸ªå”¯ä¸€å€¼æ‰€åœ¨çš„åŒºé—´ (startIdx,endIdx)
+#  2012-09-09 æ”¹è¿›ï¼š$colå…è®¸å¤šåˆ—ï¼Œä»¥1:2çš„å½¢å¼æä¾›; å¢åŠ é€‰é¡¹$more=0(default)/1ï¼Œå¦‚æœæ˜¯1,åˆ™è¾“å‡ºçš„ç¬¬3åˆ—ä¸ºå¦‚chr1,-
+#  2016/3/23 æ”¹è¿›ï¼šå¢åŠ  $more=N1:N2çš„å½¢å¼('0:10')ï¼Œå¦‚æœæä¾›ï¼Œåˆ™åªå¯¹ N1~N2è¡Œè¿›è¡ŒåŒºé—´åˆ’åˆ†ï¼Œè·å¾—idxï¼ˆæ¯”å¦‚å…è®¸å¯¹æŸä¸ªgeneèŒƒå›´å†…çš„trè¿›è¡ŒåŒºé—´åˆ’åˆ†ï¼Œè€Œä¸æ˜¯å¯¹æ‰€æœ‰åŸºå› ï¼‰
 #Usage: 
-#1) ÊäÈëÊı×é
+#1) è¾“å…¥æ•°ç»„
 #my @ary=(1,1,1,2,2,3);
-#my $ret2=getIntervals(\@ary); #²»ÄÜÖ¸¶¨col,·ñÔò³ö´í
+#my $ret2=getIntervals(\@ary); #ä¸èƒ½æŒ‡å®šcol,å¦åˆ™å‡ºé”™
 
-#2) ÊäÈë$ĞÍ¾ØÕó
-#my $ret=getIntervals($mtx,0); #±ØĞëÖ¸¶¨col
+#2) è¾“å…¥$å‹çŸ©é˜µ
+#my $ret=getIntervals($mtx,0); #å¿…é¡»æŒ‡å®šcol
 
-#3) ÊäÈë¶à¸öÁĞ
+#3) è¾“å…¥å¤šä¸ªåˆ—
 #my $ret=getIntervals($mtx,'0:1:3');
 
-#4) Ö»¶Ô¸ø¶¨ĞĞ·¶Î§½øĞĞÇø¼ä»®·Ö
-#my $ret=getIntervals($mtx,5,0:10); #Ö»¶Ô0-10ĞĞµÄÊı¾İ½øĞĞ»®·Ö 
+#4) åªå¯¹ç»™å®šè¡ŒèŒƒå›´è¿›è¡ŒåŒºé—´åˆ’åˆ†
+#my $ret=getIntervals($mtx,5,0:10); #åªå¯¹0-10è¡Œçš„æ•°æ®è¿›è¡Œåˆ’åˆ† 
 #############################################################################
 sub getIntervals {
 	my($mtx)=shift;
@@ -1267,7 +1251,7 @@ sub getIntervals {
       @cols=split(/:/,$col);
 	}	
 
-	#¸ø¶¨Ê¼ÖÕÇø¼ä
+	#ç»™å®šå§‹ç»ˆåŒºé—´
 	my $usesub=0;
 	my $firstIdx=0;
 	if ($more=~/:/) {
@@ -1350,15 +1334,15 @@ sub getIntervals {
 
 #############################################################################
 #  fillGaps($mtx,$colstart,$colend):$idxmtx (prevIdx,nextIdx)
-#  ×¢Òâ: mtxÊÇÅÅĞòºóµÄ!!!!
-#  Ìî³ä¿ÕÏ¶£¬±ÈÈçgene¼äÌî³äigt
-#  mtx: ÒÑ°´colstartÁĞÅÅĞòµÄ¾ØÕó
-#  colstart,colend: start/end×ø±êµÄÁĞºÅ£¨Ê×0£©
-#  Êä³öidxmtx: (prevIdx,nextIdx)±íÊ¾mtxÖĞµÄstartIdxĞĞºÍendIdxĞĞÊÇ¸ÃGAPµÄÊ×Ä©£¬¼´GAPµÄ³¤¶ÈÊÇ mtx.nextIdx.start-mtx.prevIdx.end+1
+#  æ³¨æ„: mtxæ˜¯æ’åºåçš„!!!!
+#  å¡«å……ç©ºéš™ï¼Œæ¯”å¦‚geneé—´å¡«å……igt
+#  mtx: å·²æŒ‰colstartåˆ—æ’åºçš„çŸ©é˜µ
+#  colstart,colend: start/endåæ ‡çš„åˆ—å·ï¼ˆé¦–0ï¼‰
+#  è¾“å‡ºidxmtx: (prevIdx,nextIdx)è¡¨ç¤ºmtxä¸­çš„startIdxè¡Œå’ŒendIdxè¡Œæ˜¯è¯¥GAPçš„é¦–æœ«ï¼Œå³GAPçš„é•¿åº¦æ˜¯ mtx.nextIdx.start-mtx.prevIdx.end+1
 #Usage: 
 #my $ret=fillGaps($mtx,1,2)
 
-#²âÊÔ
+#æµ‹è¯•
 #my $ret=fillGaps($mtx,0,1);
 #my $ipre,$inext;
 #if ($ret->[0][0]==-1) {
@@ -1416,9 +1400,9 @@ sub fillGaps {
 }
 
 #############################################################################
-## µÃµ½Á¬ĞøµÄÇøÓò£¬ÓÃÓÚdoAMB£¬×ö·¨²ÎÕÕIRanges.disjoin()
+## å¾—åˆ°è¿ç»­çš„åŒºåŸŸï¼Œç”¨äºdoAMBï¼Œåšæ³•å‚ç…§IRanges.disjoin()
 ## $outmtx=disjoin($inmtx,$startcol=0,$endcol=1,$startrow=0,$endrow=lastRow)
-## inmtxÊÇ>=Á½ÁĞ¾ØÕó£¬Ö¸¶¨start/endÁĞ£¬Ò²¿ÉÒÔÖ¸¶¨inmtxµÄÄÄĞ©ĞĞ£¬Êä³öoutmtxÊÇ°´startÅÅĞòºóµÄ
+## inmtxæ˜¯>=ä¸¤åˆ—çŸ©é˜µï¼ŒæŒ‡å®šstart/endåˆ—ï¼Œä¹Ÿå¯ä»¥æŒ‡å®šinmtxçš„å“ªäº›è¡Œï¼Œè¾“å‡ºoutmtxæ˜¯æŒ‰startæ’åºåçš„
 #############################################################################
 sub disjoin {
 	my ($g1,$si,$ei,$ri,$re)=@_;
@@ -1446,7 +1430,7 @@ sub disjoin {
 
 	push(@starts,@ends1);
 	@starts=uniq @starts;
-	#my @adjstart=sort(@starts); !!´í
+	#my @adjstart=sort(@starts); !!é”™
 	my @adjstart = sort { $a <=> $b } @starts;
 
 	pop(@adjstart);
@@ -1478,7 +1462,7 @@ sub disjoin {
 #############################################################################
 #  seqFormat($seqfile):fa/fq/''
 #  useage: $format=seqFormat($file)
-#  ËµÃ÷: ÅĞ¶ÏĞòÁĞÎÄ¼şÊÇfa»òfq¸ñÊ½,Ö»Í¨¹ıµÚ1ĞĞµÄ±êÌâÊÇ>»¹ÊÇ@À´ÅĞ¶Ï¸ñÊ½
+#  è¯´æ˜: åˆ¤æ–­åºåˆ—æ–‡ä»¶æ˜¯faæˆ–fqæ ¼å¼,åªé€šè¿‡ç¬¬1è¡Œçš„æ ‡é¢˜æ˜¯>è¿˜æ˜¯@æ¥åˆ¤æ–­æ ¼å¼
 #############################################################################
 sub seqFormat {
   my $f=shift;
@@ -1492,7 +1476,7 @@ sub seqFormat {
 #############################################################################
 #  isBad($seq,0.9):0=good/1=bad
 #  useage: if (isBad('aaaa')).. if (isBad('aaa',0.9))
-#  ËµÃ÷: qc,ÅĞ¶ÏĞòÁĞÊÇ·ñº¬ 10%µÄN »ò QT%µÄATCG..
+#  è¯´æ˜: qc,åˆ¤æ–­åºåˆ—æ˜¯å¦å« 10%çš„N æˆ– QT%çš„ATCG..
 #############################################################################
 sub isBad {
  my $aseq=shift;
@@ -1514,16 +1498,16 @@ sub isBad {
 
 #############################################################################
 ## remove12($file,$sn); remove12($file,$sn,$of); 
-## È¥³ısnÁĞÖ¸¶¨µÄseq_nameÁĞµÄ/1/2tag,ÖØĞ´Ô­ÎÄ¼ş
-## sn: seq_nameËùÔÚÁĞ,Ê×1. of: Êä³ö,ÈôÎ´Ö¸¶¨,ÔòÖØĞ´Ô­ÎÄ¼ş
-## »á×Ô¶¯¸ù¾İµÚ1ĞĞÅĞ¶ÏÊÇ·ñÓĞ1/2tag,ÈôÓĞÔòÖØĞ´,ÎŞÔòÖ±½Ó·µ»Ø
+## å»é™¤snåˆ—æŒ‡å®šçš„seq_nameåˆ—çš„/1/2tag,é‡å†™åŸæ–‡ä»¶
+## sn: seq_nameæ‰€åœ¨åˆ—,é¦–1. of: è¾“å‡º,è‹¥æœªæŒ‡å®š,åˆ™é‡å†™åŸæ–‡ä»¶
+## ä¼šè‡ªåŠ¨æ ¹æ®ç¬¬1è¡Œåˆ¤æ–­æ˜¯å¦æœ‰1/2tag,è‹¥æœ‰åˆ™é‡å†™,æ— åˆ™ç›´æ¥è¿”å›
 #############################################################################
 sub remove12 {
   my ($file,$sn,$of)=@_;   
   my ($line);
   $sn--;
   die "sn at least 1" if $sn<0;
-  ##×Ô¶¯¸ù¾İµÚ1ĞĞÅĞ¶ÏÊÇ·ñÎª/1/2
+  ##è‡ªåŠ¨æ ¹æ®ç¬¬1è¡Œåˆ¤æ–­æ˜¯å¦ä¸º/1/2
   open(ININ,"<$file") or die "Cannot read $file";
   $line=<ININ>;
   $line=trim($line);
@@ -1558,17 +1542,17 @@ sub remove12 {
 
 #############################################################################
 ## @files=splitRaw($file,$max,$cnt,$suf,$remove12,$seqfld,$idx);
-## ¸ù¾İseq_nameÁĞ,½«file»®·Ö³ÉĞ¡ÎÄ¼ş,·µ»Ø»®·ÖºóµÄÎÄ¼şÁĞ±í
-## max/cnt: ÓÃÓÚÈ·¶¨·Ö×éµÄ×î´óÖµ¼°×éÊı
-## suf: ÎÄ¼şºó×ºÈç.part,ÔòÊä³ö.part1..N+1
-## remove12: ÊÇ·ñÉ¾³ıseq_nameºóµÄ/1/2(×Ô¶¯ÅĞ¶ÏÓĞÎŞ)
-## seqfld: seq_nameËùÔÚµÄÁĞ,Ê×1. Ä¬ÈÏ1,µÚ1ÁĞ.
-## seqfldÀàËÆ: MCIC-SOLEXA:2:X:529:1316#0/1,¸ù¾İX²ğ·Ö
-## idx:  Ê×0,Ä¬ÈÏÎª2£¨ÊÊÓÚMCICµÄÇé¿ö£©£¬Ö¸¶¨seqname¿ÉÒÔÊ¶±ğÓÃÓÚsplitµÄ²¿·Ö
-## ??@HWI-ST741:189:C0GU5ACXX:8:2315[ÕâÁĞÊÇ±äµÄ]:21296:100820 1:N:0: ÕâÖÖÕ¦°ì
-## Êä³ö$file.part1..6ÎÄ¼şÃû,¸÷×é±íÊ¾´Ó1~20,21~40..81~100,>100
+## æ ¹æ®seq_nameåˆ—,å°†fileåˆ’åˆ†æˆå°æ–‡ä»¶,è¿”å›åˆ’åˆ†åçš„æ–‡ä»¶åˆ—è¡¨
+## max/cnt: ç”¨äºç¡®å®šåˆ†ç»„çš„æœ€å¤§å€¼åŠç»„æ•°
+## suf: æ–‡ä»¶åç¼€å¦‚.part,åˆ™è¾“å‡º.part1..N+1
+## remove12: æ˜¯å¦åˆ é™¤seq_nameåçš„/1/2(è‡ªåŠ¨åˆ¤æ–­æœ‰æ— )
+## seqfld: seq_nameæ‰€åœ¨çš„åˆ—,é¦–1. é»˜è®¤1,ç¬¬1åˆ—.
+## seqfldç±»ä¼¼: MCIC-SOLEXA:2:X:529:1316#0/1,æ ¹æ®Xæ‹†åˆ†
+## idx:  é¦–0,é»˜è®¤ä¸º2ï¼ˆé€‚äºMCICçš„æƒ…å†µï¼‰ï¼ŒæŒ‡å®šseqnameå¯ä»¥è¯†åˆ«ç”¨äºsplitçš„éƒ¨åˆ†
+## ??@HWI-ST741:189:C0GU5ACXX:8:2315[è¿™åˆ—æ˜¯å˜çš„]:21296:100820 1:N:0: è¿™ç§å’‹åŠ
+## è¾“å‡º$file.part1..6æ–‡ä»¶å,å„ç»„è¡¨ç¤ºä»1~20,21~40..81~100,>100
 ## Ex. @files=splitRaw($file,100,5,'.part',1);
-## 2012-06-03 Ä¬ÈÏÇé¿öÏÂidx=2£¬¶ÔÓÚLI16GµÄitemÊÇ4£¬×î´ó¿Éµ½2500×óÓÒ
+## 2012-06-03 é»˜è®¤æƒ…å†µä¸‹idx=2ï¼Œå¯¹äºLI16Gçš„itemæ˜¯4ï¼Œæœ€å¤§å¯åˆ°2500å·¦å³
 ##  @files=splitRaw($file,2500,50,'.part',1,4);
 #############################################################################
 sub splitRaw {
@@ -1583,7 +1567,7 @@ sub splitRaw {
   my (@hs,@fs,$f);
   $rm=0 if !$rm;
   
-  #Èç¹ûremove/1/2,ÔòÏÈÅĞ¶ÏÊÇ·ñº¬,Ö»¸ù¾İµÚ1ĞĞÅĞ¶Ï
+  #å¦‚æœremove/1/2,åˆ™å…ˆåˆ¤æ–­æ˜¯å¦å«,åªæ ¹æ®ç¬¬1è¡Œåˆ¤æ–­
   if ($rm) {
 	open(RAW,"<$file") or die "Cannot read $file!";
 	my $line=<RAW>;
@@ -1598,7 +1582,7 @@ sub splitRaw {
   }
 
   open(RAW,"<$file") or die "Cannot read $file!";
-  #½¨Êä³öÎÄ¼ş¾ä±ú
+  #å»ºè¾“å‡ºæ–‡ä»¶å¥æŸ„
   for my $i(1..($grpcnt+1)) {
 	my $h;
     $f="$file$suf$i";
@@ -1608,7 +1592,7 @@ sub splitRaw {
   }
   my $last=$#hs;
 
-  #·Öµ½²»Í¬ÎÄ¼ş
+  #åˆ†åˆ°ä¸åŒæ–‡ä»¶
   my $cnt=int($max/$grpcnt);
   $max=$grpcnt*$cnt;
   my ($line,@cols,@item,$idx,$name,$mod,$grp);
@@ -1619,7 +1603,7 @@ sub splitRaw {
 	if ($rm) {
       $cols[$sn]=substr($cols[$sn],0,length($cols[$sn])-2);
 	}
-	#È·¶¨ËùÓĞµÄ×é
+	#ç¡®å®šæ‰€æœ‰çš„ç»„
 	@item=split(/:/,$cols[$sn]);
 	if ($#item<$sidx or $item[$sidx]>$max or $item[$sidx]<=0) {
 	  my $HF=$hs[$last];
@@ -1644,8 +1628,8 @@ sub splitRaw {
 
 #############################################################################
 ## @uniqs=getUniqByCols($file,$cols,$sep='');
-## ¸ù¾İcolsÖ¸¶¨µÄÁĞ,È¡µÃuniqÖµ£¬ÓÃsepÁ¬½Ó
-## sepÄ¬ÈÏÎª''
+## æ ¹æ®colsæŒ‡å®šçš„åˆ—,å–å¾—uniqå€¼ï¼Œç”¨sepè¿æ¥
+## sepé»˜è®¤ä¸º''
 ## Ex. @uniqs=getUniqByCols($file,'0:1:2','-');
 #############################################################################
 sub getUniqByCols {
@@ -1669,13 +1653,13 @@ sub getUniqByCols {
 
 #############################################################################
 ## $files=splitFileByCols($file,$cols,$lbl);
-## ¸ù¾İcolsÖ¸¶¨µÄÁĞ,½«file»®·Ö³ÉĞ¡ÎÄ¼ş,·µ»Ø»®·ÖºóµÄÎÄ¼şÁĞ±í-file.spartX¼°¶ÔÓ¦µÄcolsÖµ
-## Êä³ö$files=[file.spart1,chr1**+] ÓÃ**¸ô¿ªcols
-## Ö÷Òª¿¼ÂÇµ½cols¿ÉÄÜº¬ÓĞ·Ç·¨µÄÎÄ¼şÃû£¬ËùÒÔÓÃ.spartXÊä³öÎÄ¼ş
+## æ ¹æ®colsæŒ‡å®šçš„åˆ—,å°†fileåˆ’åˆ†æˆå°æ–‡ä»¶,è¿”å›åˆ’åˆ†åçš„æ–‡ä»¶åˆ—è¡¨-file.spartXåŠå¯¹åº”çš„colså€¼
+## è¾“å‡º$files=[file.spart1,chr1**+] ç”¨**éš”å¼€cols
+## ä¸»è¦è€ƒè™‘åˆ°colså¯èƒ½å«æœ‰éæ³•çš„æ–‡ä»¶åï¼Œæ‰€ä»¥ç”¨.spartXè¾“å‡ºæ–‡ä»¶
 ## Ex. $files[filename,uniq]=splitFileByCols($file,'0:1:2');
-##     ÔòÊä³öÎª file.xx1..xxN
+##     åˆ™è¾“å‡ºä¸º file.xx1..xxN
 ##     $files[filename,uniq]=splitFileByCols($file,'0:1:2','xx');
-## 2012-10-26 Ôö¼ÓnochkÑ¡Ïî£¬ÈôÎª1,Ôò²»¼ìÑéuniqs¸öÊı (ÓÃÓÚMtr.£©
+## 2012-10-26 å¢åŠ nochké€‰é¡¹ï¼Œè‹¥ä¸º1,åˆ™ä¸æ£€éªŒuniqsä¸ªæ•° (ç”¨äºMtr.ï¼‰
 #  splitFileByCols($pairfile,"$tanchr2:$tanstrand2",'',1); 
 #############################################################################
 sub splitFileByCols {
@@ -1684,7 +1668,7 @@ sub splitFileByCols {
   $acols=0 if !$acols;
   my @cols=split(/:/,$acols);
   $nochk=0 if !$nochk;
-  #µÃµ½uniqÖµ
+  #å¾—åˆ°uniqå€¼
   my (%hs,$fs,$f);
   my @uniqs=getUniqByCols($file,$acols,'**');
   if (!$nochk) {
@@ -1692,7 +1676,7 @@ sub splitFileByCols {
  }
 
  my $nhandle=scalar(@uniqs);
- my $max=1000; #ÕâÀïÓÃ3ÍòÓÖ»á³ö´í£¬¶øÊµ¼ÊÊÔ¹ı32267ÓÖ¿ÉÒÔ£¬Ö»ÄÜÉèÖÃ1000ÁË
+ my $max=1000; #è¿™é‡Œç”¨3ä¸‡åˆä¼šå‡ºé”™ï¼Œè€Œå®é™…è¯•è¿‡32267åˆå¯ä»¥ï¼Œåªèƒ½è®¾ç½®1000äº†
  my $ngrp=int($nhandle/$max);
  my $rest=$nhandle%$max;
  if ($nhandle%$max!=0) {
@@ -1707,16 +1691,16 @@ for my $ng(1..$ngrp) {
 	$uqe=$nhandle-1;
   }
   #print "group($ngrp): $uqs..$uqe\n";
-  for my $i($uqs..$uqe) { ##2012-10-26 µ±´ò¿ªµÄÎÄ¼şºÜ¶à£¨±ÈÈçÓĞ32845¸ö£¬32267¸ö»¹ÊÇ¿ÉÒÔµÄ£©»á³öÏÖÎÄ¼ş²»ÄÜ´ò¿ªµÄ´íÎó£¬¼´¾ä±ú¿ªÁËÌ«¶àÁË
+  for my $i($uqs..$uqe) { ##2012-10-26 å½“æ‰“å¼€çš„æ–‡ä»¶å¾ˆå¤šï¼ˆæ¯”å¦‚æœ‰32845ä¸ªï¼Œ32267ä¸ªè¿˜æ˜¯å¯ä»¥çš„ï¼‰ä¼šå‡ºç°æ–‡ä»¶ä¸èƒ½æ‰“å¼€çš„é”™è¯¯ï¼Œå³å¥æŸ„å¼€äº†å¤ªå¤šäº†
 	my $h;
     $f="$file.$lbl.$i";
 	push(@{$fs},[$f,$uniqs[$i]]);
 	open($h,">$f");
-	$hs{$uniqs[$i]}=$h; #chr**+¶ÔÓ¦h¾ä±ú
+	$hs{$uniqs[$i]}=$h; #chr**+å¯¹åº”hå¥æŸ„
   }
 
   open(SFC,"<$file") or die "splitFileByCols: Cannot read $file! Total ".scalar(@uniqs)." uniqs\n";
-  #·Öµ½²»Í¬ÎÄ¼ş
+  #åˆ†åˆ°ä¸åŒæ–‡ä»¶
   my ($line,@items,$val);
   while ($line=<SFC>) {
 	$line=trim($line);
@@ -1742,9 +1726,9 @@ for my $ng(1..$ngrp) {
 #############################################################################
 #  findTail($seq,$from,$AT,$gap):$palen
 #  useage: $palen=findTail($seq,100,'AAAAAA',4)
-#  ËµÃ÷: ´ÓseqµÄfrom(²»°üº¬fromÎ»ÖÃ,Ê×1)¿ªÊ¼Á¬ĞøµÄÕÒA»òT,ÔÊĞíÊ×¸öA/TÀëfromµÄ4¸öÎ»ÖÃÒÔÄÚ. 
-#  Èç 12345AAAAAAAAAAAA from=1,gap=4,Ôò·µ»ØÀ©Õ¹ºóµÄpalen,ÈôÕÒ²»µ½palenÔò·µ»Ø0
-#  Èç$from=-100,Ôò´ÓfromµÄ×ó±ß¿ªÊ¼Æ¥Åä. AA34567 from=-3 Ôò´Ó3ÅÔ±ßµÄµÚ1¸öA¿ªÊ¼Æ¥Åä
+#  è¯´æ˜: ä»seqçš„from(ä¸åŒ…å«fromä½ç½®,é¦–1)å¼€å§‹è¿ç»­çš„æ‰¾Aæˆ–T,å…è®¸é¦–ä¸ªA/Tç¦»fromçš„4ä¸ªä½ç½®ä»¥å†…. 
+#  å¦‚ 12345AAAAAAAAAAAA from=1,gap=4,åˆ™è¿”å›æ‰©å±•åçš„palen,è‹¥æ‰¾ä¸åˆ°palenåˆ™è¿”å›0
+#  å¦‚$from=-100,åˆ™ä»fromçš„å·¦è¾¹å¼€å§‹åŒ¹é…. AA34567 from=-3 åˆ™ä»3æ—è¾¹çš„ç¬¬1ä¸ªAå¼€å§‹åŒ¹é…
 #############################################################################
 sub findTail {
 my($seq,$from,$AT,$gap)=@_;
@@ -1797,7 +1781,7 @@ return($palen);
 #############################################################################
 #  trimseq($longseq,$center,$left,$right,$isRC):$str
 #  useage: $str=trimseq(\$longseq,301,300,99,1);        
-#  ËµÃ÷: ´«longseqµÄÒıÓÃ,$isRC=1ĞèÒª·´×ª»¥²¹,0²»ĞèÒª
+#  è¯´æ˜: ä¼ longseqçš„å¼•ç”¨,$isRC=1éœ€è¦åè½¬äº’è¡¥,0ä¸éœ€è¦
 #############################################################################
 # str,center,left,right
 sub trimseq {
@@ -1807,14 +1791,14 @@ sub trimseq {
   $len=$left+$right+1;
   $subseq=substr($$longseq,$offset,$len);
   return $subseq if !$isRC;
-  #·´×ª»¥²¹
+  #åè½¬äº’è¡¥
   return reverseAndComplement($subseq,1,1);
 }
 
 #############################################################################
 #  reverseAndComplement($seq,$r,$c):$str
 #  useage: $str=reverseAndComplement($seq,1,1);        
-#  ËµÃ÷: $r=1 reverse $c=1 complement
+#  è¯´æ˜: $r=1 reverse $c=1 complement
 #############################################################################
 sub reverseAndComplement {
   my ($seq,$r,$c)=@_;
@@ -1823,7 +1807,7 @@ sub reverseAndComplement {
   $seq=uc(trim($seq));
   if ($c and $r) {
 	$seq=~tr/ATCGUatcgu/TAGCATAGCA/;
-	my $tmp=reverse($seq); #ÄáÂí£¬ÕâÀïÒª¸³¸øÒ»¸öÖµ£¬²»È»µ÷ÓÃ»á³ö´í
+	my $tmp=reverse($seq); #å°¼é©¬ï¼Œè¿™é‡Œè¦èµ‹ç»™ä¸€ä¸ªå€¼ï¼Œä¸ç„¶è°ƒç”¨ä¼šå‡ºé”™
 	return $tmp;
   }
 
@@ -1843,12 +1827,12 @@ sub reverseAndComplement {
 #############################################################################
 #  reverseAndComplement($seq,$r,$c):$str
 #  useage: $str=reverseAndComplement($seq,1,1);        
-#  ËµÃ÷: $r=1 reverse $c=1 complement
+#  è¯´æ˜: $r=1 reverse $c=1 complement
 #############################################################################
 sub reverseAndComplement2 {
   my ($seq,$r,$c)=@_;
   return $seq if (!$r and !$c);
-  #·´×ª»¥²¹
+  #åè½¬äº’è¡¥
   $seq=uc(trim($seq));
   my (@s)=split(//,$seq);
   my ($s2,$i);
@@ -1891,8 +1875,8 @@ sub reverseAndComplement2 {
 #############################################################################
 #  dna2amino($dna,$shift):$amino
 #  useage: $str=dna2amino($dna,1);        
-#  ËµÃ÷: shift=1(Ä¬ÈÏ),2,3; 1±íÊ¾´ÓµÚ1¸öÎ»ÖÃ¿ªÊ¼·­Òë
-#  ·µ»ØaminoÀàËÆ£ºaNDRSATISYKNPGATIIg »á°üÀ¨Ç°ºóÃ»·­ÒëµÄºËÜÕ(ÊäÈëDNAÈôÊÇ´óĞ´£¬×Ô¶¯×ªÎªĞ¡Ğ´)
+#  è¯´æ˜: shift=1(é»˜è®¤),2,3; 1è¡¨ç¤ºä»ç¬¬1ä¸ªä½ç½®å¼€å§‹ç¿»è¯‘
+#  è¿”å›aminoç±»ä¼¼ï¼šaNDRSATISYKNPGATIIg ä¼šåŒ…æ‹¬å‰åæ²¡ç¿»è¯‘çš„æ ¸è‹·(è¾“å…¥DNAè‹¥æ˜¯å¤§å†™ï¼Œè‡ªåŠ¨è½¬ä¸ºå°å†™)
 #############################################################################
 sub dna2amino {
   my($dna,$shift)=@_;
@@ -1909,14 +1893,14 @@ sub dna2amino {
 #############################################################################
 #  trypsin($amino,$notJunc):$amino
 #  useage: $str=trypsin($amino,0);        
-#  ËµÃ÷: notJunc:0Ö»·µ»Ø×îºóµÄÒ»¶Î(Ä¬ÈÏ)£»1·µ»ØÈ«²¿£¬ÒÔ£»¸ô¿ªRºÍK
-# Àı×Ó£º
+#  è¯´æ˜: notJunc:0åªè¿”å›æœ€åçš„ä¸€æ®µ(é»˜è®¤)ï¼›1è¿”å›å…¨éƒ¨ï¼Œä»¥ï¼›éš”å¼€Rå’ŒK
+# ä¾‹å­ï¼š
 #MACTWGKPELPHEASRTGHECNVKKKKKK
-#MACTWGKPELPHEASR;TGHECNVK;K;K;K;K;K; £¨notJunc=1Ê±£©
+#MACTWGKPELPHEASR;TGHECNVK;K;K;K;K;K; ï¼ˆnotJunc=1æ—¶ï¼‰
 #0.MACTWGKPELPHEASR
 #1.TGHECNVK
 #2~6. K
-#×îºóÊÇ·µ»Ø TGHECNVK £¨notJunc=0£©
+#æœ€åæ˜¯è¿”å› TGHECNVK ï¼ˆnotJunc=0ï¼‰
 #############################################################################
 sub trypsin {
 my ($text,$notJunc)=@_;
@@ -1954,7 +1938,7 @@ return('');
 #############################################################################
 #  trimseq($longseq,$from,$to,$isRC):$str
 #  useage: $str=trimseq(\$longseq,270,300,0);        
-#  ËµÃ÷: ´«longseqµÄÒıÓÃ,$isRC=1ĞèÒª·´×ª»¥²¹,0²»ĞèÒª
+#  è¯´æ˜: ä¼ longseqçš„å¼•ç”¨,$isRC=1éœ€è¦åè½¬äº’è¡¥,0ä¸éœ€è¦
 #############################################################################
 # str,center,left,right
 sub trimseqFromTo {
@@ -1965,7 +1949,7 @@ sub trimseqFromTo {
 #############################################################################
 #  grpSame() group same pos ($dist=0)
 #  useage: @grp=grpSame(\@coord); 
-#  ×¢Òâ´«µİµÄÊÇÊı×éµÄÒıÓÃ!
+#  æ³¨æ„ä¼ é€’çš„æ˜¯æ•°ç»„çš„å¼•ç”¨!
 #############################################################################
 sub grpSame {
   my ($curGrpNum,$i,$j,$N,$coord,@grp);
@@ -1988,11 +1972,11 @@ sub grpSame {
 #############################################################################
 #  grpByPos() group by position within dist
 #  useage: @grp=grpByPos(\@coord,$dist); 
-#  ×¢Òâ´«µİµÄÊÇÊı×éµÄÒıÓÃ!
-#  ¼ÆËãÁ½Á½²î,N¸öÊı,¼ÆËãN-1×édiff
-#  ±éÀúdiff,Ö±µ½sum(diff)>dist,ÔòÒªÈ¥³ıÍ·»òÎ²µÄÒ»¸ö
-#    È¥Í·:µÚ1¸öÉèÖÃ×éºÅ,ÆäËüµÄ¼ÌĞø·Å»ØµÈ´ı
-#    È¥Î²:³ı×îºó1¸ö¼ÌĞø·Å»ØµÈ´ı,Ç°ÃæµÄÉèÖÃ×éºÅ
+#  æ³¨æ„ä¼ é€’çš„æ˜¯æ•°ç»„çš„å¼•ç”¨!
+#  è®¡ç®—ä¸¤ä¸¤å·®,Nä¸ªæ•°,è®¡ç®—N-1ç»„diff
+#  éå†diff,ç›´åˆ°sum(diff)>dist,åˆ™è¦å»é™¤å¤´æˆ–å°¾çš„ä¸€ä¸ª
+#    å»å¤´:ç¬¬1ä¸ªè®¾ç½®ç»„å·,å…¶å®ƒçš„ç»§ç»­æ”¾å›ç­‰å¾…
+#    å»å°¾:é™¤æœ€å1ä¸ªç»§ç»­æ”¾å›ç­‰å¾…,å‰é¢çš„è®¾ç½®ç»„å·
 #############################################################################
 sub grpByPos_I {
   my ($dist,$curGrpNum,$i,$j,$N,$sumfrom,$sum,$coord,@diff,@grp);
@@ -2003,18 +1987,18 @@ sub grpByPos_I {
   
   $N=@$coord;
   $curGrpNum=1;
-  #Ö»ÓĞ1¸öÔªËØ
+  #åªæœ‰1ä¸ªå…ƒç´ 
   if ($N==1) {
   	$grp[0]=$curGrpNum;
   
-  } else { #2+¸öÔªËØ
+  } else { #2+ä¸ªå…ƒç´ 
     $sum=0;
     $sumfrom=0;
     for ($i=0;$i<$N-1;$i=$i+1) {
       $diff[$i]=$$coord[$i+1]-$$coord[$i];
       $sum=$sum+$diff[$i];
       if ($sum>$dist) {
-		      #Èô´Ë·Ö×é×îºó1¸öÓëÉÏÒ»·Ö×é×îºó1¸öÎ»ÖÃ¾àÀë<=dist,ÔòºÏ²¢µ½Ç°Ò»×é
+		      #è‹¥æ­¤åˆ†ç»„æœ€å1ä¸ªä¸ä¸Šä¸€åˆ†ç»„æœ€å1ä¸ªä½ç½®è·ç¦»<=dist,åˆ™åˆå¹¶åˆ°å‰ä¸€ç»„
 			  if ($$coord[$i]-$$coord[$sumfrom-1]<=$dist) {
 				$curGrpNum--;
               }
@@ -2023,7 +2007,7 @@ sub grpByPos_I {
     	      }
     		  $curGrpNum+=1;
     		  $sumfrom=$i+1;
-    		  if ($sumfrom==$N-1) { #Ö»Ê£1¸ö
+    		  if ($sumfrom==$N-1) { #åªå‰©1ä¸ª
 				  if ($$coord[$sumfrom]-$$coord[$sumfrom-1]<=$dist) {
 					$curGrpNum--;
 				  }
@@ -2036,8 +2020,8 @@ sub grpByPos_I {
     } #for
   } #else
   
-  #Ê£ÏÂµÄdistÄÚµÄËùÓĞÔªËØ
-  #Èô×îºó1×éµÄ×îºó1¸öÒ²ÓëÇ°1×é×îºó1¸ö¾àÀë<=dist,ÔòºÏ²¢µ½Ç°Ò»×é
+  #å‰©ä¸‹çš„distå†…çš„æ‰€æœ‰å…ƒç´ 
+  #è‹¥æœ€å1ç»„çš„æœ€å1ä¸ªä¹Ÿä¸å‰1ç»„æœ€å1ä¸ªè·ç¦»<=dist,åˆ™åˆå¹¶åˆ°å‰ä¸€ç»„
   if ($$coord[$N-1]-$$coord[$sumfrom-1]<=$dist) {
     $curGrpNum--;
   }
@@ -2053,8 +2037,8 @@ sub grpByPos_I {
 #############################################################################
 #  grpByPos() group by position within dist
 #  useage: @grp=grpByPos(\@coord,$dist); 
-#  ×¢Òâ´«µİµÄÊÇÊı×éµÄÒıÓÃ!
-#  ±È½ÏÇ°ºó2¸öÎ»ÖÃ£¬Èç¹û¾àÀë<=dist,ÔòºÏ²¢,²»¹ÜºÏ²¢ºóµÄ¿í¶È
+#  æ³¨æ„ä¼ é€’çš„æ˜¯æ•°ç»„çš„å¼•ç”¨!
+#  æ¯”è¾ƒå‰å2ä¸ªä½ç½®ï¼Œå¦‚æœè·ç¦»<=dist,åˆ™åˆå¹¶,ä¸ç®¡åˆå¹¶åçš„å®½åº¦
 #############################################################################
 sub grpByPos {
   my $coord=$_[0];
@@ -2063,10 +2047,10 @@ sub grpByPos {
   my $N=@$coord-1;
   return () if $N<0;
   my (@grp);
-  #Ö»ÓĞ1¸öÔªËØ
+  #åªæœ‰1ä¸ªå…ƒç´ 
   if ($N==0) {
   	$grp[0]=0;  
-  } else { #2+¸öÔªËØ
+  } else { #2+ä¸ªå…ƒç´ 
     $grp[0]=0;
 	for my $i(1..$N) {
 	  if ($$coord[$i]-$$coord[$i-1]<=$dist) {
@@ -2082,21 +2066,21 @@ sub grpByPos {
 #############################################################################
 #  isIP($papos,$nt,$nts,$seq):$int
 #  useage: $IP=isIP($papos,$nt,$nts,\$seq);         
-#  ËµÃ÷:²»ÅĞ¶Ï±ß½ç,Ä¬ÈÏÎ»µã×óÓÒ¸÷ÓĞ9,10nt (-10~-1[PA],1~10)
-#  ·µ»Ø1´ú±íÊÇIP,·ñÔò0
+#  è¯´æ˜:ä¸åˆ¤æ–­è¾¹ç•Œ,é»˜è®¤ä½ç‚¹å·¦å³å„æœ‰9,10nt (-10~-1[PA],1~10)
+#  è¿”å›1ä»£è¡¨æ˜¯IP,å¦åˆ™0
 #############################################################################
 sub isIP {
 	my($papos,$nt,$nts,$seq)=@_;
 	my($s,$e,$ee,$cnt,$subseq,@wseq,$i);
 	$s=0;
-	#×óÈ¡10nt(º¬pa),ÓÒÈ¡10nt,¹²20nt,ÏÂ±ê´Ó0¿ªÊ¼	
-    if ($papos-10<0) { #2011/3/6ĞŞ¸Ä£¬Ô­À´ÊÇÎŞÕâ¸öÅĞ¶Ï£¬¶Ô¿ªÍ·µÄĞòÁĞÅĞ¶ÏÊÇ´íµÄ!
+	#å·¦å–10nt(å«pa),å³å–10nt,å…±20nt,ä¸‹æ ‡ä»0å¼€å§‹	
+    if ($papos-10<0) { #2011/3/6ä¿®æ”¹ï¼ŒåŸæ¥æ˜¯æ— è¿™ä¸ªåˆ¤æ–­ï¼Œå¯¹å¼€å¤´çš„åºåˆ—åˆ¤æ–­æ˜¯é”™çš„!
 	  my $start=0;
       $subseq=uc(substr($$seq,$start,10+$papos));
 	} else {
 	  $subseq=uc(substr($$seq,$papos-10,20));
 	}
-    return 1 if (index($subseq,$nts)>=0); #2011/3/6ĞŞ¸Ä£¬Ô­À´ÊÇ >0 £¬¶ÔµÚÒ»¸ö¿ªÍ·º¬AsÊÇ´íµÄ!
+    return 1 if (index($subseq,$nts)>=0); #2011/3/6ä¿®æ”¹ï¼ŒåŸæ¥æ˜¯ >0 ï¼Œå¯¹ç¬¬ä¸€ä¸ªå¼€å¤´å«Asæ˜¯é”™çš„!
 	@wseq=split(//,$subseq);
 	$e=$s+9;	
 	for $i ($s..$e) {
@@ -2120,7 +2104,7 @@ sub isIP {
 #############################################################################
 #  formatPatOutput($file);
 #  useage: formatPatOutput($file);;
-#  ËµÃ÷:#¸ñÊ½»¯patronusµÄÊä³ö,²¢Ìæ»»Ô­ÎÄ¼ş
+#  è¯´æ˜:#æ ¼å¼åŒ–patronusçš„è¾“å‡º,å¹¶æ›¿æ¢åŸæ–‡ä»¶
 #############################################################################
 sub formatPatOutput {
 my($f)=shift;
@@ -2141,7 +2125,7 @@ my($line,$s,$i1,$i2,$i3,@ss,$i,$j,$mtx,$idx);
       $mtx->[$idx][2]=substr($s,$i3+1,length($s)-$i3-1);
 	} elsif ($s=~/^Z/) { #Z_value(213)=4.91956 Mean=146.156 StdDev=13.5875
 	  @ss=split(/\s+/,$s);
-	  for $i(0..0) { #Ö»ÒªZ_value
+	  for $i(0..0) { #åªè¦Z_value
 		$i3=index($ss[$i],'=');
 		$s=trim($s);
 		$s=substr($ss[$i],$i3+1,length($ss[$i])-$i3-1);
@@ -2189,15 +2173,15 @@ for $i(0..$#order) {
   push(@$mtx2,[@{$mtx->[$order[$i]]}]);
 }
 
- #±£´æµ½ÎÄ¼ş
+ #ä¿å­˜åˆ°æ–‡ä»¶
  saveMtx2File($mtx2,"${f}x");
  rename("${f}x", $f);
 }
 
 #############################################################################
 # getNt(@prb):chr
-#µ÷ÓÃ: $c=getNt(@prb);  ATCG
-#ËµÃ÷: ¸ù¾İ±³¾°¸ÅÂÊ(ÕûÊıµÄ),²úÉúÁª×Ó
+#è°ƒç”¨: $c=getNt(@prb);  ATCG
+#è¯´æ˜: æ ¹æ®èƒŒæ™¯æ¦‚ç‡(æ•´æ•°çš„),äº§ç”Ÿè”å­
 #############################################################################
 sub getNt{
   my (@prb)=@_;
@@ -2232,7 +2216,7 @@ sub getNt{
 #############################################################################
 #  countSubstr($str,$substr):$count
 #  useage: $i=countSubstr('AAATTXXXX','AT');      
-#  ËµÃ÷: ¼ÆËã×Ö·û´®ÖĞ¸ø¶¨×Ö·ûµÄ¸öÊı
+#  è¯´æ˜: è®¡ç®—å­—ç¬¦ä¸²ä¸­ç»™å®šå­—ç¬¦çš„ä¸ªæ•°
 #############################################################################
 sub countSubstr {
 my ($str,$substr)=@_;
@@ -2247,7 +2231,7 @@ return $cc;
 #############################################################################
 #  convertChrToIdx($chr):$idx
 #  useage: $i=convertChrToIdx('A');      
-#  ËµÃ÷: atcgATCG-->ÏÂ±ê
+#  è¯´æ˜: atcgATCG-->ä¸‹æ ‡
 #############################################################################
 sub convertChrToIdx {
   my($i)=uc(shift);
@@ -2265,7 +2249,7 @@ sub convertChrToIdx {
 #############################################################################
 #  convertIdxToChr($idx):$chr
 #  useage: $c=convertIdxToChr(0);      
-#  ËµÃ÷:ÏÂ±ê-->ATCG
+#  è¯´æ˜:ä¸‹æ ‡-->ATCG
 #############################################################################
 sub convertIdxToChr {
   my($i)=shift;
@@ -2283,12 +2267,12 @@ sub convertIdxToChr {
 #############################################################################
 #  getKgramId($gram):$i
 #  useage: $id=getKgramId('AATAAA');      
-#  ËµÃ÷:¸ù¾İkgram,µÃµ½ÏÂ±ê
+#  è¯´æ˜:æ ¹æ®kgram,å¾—åˆ°ä¸‹æ ‡
 #############################################################################
 sub getKgramId {
   my $g=shift;
   if ($g=~/N/) {
-	return(-1); #²»ÅĞ¶Ï´øNµÄÁª×Ó
+	return(-1); #ä¸åˆ¤æ–­å¸¦Nçš„è”å­
   }
   my(@gram)=split(//,$g);
   my($k)=$#gram+1;
@@ -2306,7 +2290,7 @@ sub getKgramId {
 #############################################################################
 #  genOneKGram($k,$idx):$gram
 #  useage: $gram=genOneKGram(6,0);      
-#  ËµÃ÷:²úÉú1¸ö¿ÕµÄkÁª×Ó£¬idx±íÊ¾ÏÂ±ê
+#  è¯´æ˜:äº§ç”Ÿ1ä¸ªç©ºçš„kè”å­ï¼Œidxè¡¨ç¤ºä¸‹æ ‡
 #############################################################################
 sub genOneKGram {
   my($k)=shift;
@@ -2324,7 +2308,7 @@ sub genOneKGram {
 #############################################################################
 #  genKgrams($k,$withvalue):@kgrams
 #  useage: @kgrams=genKgrams(6,0);      
-#  ËµÃ÷:²úÉú¿ÕµÄkÁª×Ó£¬withvalue±íÊ¾ÊÇ·ñÓÒ±ß²úÉú£½0
+#  è¯´æ˜:äº§ç”Ÿç©ºçš„kè”å­ï¼Œwithvalueè¡¨ç¤ºæ˜¯å¦å³è¾¹äº§ç”Ÿï¼0
 #############################################################################
 sub genKgrams {
   my($k)=shift;
@@ -2349,10 +2333,10 @@ sub genKgrams {
 #############################################################################
 #  cntKgramsByK($seqfile,$from,$to,$k,$gapOronce):@cnts
 #  useage: 
-#  ³£¹æ»¬¶¯·½Ê½($gapOronce²»ÉèÖÃ»ò=0): @cnts=cntKgrams('xx.fasta',-1,-1,6); 
-#  gap·½Ê½($gapOronce>0): @cnts=cntKgrams('xx.fasta',-1,-1,6,2); 
-#  once·½Ê½($gapOronce<0): @cnts=cntKgrams('xx.fasta',-1,-1,6,-1);      
-#  ËµÃ÷:Í³¼ÆÈ«²¿k-gramÔÚseqfileÖĞ³öÏÖ´ÎÊı,$from,$to<1ÔòÎªÍ³¼ÆÕûÌõĞòÁĞ
+#  å¸¸è§„æ»‘åŠ¨æ–¹å¼($gapOronceä¸è®¾ç½®æˆ–=0): @cnts=cntKgrams('xx.fasta',-1,-1,6); 
+#  gapæ–¹å¼($gapOronce>0): @cnts=cntKgrams('xx.fasta',-1,-1,6,2); 
+#  onceæ–¹å¼($gapOronce<0): @cnts=cntKgrams('xx.fasta',-1,-1,6,-1);      
+#  è¯´æ˜:ç»Ÿè®¡å…¨éƒ¨k-gramåœ¨seqfileä¸­å‡ºç°æ¬¡æ•°,$from,$to<1åˆ™ä¸ºç»Ÿè®¡æ•´æ¡åºåˆ—
 #  2016/2/21 add w=1/0 weighted by seqfile title PAT number
 #############################################################################
 sub cntKgramsByK {
@@ -2386,40 +2370,40 @@ sub cntKgramsByK {
 	if ($all==1) {
 	  $s=0;
 	  $e1=length($line)-$k;
-	} else { #ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
+	} else { #è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
 	  $e1=length($line)-$k if $to>length($line);
 	}
 
-	if ($go==0) { #³£¹æ·½Ê½
+	if ($go==0) { #å¸¸è§„æ–¹å¼
 	  for $i($s..$e1) {
 	    $idx=getKgramId(substr($line,$i,$k));
 	    $cnts[$idx]+=$PAT if $idx!=-1;
 	  }
 	}
 	
-	elsif ($go<0) { #once·½Ê½
+	elsif ($go<0) { #onceæ–¹å¼
 	  %ks=();
 	  $i=$s;
 	  while ($i<=$e1) {
 	    $idx=getKgramId(substr($line,$i,$k));
-	    $ks{$idx}=$i-$s if $idx!=-1; #¼ÇÂ¼kgramºÍÎ»ÖÃ
+	    $ks{$idx}=$i-$s if $idx!=-1; #è®°å½•kgramå’Œä½ç½®
 	    $i++;
 	  }
-	  #ÀÛ¼Óµ½×ÜÌåÖĞ
+	  #ç´¯åŠ åˆ°æ€»ä½“ä¸­
 	  foreach $idx (keys(%ks)){
         $cnts[$idx]+=$PAT;
       }	    
     }
 	
-	else{ #gap·½Ê½
+	else{ #gapæ–¹å¼
 	  $i=$s;
 	  while ($i<=$e1) {
-	    #Èôgap=N,ÔòÒ»´ÎÈ¡N+1×ékgramÅĞ¶Ï
+	    #è‹¥gap=N,åˆ™ä¸€æ¬¡å–N+1ç»„kgramåˆ¤æ–­
 	    %ks=();
 	    for $j(0..$go) {
 		 if ($i<=$e1) {
            $idx=getKgramId(substr($line,$i,$k));		 
-		   $ks{$idx}=$i-$s if $idx!=-1; #gapÄÚÖ»¼Æ×îºóÎ»ÖÃ,²»Ôö¼Ó¼ÆÊı	
+		   $ks{$idx}=$i-$s if $idx!=-1; #gapå†…åªè®¡æœ€åä½ç½®,ä¸å¢åŠ è®¡æ•°	
 	       $i++;	
 		 }
 	    }
@@ -2438,8 +2422,8 @@ sub cntKgramsByK {
 #############################################################################
 #  cntKgrams($seqfile,$from,$to,$gapOronce,@grams):@cnts
 #  useage: @cnts=cntKgrams('xx.fasta',-1,-1,('aataaa','atcg'));      
-#  ËµÃ÷:Í³¼Æ¸ø¶¨gramsÔÚseqfileÖĞ³öÏÖ´ÎÊı,$from,$to<1ÔòÎªÍ³¼ÆÕûÌõĞòÁĞ
-#  2016/2/21 ¼ÓgramsÅĞ¶Ï£¬Ä©Î²Îª1£¬Ôò±íÊ¾¼ÓÈ¨
+#  è¯´æ˜:ç»Ÿè®¡ç»™å®šgramsåœ¨seqfileä¸­å‡ºç°æ¬¡æ•°,$from,$to<1åˆ™ä¸ºç»Ÿè®¡æ•´æ¡åºåˆ—
+#  2016/2/21 åŠ gramsåˆ¤æ–­ï¼Œæœ«å°¾ä¸º1ï¼Œåˆ™è¡¨ç¤ºåŠ æƒ
 #############################################################################
 sub cntKgrams {
   my($seqfile,$from,$to,$go,@grams)=@_;
@@ -2470,39 +2454,39 @@ sub cntKgrams {
 	  next;
 	}
 
-	#¶ÔÓÚÃ¿¸ögram,µ¥¶À¼ÆËã(ÒòÎªÔÊĞígram³¤¶È²»Ò»)
+	#å¯¹äºæ¯ä¸ªgram,å•ç‹¬è®¡ç®—(å› ä¸ºå…è®¸gramé•¿åº¦ä¸ä¸€)
 	for $k(0..$#grams) {
-		#»¬¶¯´°¿ÚÊ×Î²
+		#æ»‘åŠ¨çª—å£é¦–å°¾
 		$klen=length($grams[$k]);
 		$e=$to-$klen;
 		if ($all==1) {
 		  $s=0;
 		  $e=length($line)-$klen;
-		} else { #ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
+		} else { #è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
 		  $e=length($line)-$klen if $to>length($line);
 		}
 
-		if ($go==0) { #³£¹æ·½Ê½
+		if ($go==0) { #å¸¸è§„æ–¹å¼
 		  for $i($s..$e) {
 			$cnts[$k]+=$PAT if substr($line,$i,$klen) eq $grams[$k];
 		  }
 		}
 		
-		elsif ($go<0) { #once·½Ê½
+		elsif ($go<0) { #onceæ–¹å¼
 		  for $i($s..$e) {
 			if (substr($line,$i,$klen) eq $grams[$k]) {
 			  $cnts[$k]+=$PAT ;
-			  last; #Ö»¼ÆÒ»´Î
+			  last; #åªè®¡ä¸€æ¬¡
 			}
 		  }   
 		}
 		
-		else{ #gap·½Ê½
+		else{ #gapæ–¹å¼
 		  $i=$s;
 		  while ($i<=$e) {
 			if (substr($line,$i,$klen) eq $grams[$k]) {
 			  $cnts[$k]+=$PAT ;
-			  $i+=($go+1); #Ìø¹ı$gap+1
+			  $i+=($go+1); #è·³è¿‡$gap+1
 			} else {
               $i++;
 		    }
@@ -2518,14 +2502,14 @@ sub cntKgrams {
 #############################################################################
 #  cntEachPosByK($seqfile,$from,$to,$k,$go):$cnts
 #  useage: 
-#    1) $cnts=cntEachPosByGap('xx.fasta',1,400,6); #³£¹æ·½Ê½ go=0   
-#    2) $cnts=cntEachPosByGap('xx.fasta',1,400,6,3); #gap·½Ê½ go>0
-#    3) $cnts=cntEachPosByGap('xx.fasta',1,400,6,-1); #once·½Ê½ go<0
-#  ËµÃ÷:
-#    1) Í³¼ÆseqfileÖĞ´Ófrom~toµÄÎ»ÖÃµÄ¸÷kgram³öÏÖ´ÎÊı,±ØĞëÉèÖÃfrom,to
-#    2) Èôgo>0,ÔòÏÂÒ»¸ö**ÏàÍ¬**kgramÓëÇ°Ò»¸öÏà²îgap¸öÎ»ÖÃ
-#    3) Èôgo<0(once),ÔòÍ¬Ò»ÖÖkgramÔÚÍ¬Ò»ÌõĞòÁĞÖĞÖ»¼ÆÒ»´Î,Î»ÖÃÈ¡×îºó³öÏÖµÄÄÇ¸öÎ»ÖÃ
-#  2016/2/21 Ôö¼ÓwÑ¡Ïî£¬Èô1ÔòÓÃseqfile±êÌâÖĞ£»×îºóÒ»×Ö¶Î×÷ÎªPATÈ¨ÖØ
+#    1) $cnts=cntEachPosByGap('xx.fasta',1,400,6); #å¸¸è§„æ–¹å¼ go=0   
+#    2) $cnts=cntEachPosByGap('xx.fasta',1,400,6,3); #gapæ–¹å¼ go>0
+#    3) $cnts=cntEachPosByGap('xx.fasta',1,400,6,-1); #onceæ–¹å¼ go<0
+#  è¯´æ˜:
+#    1) ç»Ÿè®¡seqfileä¸­ä»from~toçš„ä½ç½®çš„å„kgramå‡ºç°æ¬¡æ•°,å¿…é¡»è®¾ç½®from,to
+#    2) è‹¥go>0,åˆ™ä¸‹ä¸€ä¸ª**ç›¸åŒ**kgramä¸å‰ä¸€ä¸ªç›¸å·®gapä¸ªä½ç½®
+#    3) è‹¥go<0(once),åˆ™åŒä¸€ç§kgramåœ¨åŒä¸€æ¡åºåˆ—ä¸­åªè®¡ä¸€æ¬¡,ä½ç½®å–æœ€åå‡ºç°çš„é‚£ä¸ªä½ç½®
+#  2016/2/21 å¢åŠ wé€‰é¡¹ï¼Œè‹¥1åˆ™ç”¨seqfileæ ‡é¢˜ä¸­ï¼›æœ€åä¸€å­—æ®µä½œä¸ºPATæƒé‡
 #############################################################################
 sub cntEachPosByK {
   my($seqfile,$from,$to,$k,$go,$w)=@_;
@@ -2535,7 +2519,7 @@ sub cntEachPosByK {
   $s=$from-1;
   $e=$to-$k;
   open (K_INPUT,"<$seqfile") or die "cannot open file $_!\n";
-  #³õÊ¼»¯¸öÊıÕó
+  #åˆå§‹åŒ–ä¸ªæ•°é˜µ
   for $i(0..4**$k-1) {
 	for $j($s..$e) {
 	  $cnts->[$i][$j-$s]=0;
@@ -2545,7 +2529,7 @@ sub cntEachPosByK {
  my $PAT=1;
  $w=0 if !defined($w);
  my $e1;
-  #¼ÆÊı1:³£¹æ·½Ê½
+  #è®¡æ•°1:å¸¸è§„æ–¹å¼
  if ($go==0) {
   while($line=<K_INPUT>){	
 	$line=trim($line);
@@ -2557,8 +2541,8 @@ sub cntEachPosByK {
 	  next;
 	}
 
-	#ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
-	$e1=$e; #2011/12/1 BUGĞŞÕı
+	#è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
+	$e1=$e; #2011/12/1 BUGä¿®æ­£
 	$e1=length($line)-$k if $to>length($line);
 	$i=$s;
 	while ($i<=$e1) {
@@ -2568,7 +2552,7 @@ sub cntEachPosByK {
 	}
   } 
 }
-  #¼ÆÊı2:once·½Ê½:1¸ökgramÔÚ1ÌõĞòÁĞ½ö¼ÆÊıÒ»´Î
+  #è®¡æ•°2:onceæ–¹å¼:1ä¸ªkgramåœ¨1æ¡åºåˆ—ä»…è®¡æ•°ä¸€æ¬¡
  elsif ($go<0) {
   while($line=<K_INPUT>){	  
 	$line=trim($line);
@@ -2580,23 +2564,23 @@ sub cntEachPosByK {
 	  next;
 	}
 	%onceks=();
-	#ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
-	$e1=$e; #2011/12/1 BUGĞŞÕı
+	#è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
+	$e1=$e; #2011/12/1 BUGä¿®æ­£
 	$e1=length($line)-$k if $to>length($line);
 	$i=$s;
 	while ($i<=$e1) {
 	  $idx=getKgramId(substr($line,$i,$k));
-	  $onceks{$idx}=$i-$s  if $idx!=-1; #¼ÇÂ¼kgramºÍÎ»ÖÃ
+	  $onceks{$idx}=$i-$s  if $idx!=-1; #è®°å½•kgramå’Œä½ç½®
 	  $i++;
 	}
-	#ÀÛ¼Óµ½×ÜÌåÖĞ
+	#ç´¯åŠ åˆ°æ€»ä½“ä¸­
 	foreach $idx (keys(%onceks)){
         $cnts->[$idx][$onceks{$idx}]+=$PAT  if $idx!=-1;
     }	
   } 
  } 
 
- #¼ÆÊı3: gap·½Ê½
+ #è®¡æ•°3: gapæ–¹å¼
  elsif ($go>0) {
   while($line=<K_INPUT>){	
 	$line=trim($line);
@@ -2607,19 +2591,19 @@ sub cntEachPosByK {
 	  }
 	  next;
 	}
-	#ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
-	$e1=$e; #2011/12/1 BUGĞŞÕı
+	#è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
+	$e1=$e; #2011/12/1 BUGä¿®æ­£
 	$e1=length($line)-$k if $to>length($line);
 	#$e=$to-$k;
 	$i=$s;
 	#print "i=$i s=$s e=$e\t";
 	while ($i<=$e1) {
-	  #Èôgap=N,ÔòÒ»´ÎÈ¡N+1×ékgramÅĞ¶Ï
+	  #è‹¥gap=N,åˆ™ä¸€æ¬¡å–N+1ç»„kgramåˆ¤æ–­
 	  %gapks=();
 	  for $j(0..$go) {
 		 if ($i<=$e) {
            $idx=getKgramId(substr($line,$i,$k));		 
-		   $gapks{$idx}=$i-$s  if $idx!=-1; #gapÄÚÖ»¼Æ×îºóÎ»ÖÃ,²»Ôö¼Ó¼ÆÊı	
+		   $gapks{$idx}=$i-$s  if $idx!=-1; #gapå†…åªè®¡æœ€åä½ç½®,ä¸å¢åŠ è®¡æ•°	
 		   #print substr($line,$i,$k)." idx=".$idx." pos=".$gapks{$idx}."\n";
 	       $i++;	
 		 }
@@ -2638,14 +2622,14 @@ sub cntEachPosByK {
 #############################################################################
 #  cntEachPosByGrams($seqfile,$from,$to,$go,@grams):$cnts
 #  useage: $cnts=cntEachPosByGrams('xx.fasta',1,400,@grams));      
-#  ËµÃ÷:Í³¼ÆseqfileÖĞ´Ófrom~toµÄÎ»ÖÃµÄ¸÷kgram³öÏÖ´ÎÊı,±ØĞëÉèÖÃfrom,to
-#  2016/2/21 Ìí¼Ó gramsÖĞ×îºó1ĞĞÈç¹ûÊÇ1ÔòÊÇ±íÊ¾¼ÓÈ¨
+#  è¯´æ˜:ç»Ÿè®¡seqfileä¸­ä»from~toçš„ä½ç½®çš„å„kgramå‡ºç°æ¬¡æ•°,å¿…é¡»è®¾ç½®from,to
+#  2016/2/21 æ·»åŠ  gramsä¸­æœ€å1è¡Œå¦‚æœæ˜¯1åˆ™æ˜¯è¡¨ç¤ºåŠ æƒ
 #############################################################################
 sub cntEachPosByGrams {
   my($seqfile,$from,$to,$go,@grams)=@_;
   my($i,$j,$cnts,$line,$s,$e,$idx,$l,%gpos,$key);
   die "From or To wrong!" if($from<1 or $to<1);
-  #Ö»ÄÜÍ¬³¤
+  #åªèƒ½åŒé•¿
   my($k)=length($grams[0]);
   $s=$from-1;
   $e=$to-$k;
@@ -2674,10 +2658,10 @@ sub cntEachPosByGrams {
 	  }
 	  next;
 	}
-        #ÈôĞòÁĞÌ«¶Ì,ÔòÈ¡È«³¤
-	    $e1=$e; #2011/12/1 BUGĞŞÕı
+        #è‹¥åºåˆ—å¤ªçŸ­,åˆ™å–å…¨é•¿
+	    $e1=$e; #2011/12/1 BUGä¿®æ­£
 	    $e1=length($line)-$k if $to>length($line);
-		#Öğ¸ö±È½Ï
+		#é€ä¸ªæ¯”è¾ƒ
 	  if ($go==0) {		 
 		for $i($s..$e1) {
 		  $l=substr($line,$i,$k);
@@ -2695,7 +2679,7 @@ sub cntEachPosByGrams {
 			  $l=substr($line,$i,$k);
 			  for $j(0..$#grams) {
 				 if ($l eq $grams[$j]) {
-					$gpos{$j}=$i-$s; #ÓÃ%{gramidx}=pos¼ÇÂ¼,Ö»±£´æ×îºó³öÏÖµÄÎ»ÖÃ			
+					$gpos{$j}=$i-$s; #ç”¨%{gramidx}=posè®°å½•,åªä¿å­˜æœ€åå‡ºç°çš„ä½ç½®			
 					last;
 				 }            
 			  }
@@ -2709,14 +2693,14 @@ sub cntEachPosByGrams {
 		my($gi);
 		$i=$s;
 		while ($i<=$e1) {
-		  #Èôgap=N,ÔòÒ»´ÎÈ¡N+1¸öĞòÁĞÖĞµÄkgram×÷ÅĞ¶Ï
+		  #è‹¥gap=N,åˆ™ä¸€æ¬¡å–N+1ä¸ªåºåˆ—ä¸­çš„kgramä½œåˆ¤æ–­
 		  %gpos=();
 		  for $j(0..$go) {
 			 if ($i<=$e1) {
 			   $l=substr($line,$i,$k);	
 			   for $gi(0..$#grams) {
 				 if ($l eq $grams[$gi]) {
-					$gpos{$gi}=$i-$s; #ÓÃ%{gramidx}=pos¼ÇÂ¼,Ö»±£´æ×îºó³öÏÖµÄÎ»ÖÃ			
+					$gpos{$gi}=$i-$s; #ç”¨%{gramidx}=posè®°å½•,åªä¿å­˜æœ€åå‡ºç°çš„ä½ç½®			
 					last;
 				 }            
 			   }			   
@@ -2737,25 +2721,25 @@ sub cntEachPosByGrams {
 #############################################################################
 #  kcnt2pssm($cntmtx):$pssm
 #  useage: $pssm=kcnt2pssm($kcntmtx);      
-#  ËµÃ÷:kcntÕó×ª»»ÎªpssmÕó
-#  2010/3/5: ¼ÓÈëpsedo_count=1
+#  è¯´æ˜:kcnté˜µè½¬æ¢ä¸ºpssmé˜µ
+#  2010/3/5: åŠ å…¥psedo_count=1
 #############################################################################
 sub kcnt2pssm {
   my($cntmtx)=@_;
   my($pssm,@rowsum,@colsum,$sumall,$i,$j,$p,$pg,$pk);
-  #¼ÆËãµÚNĞĞµÄËùÓĞÁĞµÄºÍ
+  #è®¡ç®—ç¬¬Nè¡Œçš„æ‰€æœ‰åˆ—çš„å’Œ
   for $i(0..$#$cntmtx) {
     for $j(0..$#{$cntmtx->[$i]}) {
       $rowsum[$i]+=$cntmtx->[$i][$j];
 	}
   }
-  #¼ÆËãµÚNÁĞµÄËùÓĞĞĞµÄºÍ
+  #è®¡ç®—ç¬¬Nåˆ—çš„æ‰€æœ‰è¡Œçš„å’Œ
   for $i(0..$#{$cntmtx->[0]}) {
     for $j(0..$#$cntmtx) {
       $colsum[$i]+=$cntmtx->[$j][$i];
 	}
   }
-  #ËùÓĞÁª×Ó×ÜºÍ£¨ĞĞºÍ»òÁĞºÍµÄºÍ£©
+  #æ‰€æœ‰è”å­æ€»å’Œï¼ˆè¡Œå’Œæˆ–åˆ—å’Œçš„å’Œï¼‰
   for $i(0..$#colsum) {
     $sumall+=$colsum[$i];
   }
@@ -2794,13 +2778,13 @@ sub kcnt2pssm {
 #############################################################################
 #  sortKcnt($cntmtx):@order
 #  useage: @order=sortKcnt($kcntmtx);      
-#  ËµÃ÷:½µĞòÅÅĞòkcnt¾ØÕó,ÒÔËùÓĞÁĞµÄºÍÅÅĞò
+#  è¯´æ˜:é™åºæ’åºkcntçŸ©é˜µ,ä»¥æ‰€æœ‰åˆ—çš„å’Œæ’åº
 #  
 #############################################################################
 sub sortKcnt {
   my($cntmtx)=shift;
   my(@rowsum,$i,$j);
-  #¼ÆËãµÚNĞĞµÄËùÓĞÁĞµÄºÍ
+  #è®¡ç®—ç¬¬Nè¡Œçš„æ‰€æœ‰åˆ—çš„å’Œ
   for $i(0..$#$cntmtx) {
     for $j(0..$#{$cntmtx->[$i]}) {
       $rowsum[$i]+=$cntmtx->[$i][$j];
@@ -2812,12 +2796,12 @@ sub sortKcnt {
 #############################################################################
 #  sortPssm($pssm):@order
 #  useage: @order=sortPssm($pssm);      
-#  ËµÃ÷:½µĞòÅÅĞòpssm¾ØÕó,ÒÔËùÓĞÁĞµÄ×î´óÖµÅÅĞò
+#  è¯´æ˜:é™åºæ’åºpssmçŸ©é˜µ,ä»¥æ‰€æœ‰åˆ—çš„æœ€å¤§å€¼æ’åº
 #############################################################################
 sub sortPssm {
   my($pssm)=shift;
   my(@rowmax,$i,$j);
-  #¼ÆËãµÚNĞĞµÄËùÓĞÁĞµÄmax
+  #è®¡ç®—ç¬¬Nè¡Œçš„æ‰€æœ‰åˆ—çš„max
   for $i(0..$#$pssm) {
     $rowmax[$i]=-99999999999;
   }
@@ -2832,7 +2816,7 @@ sub sortPssm {
 #############################################################################
 #  fas2tbl($fasfile):$tbl
 #  useage: $tbl=fas2tbl($fasfile);      
-#  ËµÃ÷: ¶ÁÈëfas,Êä³ö2ÁĞmatrix(title,seq)
+#  è¯´æ˜: è¯»å…¥fas,è¾“å‡º2åˆ—matrix(title,seq)
 #############################################################################
 sub fas2tbl {
   my($f)=shift;
@@ -2851,7 +2835,7 @@ sub fas2tbl {
 		  push(@$tbl,[$title,$seq]);
 		}
 		$title=substr($line,1,length($line)-1);
-		$title=~s/\t/ /g; #°ÑTABÌæ»»³É¿Õ¸ñ,ÃâµÃ2ÁĞ²»¶Ô.
+		$title=~s/\t/ /g; #æŠŠTABæ›¿æ¢æˆç©ºæ ¼,å…å¾—2åˆ—ä¸å¯¹.
 		$seq="";
 	}
 	else
@@ -2872,21 +2856,21 @@ return $tbl;
 #  ($poly,$polypos,$polylen,$polyedit)=findPolyAT($seq,$search=A/T/AT,tlen,tregion)
 #  useage: 
 #  ($poly,$polypos,$polylen,$polyedit)=findPolyAT($str,'A',8,20);
-#  ËµÃ÷: ²éÕÒA/T£¬»ò×Ô¶¯ÅĞ¶ÏpolyA/T
-#ÊäÈë£º
-#seq=ĞòÁĞ
-#search=('A','T','AT') ÈôÎªAT£¬Ôò×Ô¶¯²éÕÒ£¬È»ºóÅĞ¶ÏA»òT
-#tlen=8 polyAÎ²°ÍµÄ³¤¶È£¨º¬·ÇA²¿·Ö£©
-#tregion=20 ¶ÔpolyA²éÕÒÄ©Î²20nt£¬¶ÔpolyT²éÕÒ¿ªÍ·20nt
-#·µ»Ø $poly=A/T/N,$polyposÊ×1,$polylen,$polyedit £¨ÈôÎªN£¬ÔòºóÃæÈı¸öÊıÎª-1£©
-#Àı×Ó£º($poly,$polypos,$polylen,$polyedit)=findPolyAT($str,'A',8,20);
+#  è¯´æ˜: æŸ¥æ‰¾A/Tï¼Œæˆ–è‡ªåŠ¨åˆ¤æ–­polyA/T
+#è¾“å…¥ï¼š
+#seq=åºåˆ—
+#search=('A','T','AT') è‹¥ä¸ºATï¼Œåˆ™è‡ªåŠ¨æŸ¥æ‰¾ï¼Œç„¶ååˆ¤æ–­Aæˆ–T
+#tlen=8 polyAå°¾å·´çš„é•¿åº¦ï¼ˆå«éAéƒ¨åˆ†ï¼‰
+#tregion=20 å¯¹polyAæŸ¥æ‰¾æœ«å°¾20ntï¼Œå¯¹polyTæŸ¥æ‰¾å¼€å¤´20nt
+#è¿”å› $poly=A/T/N,$polyposé¦–1,$polylen,$polyedit ï¼ˆè‹¥ä¸ºNï¼Œåˆ™åé¢ä¸‰ä¸ªæ•°ä¸º-1ï¼‰
+#ä¾‹å­ï¼š($poly,$polypos,$polylen,$polyedit)=findPolyAT($str,'A',8,20);
 
-#polyAµÄÅĞ¶Ï£ºÂú×ãAper>=0.8; Acnt>=8; Alen>=tlen ÒÔ¼°polyAµÄ×îºóÒ»¸öAÒªÔÚseqÎ²²¿µÄtregionÄÚ
-#polyTµÄÅĞ¶Ï£ºÂú×ãTper/Tcnt£¬ÒÔ¼°polyTµÄµÚÒ»¸öTÒªÔÚseqÍ·²¿µÄtregionÄÚ
-#ÕıÔò±í´ïÊ½	 /findPolyAT/ ±íÊ¾ÒÔ8A¿ªÍ·£¬ÇÒÖĞ¼ä¿ÉÒÔ¼ä¸ô1¸öÆäËü×Ö·û£¬µ«±ØĞëÓĞAAÏà¼ä¸ô¡£
-#±ÈÈç AAAAAXAAXAAXAA ±íÊ¾Ò»´® ¶ø AAAAAXAXAÔò²»Âú×ãÌõ¼ş
+#polyAçš„åˆ¤æ–­ï¼šæ»¡è¶³Aper>=0.8; Acnt>=8; Alen>=tlen ä»¥åŠpolyAçš„æœ€åä¸€ä¸ªAè¦åœ¨seqå°¾éƒ¨çš„tregionå†…
+#polyTçš„åˆ¤æ–­ï¼šæ»¡è¶³Tper/Tcntï¼Œä»¥åŠpolyTçš„ç¬¬ä¸€ä¸ªTè¦åœ¨seqå¤´éƒ¨çš„tregionå†…
+#æ­£åˆ™è¡¨è¾¾å¼	 /findPolyAT/ è¡¨ç¤ºä»¥8Aå¼€å¤´ï¼Œä¸”ä¸­é—´å¯ä»¥é—´éš”1ä¸ªå…¶å®ƒå­—ç¬¦ï¼Œä½†å¿…é¡»æœ‰AAç›¸é—´éš”ã€‚
+#æ¯”å¦‚ AAAAAXAAXAAXAA è¡¨ç¤ºä¸€ä¸² è€Œ AAAAAXAXAåˆ™ä¸æ»¡è¶³æ¡ä»¶
 #############################################################################
-sub findPolyAT_regError { #ÕıÔò±í´ïÊ½»¹ÊÇÓĞµãÎÊÌâ ±ÈÈç $str='AAAAAAAAXAXXXA' ÓÃ /(A{8,}([B-Z]{0,1}AA+[B-Z]{0,1})+A+)/g ¾ÍÆ¥Åä²»µ½£¬»òÕßÉõÖÁÓÃA{6,}Ò²²»ĞĞ£¡
+sub findPolyAT_regError { #æ­£åˆ™è¡¨è¾¾å¼è¿˜æ˜¯æœ‰ç‚¹é—®é¢˜ æ¯”å¦‚ $str='AAAAAAAAXAXXXA' ç”¨ /(A{8,}([B-Z]{0,1}AA+[B-Z]{0,1})+A+)/g å°±åŒ¹é…ä¸åˆ°ï¼Œæˆ–è€…ç”šè‡³ç”¨A{6,}ä¹Ÿä¸è¡Œï¼
 my $seq=shift;
 my $search=shift;
 my $tlen=shift;
@@ -2900,11 +2884,11 @@ my @matches=();
 
 if ($search eq 'A' or $search eq 'AT') {
 while ($seq =~ /(A{8,}([B-Z]{0,1}AA+[B-Z]{0,1})+A+)/g) { 
-  push(@matches,$&); #Æ¥ÅäµÄ´®
+  push(@matches,$&); #åŒ¹é…çš„ä¸²
   pos($seq) = pos($seq); 
 } 
 if ($#matches!=-1) {
-  $polyAseq=$matches[$#matches]; #polyAÕÒÄ©Î²£¬polyTÕÒµÚÒ»¸ö
+  $polyAseq=$matches[$#matches]; #polyAæ‰¾æœ«å°¾ï¼ŒpolyTæ‰¾ç¬¬ä¸€ä¸ª
   $Acnt=countSubstr($polyAseq,'A');  
   $Aper=$Acnt/length($polyAseq);
   my $idx=index($seq,$polyAseq);
@@ -2917,8 +2901,8 @@ if ($#matches!=-1) {
 
 if ($search eq 'T' or $search eq 'AT') {
 @matches=();
-if ($seq =~ /(T{8,}([A-SU-Z]{0,1}TT+[A-SU-Z]{0,1})+T+)/g) {  #polyTÕÒ¿ªÍ·£¬ËùÒÔÓÃif¾Í¿ÉÒÔ
-  push(@matches,$&); #Æ¥ÅäµÄ´®
+if ($seq =~ /(T{8,}([A-SU-Z]{0,1}TT+[A-SU-Z]{0,1})+T+)/g) {  #polyTæ‰¾å¼€å¤´ï¼Œæ‰€ä»¥ç”¨ifå°±å¯ä»¥
+  push(@matches,$&); #åŒ¹é…çš„ä¸²
   pos($seq) = pos($seq); 
 } 
 if ($#matches!=-1) {
@@ -2952,7 +2936,7 @@ if ( ($search eq 'A' and !$haveA) or ($search eq 'T' and !$haveT) or ($search eq
 #  @source=split(//,'AATAAA'); @items=split(//,'ATCG'); $bits=1;
 #  mutateMotif(0,$bits,\@source,\@items,\@mutes); 
 #  print join("\n",@mutes);
-#  ËµÃ÷: ×îºó½á¹ûÔÚ@mutesÖĞ,Ã¿¸öÖµ1¸ömotif
+#  è¯´æ˜: æœ€åç»“æœåœ¨@mutesä¸­,æ¯ä¸ªå€¼1ä¸ªmotif
 #############################################################################
 sub mutateMotif {
   my($currIdx,$remain,$source,$items,$mutes)=@_;
@@ -2980,7 +2964,7 @@ sub mutateMotif {
 #############################################################################
 #  ($set,$rv)=execSql($dbh,$sql)
 #  useage: ($set,$rv)=execSql($dbh,'select * from xxtbl')
-#  ËµÃ÷:Ö´ĞĞsqlÓï¾ä
+#  è¯´æ˜:æ‰§è¡Œsqlè¯­å¥
 #############################################################################
 sub execSql {
   my($dbh,$sql)=@_;
@@ -2996,8 +2980,8 @@ sub execSql {
 #############################################################################
 #  getTableIndex($dbh,$tbl)
 #  useage: $mtx=getTableIndex($dbh,'atbl')
-#  ËµÃ÷: È¡µÃÖ¸¶¨±íµÄindex£¬·µ»Ø¾ØÕó£¬2ÁĞ£¬µÚ1ÁĞÎªË÷ÒıÃû£¬µÚ2ÁĞÎª,¸ô¿ªµÄÁĞ£¬±ÈÈç£ºindex_xx chr,strand,coord
-#        Èô±íÎŞË÷Òı£¬Ôò·µ»Ø¿Õ¾ØÕó
+#  è¯´æ˜: å–å¾—æŒ‡å®šè¡¨çš„indexï¼Œè¿”å›çŸ©é˜µï¼Œ2åˆ—ï¼Œç¬¬1åˆ—ä¸ºç´¢å¼•åï¼Œç¬¬2åˆ—ä¸º,éš”å¼€çš„åˆ—ï¼Œæ¯”å¦‚ï¼šindex_xx chr,strand,coord
+#        è‹¥è¡¨æ— ç´¢å¼•ï¼Œåˆ™è¿”å›ç©ºçŸ©é˜µ
 #############################################################################
 sub getTableIndex { 
   my ($dbh,$tbl)=@_;
@@ -3026,7 +3010,7 @@ sub getTableIndex {
 #############################################################################
 #  cloneTblIndex($dbh,$fromtbl,$totbl)
 #  useage: cloneTblIndex($dbh,'fromtbl','totbl')
-#  ËµÃ÷: ÔÚtotblÖĞ´´½¨fromtblµÄindex
+#  è¯´æ˜: åœ¨totblä¸­åˆ›å»ºfromtblçš„index
 #############################################################################
 #Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type
 #t_gff_org_v7	1	idx_chr	1	chr	A	9	NULL	NULL	YES	BTREE
@@ -3066,17 +3050,17 @@ sub cloneTblIndex {
 #############################################################################
 #  tblExists($dbh,$tbl):0/1
 #  useage: tblExists($dbh,'aa')
-#  ËµÃ÷:ÅĞ¶ÏtableÊÇ·ñ´æÔÚ
+#  è¯´æ˜:åˆ¤æ–­tableæ˜¯å¦å­˜åœ¨
 #############################################################################
 sub tblExists {
   my($dbh,$tbl)=@_;
   my($sql,$sth,$tblnames);
-#Èç¹ûtblÊÇÒÔxx.yy,ÔòÈ¡xxÎªdb
+#å¦‚æœtblæ˜¯ä»¥xx.yy,åˆ™å–xxä¸ºdb
 my $db='';
 if (index($tbl,'.')!=-1) {
   $db=substr($tbl,0,index($tbl,'.'));
 }
-$tbl=~s/.*\.//; #È¥µôdbµÄ²¿·Ö,ÒòÎªÓĞÊ±´«½øÀ´µÄÊÇdb.table
+$tbl=~s/.*\.//; #å»æ‰dbçš„éƒ¨åˆ†,å› ä¸ºæœ‰æ—¶ä¼ è¿›æ¥çš„æ˜¯db.table
 $tbl=lc($tbl);
 $sql="show tables" if $db eq '';
 $sql="show tables in $db" if $db ne '';
@@ -3094,13 +3078,13 @@ return(0);
 #############################################################################
 #  connectDB($conf,$quiet,('chromosome','mpss')):($dbh,$chr,$mpss)
 #  useage: ($dbh,$chr)=connectDB('xx.xml',1)
-#  ¾ÍËãÃ»ÓĞ$chr£¬Ò²ĞèÒªÓÃ ($dbh)=connectDB(..) ()Ò»¶¨Òª´æÔÚ
-#  !!²»ĞèÒªÊÂÏÈÅĞ¶Ï -e $conf..
-#  ËµÃ÷:Á¬½ÓDB 
-#  (ÎªÍ³Ò»¹ÜÀíconf.xmlÎÄ¼ş)
-#  !!2011/3/19 Èôµ±Ç°ÎÄ¼ş¼ĞÏÂ²»´æÔÚconf,ÔòÈ¥E:\sys\project\_code\XML_conf\ÏÂËÑ
-#  #Ôö¼ÓÊä³öÌØ¶¨µÄ±íÃû
-#  my($dbh,$chrtbl,$mpsstbl)=connectDB($conf,1,('chromosome','mpss')); »ò ($dbh)=connectDB($conf,1);
+#  å°±ç®—æ²¡æœ‰$chrï¼Œä¹Ÿéœ€è¦ç”¨ ($dbh)=connectDB(..) ()ä¸€å®šè¦å­˜åœ¨
+#  !!ä¸éœ€è¦äº‹å…ˆåˆ¤æ–­ -e $conf..
+#  è¯´æ˜:è¿æ¥DB 
+#  (ä¸ºç»Ÿä¸€ç®¡ç†conf.xmlæ–‡ä»¶)
+#  !!2011/3/19 è‹¥å½“å‰æ–‡ä»¶å¤¹ä¸‹ä¸å­˜åœ¨conf,åˆ™å»E:\sys\project\_code\XML_conf\ä¸‹æœ
+#  #å¢åŠ è¾“å‡ºç‰¹å®šçš„è¡¨å
+#  my($dbh,$chrtbl,$mpsstbl)=connectDB($conf,1,('chromosome','mpss')); æˆ– ($dbh)=connectDB($conf,1);
 #############################################################################
 sub connectDB{
     my($conf)=shift;
@@ -3137,7 +3121,7 @@ sub connectDB{
 
 #############################################################################
 #  @values=getXMLItems($xml,('chromosome','dbname'))
-#  ËµÃ÷£ºµÃµ½XMLÏàÓ¦ÏîµÄÖµ
+#  è¯´æ˜ï¼šå¾—åˆ°XMLç›¸åº”é¡¹çš„å€¼
 #############################################################################
 sub getXMLItems{
     my($xmlfile,@items)=@_;
@@ -3160,7 +3144,7 @@ sub getXMLItems{
 #############################################################################
 #  getFldsIdx($dbh,$tbl,@flds):@fldsIdx
 #  useage: ($a,$b,$notall)=getFldsIdx($dbh,'t_aa',('aa','bb'));
-#  ËµÃ÷:·µ»Ø±íÖĞÖ¸¶¨×Ö¶ÎµÄÏÂ±ê
+#  è¯´æ˜:è¿”å›è¡¨ä¸­æŒ‡å®šå­—æ®µçš„ä¸‹æ ‡
 #############################################################################
 sub getFldsIdx {
 	my($dbh,$tbl,@aflds)=@_;
@@ -3177,7 +3161,7 @@ sub getFldsIdx {
 		  }
 	  }
 	}
-	#ÈôÓĞÒ»¸öfldÎª-1,Ôò·µ»ØµÄÊı×é×îºó¸úÒ»¸ö-1,·ñÔòÊÇ¿Õ
+	#è‹¥æœ‰ä¸€ä¸ªfldä¸º-1,åˆ™è¿”å›çš„æ•°ç»„æœ€åè·Ÿä¸€ä¸ª-1,å¦åˆ™æ˜¯ç©º
 	$notall=0;
 	for $i(0..$#ids) {
 	  if ($ids[$i]==-1) {
@@ -3185,14 +3169,14 @@ sub getFldsIdx {
 	  }
 	}
 	return $ids[0] if $#ids==0;
-	push(@ids,$notall); #Ìí¼Ó×îºóÒ»Ïî
+	push(@ids,$notall); #æ·»åŠ æœ€åä¸€é¡¹
 	return @ids;
 }
 
 #############################################################################
 #  getTblFlds($dbh,$tbl):@fldnames
 #  useage: @flds=getTblFlds($dbh,'t_aa');
-#  ËµÃ÷:·µ»Ø±íÖĞËùÓĞ×Ö¶ÎÃû
+#  è¯´æ˜:è¿”å›è¡¨ä¸­æ‰€æœ‰å­—æ®µå
 #############################################################################
 sub getTblFlds {
 	my($dbh,$tbl)=@_;
@@ -3210,7 +3194,7 @@ sub getTblFlds {
 #############################################################################
 #  getFldValues($dbh,$sql,$ncol):@fldValue
 #  useage: @fldValue=getFldValues($dbh,'select distinct(chr) from xx order by chr',0);
-#  ËµÃ÷:È¡µÃÄ³ÁĞµÄÖµ,·µ»ØÊı×é. ncol from 0.
+#  è¯´æ˜:å–å¾—æŸåˆ—çš„å€¼,è¿”å›æ•°ç»„. ncol from 0.
 #############################################################################
 sub getFldValues {
   my($dbh,$sql,$ncol)=@_;
@@ -3227,12 +3211,12 @@ sub getFldValues {
 #############################################################################
 #  loadFile2Tbl($dbh,$tbl,$file,$ignoreLine):int;
 #  useage: $rv=loadFile2Tbl($dbh,$tbl,$file,0)
-#  ËµÃ÷:ÎÄ¼şµ¼ÈëÊı¾İ±í
+#  è¯´æ˜:æ–‡ä»¶å¯¼å…¥æ•°æ®è¡¨
 #############################################################################
 sub loadFile2Tbl {
   my($dbh,$tbl,$file,$ignoreLine)=@_;
   my($sth,$sql,$rv);
-  #×Ô¶¯ÅĞ¶Ï \r\n or \n
+  #è‡ªåŠ¨åˆ¤æ–­ \r\n or \n
   my $mode=fileMode($file);
   my $rn='\r\n'; #win
   if ($mode eq 'unix') {
@@ -3253,7 +3237,7 @@ sub loadFile2Tbl {
 #############################################################################
 #  dotStr2sqlStr($dotstr,$sep=','):sqlstr;
 #  useage: $sqlstr=dotStr2sqlStr('chr1,chr2,chr3')
-#  ËµÃ÷: ½«×Ö·û´®×ª»»ÎªsqlÓï¾äµÄstr£¬Êä³ö 'chr1','chr2','chr3'
+#  è¯´æ˜: å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºsqlè¯­å¥çš„strï¼Œè¾“å‡º 'chr1','chr2','chr3'
 #############################################################################
 sub dotStr2sqlStr {
   my($dotstr,$sep)=@_;
@@ -3274,7 +3258,7 @@ sub dotStr2sqlStr {
 #############################################################################
 #  getTblFlds_lite($dbh,$tbl):@fldnames
 #  useage: @flds=getTblFlds_lite($dbh,'t_aa');
-#  ËµÃ÷:·µ»Ø±íÖĞËùÓĞ×Ö¶ÎÃû
+#  è¯´æ˜:è¿”å›è¡¨ä¸­æ‰€æœ‰å­—æ®µå
 #############################################################################
 sub getTblFlds_lite {
 	my($dbh,$tbl)=@_;
@@ -3284,7 +3268,7 @@ sub getTblFlds_lite {
 	if ($#{$flds}!=0) {
       return ();
 	}
-    #µÃµ½´´½¨±íµÄsqlÓï¾ä,ÈçCREATE TABLE aa (cc int null, bb int null, dd varchar(1024) null)
+    #å¾—åˆ°åˆ›å»ºè¡¨çš„sqlè¯­å¥,å¦‚CREATE TABLE aa (cc int null, bb int null, dd varchar(1024) null)
 	my @f;
 	my $str=$flds->[0][0];
 	my $i1=index($str,'(');
@@ -3304,7 +3288,7 @@ sub getTblFlds_lite {
 #############################################################################
 #  getFldsIdx_lite($dbh,$tbl,@flds):@fldsIdx
 #  useage: ($a,$b,$notall)=getFldsIdx_lite($dbh,'t_aa',('aa','bb'));
-#  ËµÃ÷:·µ»Ø±íÖĞÖ¸¶¨×Ö¶ÎµÄÏÂ±ê
+#  è¯´æ˜:è¿”å›è¡¨ä¸­æŒ‡å®šå­—æ®µçš„ä¸‹æ ‡
 #############################################################################
 sub getFldsIdx_lite {
 	my($dbh,$tbl,@aflds)=@_;
@@ -3323,7 +3307,7 @@ sub getFldsIdx_lite {
 		  }
 	  }
 	}
-	#ÈôÓĞÒ»¸öfldÎª-1,Ôò·µ»ØµÄÊı×é×îºó¸úÒ»¸ö-1,·ñÔòÊÇ¿Õ
+	#è‹¥æœ‰ä¸€ä¸ªfldä¸º-1,åˆ™è¿”å›çš„æ•°ç»„æœ€åè·Ÿä¸€ä¸ª-1,å¦åˆ™æ˜¯ç©º
 	$notall=0;
 	for $i(0..$#ids) {
 	  if ($ids[$i]==-1) {
@@ -3331,14 +3315,14 @@ sub getFldsIdx_lite {
 	  }
 	}
 	return $ids[0] if $#ids==0;
-	push(@ids,$notall); #Ìí¼Ó×îºóÒ»Ïî
+	push(@ids,$notall); #æ·»åŠ æœ€åä¸€é¡¹
 	return @ids;
 }
 
 #############################################################################
 #  file2LiteTbl($dbh,$tbl,$file,$ignoreLine):int;
 #  useage: $rv=file2LiteTbl($dbh,$tbl,$file,0)
-#  ËµÃ÷:ÎÄ¼şµ¼ÈëLiteÊı¾İ±í
+#  è¯´æ˜:æ–‡ä»¶å¯¼å…¥Liteæ•°æ®è¡¨
 #############################################################################
 sub file2LiteTbl {
   my ($dbh,$tbl,$file,$ignoreLine)=@_;
@@ -3369,7 +3353,7 @@ sub file2LiteTbl {
 #############################################################################
 #  sql2file($dbh,$sql,$file,$append):rv
 #  useage: $rv=sql2file($dbh,$sql,$file,1,'\N')
-#  $blankstrÓÃÓÚÌæ´ú¿Õ×Ö¶Î,±ÈÈçÌæ»»³É\N,Ôòmysql¿ÉÒÔÕıÈ·µ¼Èë.
+#  $blankstrç”¨äºæ›¿ä»£ç©ºå­—æ®µ,æ¯”å¦‚æ›¿æ¢æˆ\N,åˆ™mysqlå¯ä»¥æ­£ç¡®å¯¼å…¥.
 #############################################################################
 sub sql2file {
  my($dbh,$sql,$file,$append,$blankstr)=@_;
@@ -3402,8 +3386,8 @@ return $rv;
 
 #############################################################################
 ##getSqlFlds_Lite($dbh,$tbl,$tblalia,$fldsuf,@excludefields)
-##È¡µÃÀàËÆ a.chr chr_1,a.strand strand_1µÄ×Ö·û´®
-##exclude°üº¬²»ÏëÒªµÄ×Ö¶Î
+##å–å¾—ç±»ä¼¼ a.chr chr_1,a.strand strand_1çš„å­—ç¬¦ä¸²
+##excludeåŒ…å«ä¸æƒ³è¦çš„å­—æ®µ
 ##Ex. getSqlFlds_Lite($dbh,$tbl,'a','_1',@exclude)
 #############################################################################
 sub getSqlFlds_Lite {
@@ -3431,12 +3415,12 @@ sub getSqlFlds_Lite {
 #############################################################################
 #  tblExists_Lite($dbh,$tbl):0/1
 #  useage: tblExists($dbh,'aa')
-#  ËµÃ÷:ÅĞ¶ÏtableÊÇ·ñ´æÔÚ
+#  è¯´æ˜:åˆ¤æ–­tableæ˜¯å¦å­˜åœ¨
 #############################################################################
 sub tblExists_Lite {
   my($dbh,$tbl)=@_;
   my($sql,$sth,$tblnames);
-$tbl=~s/.*\.//; #È¥µôdbµÄ²¿·Ö,ÒòÎªÓĞÊ±´«½øÀ´µÄÊÇdb.table
+$tbl=~s/.*\.//; #å»æ‰dbçš„éƒ¨åˆ†,å› ä¸ºæœ‰æ—¶ä¼ è¿›æ¥çš„æ˜¯db.table
 $tbl=lc($tbl);
 $sql="SELECT name FROM sqlite_master WHERE type = \"table\"";
 $sth = $dbh->prepare($sql) or die $dbh->errstr;
@@ -3453,7 +3437,7 @@ return(0);
 #############################################################################
 #  getTblNames_Lite($dbh):@tables
 #  useage: getTblNames_Lite($dbh)
-#  ËµÃ÷:È¡µÃËùÓĞ±í
+#  è¯´æ˜:å–å¾—æ‰€æœ‰è¡¨
 #############################################################################
 sub getTblNames_Lite {
 my($dbh)=shift;
@@ -3477,8 +3461,8 @@ return(@ret);
 #****************************************************************************
 
 #############################################################################
-##createPAtbl($dbh,$tbl,$withGFF=0(default)/1,smps=A:B»ò²»Ìá¹©)
-##½¨PA±í
+##createPAtbl($dbh,$tbl,$withGFF=0(default)/1,smps=A:Bæˆ–ä¸æä¾›)
+##å»ºPAè¡¨
 ##Ex. createPAtbl($dbh,$tbl,0);
 #############################################################################
 sub createPAtbl {
@@ -3504,9 +3488,9 @@ sub createPAtbl {
 
 #############################################################################
 ##geneFromGff($dbh,$gfftbl,$otbl,$codon=1/0)
-##´ÓgffÖĞÌáÈ¡³ögeneµÄstartºÍend
-##Èç¹ûcodon=0,ÔòÈ¡×î¿ªÊ¼ºÍ×îÄ©¶Ë
-##Èç¹ûcodon=1,ÔòÈ¡max(CDS)ºÍmin(CDS)
+##ä»gffä¸­æå–å‡ºgeneçš„startå’Œend
+##å¦‚æœcodon=0,åˆ™å–æœ€å¼€å§‹å’Œæœ€æœ«ç«¯
+##å¦‚æœcodon=1,åˆ™å–max(CDS)å’Œmin(CDS)
 ##Ex. $rv=geneFromGff($dbh,'t_gff9','t_gff9_codon_genes',1);
 #############################################################################
 sub geneFromGff {
@@ -3517,7 +3501,7 @@ sub geneFromGff {
   } else {
 	$sql="select chr,strand,ftr,gene,ftr_start,ftr_end from $gfftbl where ftr=\'CDS\' order by gene";
   }  
-  #×¢Òâ: codon=1µÄ»ùÒòÊı»áÉÙÓÚcodon=0µÄ,ÒòÎªcodon=1ÊÇÈ«²¿»ùÒò,°üÀ¨psudoµÄÕâÖÖ,±ÈÈç27373:33518
+  #æ³¨æ„: codon=1çš„åŸºå› æ•°ä¼šå°‘äºcodon=0çš„,å› ä¸ºcodon=1æ˜¯å…¨éƒ¨åŸºå› ,åŒ…æ‹¬psudoçš„è¿™ç§,æ¯”å¦‚27373:33518
   my ($gff,$rv)=execSql($dbh,$sql);
   my $idxs=getIntervals($gff,3);
   my ($startIdx,$endIdx);
@@ -3550,7 +3534,7 @@ sub geneFromGff {
 
 #############################################################################
 ##cdsLenFromGff($dbh,$gfftbl,$otbl)
-##´ÓgffÖĞÌáÈ¡³ögeneµÄCDS£¬¼ÆËãÃ¿¸ögeneµÄËùÓĞCDSµÄÀÛ¼Ó³¤¶È
+##ä»gffä¸­æå–å‡ºgeneçš„CDSï¼Œè®¡ç®—æ¯ä¸ªgeneçš„æ‰€æœ‰CDSçš„ç´¯åŠ é•¿åº¦
 #otbl=<gene len>
 ##Ex. $rv=cdsLenFromGff($dbh,'t_gff9','t_gff9_glen');
 #############################################################################
@@ -3585,7 +3569,7 @@ sub cdsLenFromGff {
 #############################################################################
 #  cigar2MS
 #  useage: cigar2MS(cigar=60M2I5D4M11S includeDI=0)       
-#  ËµÃ÷: ÓÉcigar´®£¬µÃµ½matchºÍmisµÄ¸öÊı
+#  è¯´æ˜: ç”±cigarä¸²ï¼Œå¾—åˆ°matchå’Œmisçš„ä¸ªæ•°
 #cigar=60M2I5D4M11S includeDI=0
 #M=64,S=11
 #cigar=60M2I5D4M11S includeDI=1
@@ -3613,9 +3597,9 @@ sub cigar2MS {
 
 #############################################################################
 #  2016/5/24
-#  gffÎÄ¼ş´¦Àíº¯Êı
+#  gffæ–‡ä»¶å¤„ç†å‡½æ•°
 #############################################################################
-##¶ÁÈ¡gffÎÄ¼şÈ«²¿µÄchr, ftrºÍbiotypeÁĞ£¬µÃµ½¿ÉÄÜµÄÖµ
+##è¯»å–gffæ–‡ä»¶å…¨éƒ¨çš„chr, ftrå’Œbiotypeåˆ—ï¼Œå¾—åˆ°å¯èƒ½çš„å€¼
 sub getFtrAndBio {
   my $f=shift;
   open(GFF,"<$f") or die "cannot open $f";
@@ -3657,7 +3641,7 @@ sub getFtrAndBio {
 }
 
 
-#require ĞèÒª·µ»Ø>0µÄÖµ
+#require éœ€è¦è¿”å›>0çš„å€¼
 1;
 
 
