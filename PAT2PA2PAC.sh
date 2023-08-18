@@ -1,28 +1,28 @@
 #!/bin/bash -l
 
-#------------------------------------------------- 
-## Ex. 
+#-------------------------------------------------
+## Ex.
 ## dos2unix PAT2PA2PAC.sh
 ## bash PAT2PA2PAC.sh "P_heterocycla.fa" "/xx/" "/xx/yy" 24 "1.sam,2.sam" "s1,s2"
 
-## require:
+## Requirements:
 ## MAP_parseSAM2PAT.pl PAT_setIP_big.pl bedtools bedmap awk sed
 
-#  ²ÎÊı
-#1 chrfa="P_heterocycla.fa" #È¾É«ÌåĞòÁĞ£¬ÓÃÓÚsetIP
-#2 indir=/xx/ #¹¤×÷Â·¾¶
-#3 odir=/xx/yy/ #Êä³ö½á¹ûÄ¿Â¼
-#4 dist=24 #PA¾ÛPACÏàÁÚ¾àÀë
-#5 samfiles="1.sam,2.sam" #Òª¼ÆËãµÄSAMÎÄ¼ş£¬×¢Òâ£ºÒÑ¾­¸ù¾İ²»Í¬mapping¹¤¾ßµÄ½á¹û¹ıÂË³öĞèÒªµÄSAM£¬ÕâÀïÖ»ÊÇµ÷ÓÃperlÔÙ×ª³ÉPATĞÎÊ½
-#6 lbls="test1,test2" #¶ÔÓ¦µÄ±êÇ©
+# Parameters
+#1 chrfa="P_heterocycla.fa" # Chromosome sequence, used for setIP
+#2 indir=/xx/ # Working directory
+#3 odir=/xx/yy/ # Output result directory
+#4 dist=24 # Distance between adjacent PA and PAC
+#5 samfiles="1.sam,2.sam" # SAM files to be processed, note: SAM files should already be filtered based on different mapping tools' results and converted to PAT format using perl
+#6 lbls="test1,test2" # Corresponding labels
 
-## Êä³ö [odir] ×¢Òâstart×ø±êÊÇ0»¹ÊÇ1¿ªÊ¼
-#all.PAC.info           -- PACµÄinfoĞÅÏ¢
-#all.PAC.header         -- PAC¾ØÕó±êÌâĞĞ [chr UPA_start(1-base) UPA_end strand PAnum tot_tagnum coord(1-base) refPAnum]/s1...sN
-#all.PAC.PAcount        -- PACµÄÃ¿¸öÑù±¾ÏÂµÄPA¸öÊı [info]/s1...sN £¨Ñù±¾µÄºÍÒªĞ¡ÓÚµÈÓÚPAnum£©
-#all.PAC.PATcount       -- PACµÄÃ¿¸öÑù±¾ÏÂµÄPAT¸öÊı [info]/s1...sN  £¨Ñù±¾µÄºÍÒªµÈÓÚtot_tagnum£©
-#all.PA.uniq.bed             -- ËùÓĞÑù±¾µÄ×ÜPA×ø±ê(È¥ÖØºó£¬ÇÒ¼ÆËã×ÜµÄPATÊı) chr/start(0-base)/end/./PATnum/strand
-#----------- ÒÔÏÂÎªµ¥Ñù±¾µÄÖĞ¼äÎÄ¼ş ----------- 
+## Output [odir] Note: start coordinates are 0-based or 1-based
+#all.PAC.info           -- Info about PACs
+#all.PAC.header         -- Header row of PAC matrix [chr UPA_start(1-base) UPA_end strand PAnum tot_tagnum coord(1-base) refPAnum]/s1...sN
+#all.PAC.PAcount        -- Number of PAs for each sample under PAC [info]/s1...sN (sum of samples should be less than or equal to PAnum)
+#all.PAC.PATcount       -- Number of PATs for each sample under PAC [info]/s1...sN (sum of samples should be equal to tot_tagnum)
+#all.PA.uniq.bed             -- Coordinates of all PAs across samples (deduplicated, with total PAT count) chr/start(0-base)/end/./PATnum/strand
+#----------- The following are intermediate files for individual samples -----------
 # PAT01.txt.PA
 #PAT01.txt.PA.bed
 #PAT01.txt.PA.bed.PAinPAC.bed
@@ -40,7 +40,8 @@
 #chr1	99	103	+	5	25	100	12	5	5
 #chr1	1099	1103	+	5	12	1100	6	0	5
 
-#------------------------------------------------- 
+#-------------------------------------------------
+
 
 chrfa=$1
 indir=$2
@@ -50,7 +51,7 @@ dist=$4
 #lbls=$5
 temp=$5
 
-## DEBUG ²âÊÔ ×¢Òâ´úÂëÖĞµÄ DEBUG ĞĞ ##
+## DEBUG Testing Pay attention to the DEBUG lines in the code ##
 #chrfa="P_heterocycla.fa"
 #indir="/data/gpfs01/szhou/WXH"
 #odir="/data/gpfs01/szhou/WXH/test1/"
@@ -58,49 +59,57 @@ temp=$5
 #samfiles="PAT01.txt,PAT02.txt"
 #lbls="s1,s2"
 
-printf  "chrfa=$chrfa\nindir=$indir\nodir=$odir\ndist=$dist\nsamfiles=$temp\nlbls=$temp\n"
 
-## ²ÎÊıÉèÖÃ
+# Printing parameter values
+printf "chrfa=$chrfa\nindir=$indir\nodir=$odir\ndist=$dist\nsamfiles=$temp\nlbls=$temp\n"
+
+## Parameter settings
 cd $indir
 
+# Loop through each file in 'temp'
 for file in $temp
 do
  echo "${file}"
  samfiles+=($file)
  lbls+=($file)
 done
+
 #echo "print $samfiles"
 
-#samfiles=(${samfiles//[, ;]/ });
+# The following lines seem to be attempts to modify 'samfiles' and 'lbls' arrays
+# They are commented out in the original script
+
+##samfiles=(${samfiles//[, ;]/ });
 #lbls=(${lbls//[, ;]/ });
 
 ##samfiles=$(find $indir -maxdepth 1 -name "*.bam*" -type f)
 
-## ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+## Checking if the chromosome fasta file exists
 if [ ! -f $chrfa ]; then
     echo "$chrfa not found!"
-	exit 1
+    exit 1
 fi
 
+# Loop through each file in 'samfiles' array
 for file in "${samfiles[@]}";
 do
   echo "********check $file exist************"
   if [ ! -f $file ]; then
     echo "$file not found!"
-	exit 1
+    exit 1
 fi
 done
 
-
-## Êä³öÄ¿Â¼,´´½¨µİ¹éÄ¿Â¼
+## Creating output directory recursively if not exists
 mkdir -p $odir
-echo "output results to $odir"
+echo
+
 
 #################################################
-# SAM2PAT: ½«SAM×ªPAT
+# SAM2PAT: Convert SAM to PAT
 #################################################
-# SAMÊÇÒÑ¾­¹ıÂË¹ı£¨ÒòÎª²»Í¬±È¶Ô¹¤¾ßSAM¸ñÊ½²»Í¬£¬»¹ÊÇÊÖ¶¯¹ıÂËÎªºÃ£©£¬ÕâÀïÖ»ÊÇµ÷ÓÃperl³ÌĞò×ªÎªPAT
-echo "sam files: ${#samfiles[*]}"
+# SAM files have been pre-filtered (since different alignment tools have different SAM formats, manual filtering is recommended). Here we are calling a Perl program to convert them to PAT format.
+echo "Number of SAM files: ${#samfiles[*]}"
 echo ">>> $(date) - SAM2PAT (MAP_parseSAM2PAT.pl)"
 patfiles=()
 cd $indir
@@ -108,49 +117,47 @@ for file in "${samfiles[@]}";
 do
   iname=$(basename $file .sam)
   #idir="$(dirname $file)/"
-  oname=${iname}.PAT  
-  ##×¢ÒâĞŞ¸Ä´úÂëËùÔÚÂ·¾¶   seven
+  oname=${iname}.PAT
+  ## Make sure to modify the code location   seven
   perl MAP_parseSAM2PAT.pl -sam $file -poly T -m 20 -s 10 -more F
-  #cp $file $oname ##DEBUG£¬Êµ¼ÊÔËĞĞÒª×¢ÊÍµôÕâ¾ä
-  mv  ${iname}.PAT  $odir
+  #cp $file $oname ##DEBUG, remember to comment out this line during actual execution
+  mv ${iname}.PAT $odir
   echo "$file >>> $oname"
   patfiles+=($oname)
 done
-
-
-
 cd $odir
-#################################################
-# PAT2PA£ºÖ±½ÓsortÏàÍ¬ĞĞ²¢¼Ætag count
-# PAT: chr, strand, coord
-#################################################
-echo "pat files: ${#patfiles[*]}"
-echo ">>> $(date) - PAT2PA (sort uniq)"
+
+###############################################################
+# PAT2PA: Sort the same rows directly and calculate tag count
+# PAT: chr, strand, coord				     
+###############################################################
+
+echo "Number of pat files: ${#patfiles[*]}"
+echo ">>> $(date) - Converting PAT to PA (sorting and deduplication)"
 pafiles=()
-for file in "${patfiles[@]}";
-do
+for file in "${patfiles[@]}"; do
   iname=$(basename $file .PAT)
   oname=${iname}.PA
-  sort $file | uniq -c | awk '$1=$1' > $oname
+  sort "$file" | uniq -c | awk '$1=$1' > "$oname"
   # PA: tagnum, chr, strand, coord
   echo "$file >>> $oname"
-  pafiles+=($oname)
+  pafiles+=("$oname")
 done
 
-cd $odir
-#PA×ªbed¸ñÊ½ (chr, start(Îªend-1), end, ., count, strand£»µÚ5ÁĞÎªcountÊı)
-echo ">>> $(date) - PA2BED (awk)"
+cd "$odir"
+# Convert PA to BED format (chr, start (end-1), end, ., count, strand; count is in the 5th column)
+echo ">>> $(date) - Converting PA to BED (using awk)"
 paBEDfiles=()
-for file in "${pafiles[@]}";
-do
-  iname=$(basename $file .PA)
+for file in "${pafiles[@]}"; do
+  iname=$(basename "$file" .PA)
   oname=${iname}.PA.bed
-  #ÕâÀïstart=PAcood-1
-  awk -vOFS="\t" '{ print $2, $4-1, $4, ".", $1, $3 }' $file | sort-bed - > $file.bed
-  paBEDfiles+=($oname)
+  # Here, start = PAcoord-1
+  awk -v OFS="\t" '{ print $2, $4-1, $4, ".", $1, $3 }' "$file" | sort-bed - > "$file.bed"
+  paBEDfiles+=("$oname")
 done
 
-cd $odir
+cd "$odir"
+
 #################################################
 # setIP
 #################################################
@@ -160,11 +167,11 @@ realfiles=()
 for file in "${paBEDfiles[@]}";
 do
   oname=${file}.real
-  #fldsÎªchr,strand,coordµÄÁĞÏÂ±ê£¨0ÎªµÚ1ÁĞ£©
-  #0:5:2 ¶ÔÓ¦bedÖĞµÄÏàÓ¦ÁĞ
-  #×¢ÒâÌí¼Ó¶ÔÓ¦µÄÂ·¾¶
+  #fldsä¸ºchr,strand,coordçš„åˆ—ä¸‹æ ‡ï¼ˆ0ä¸ºç¬¬1åˆ—ï¼‰
+  #0:5:2 å¯¹åº”bedä¸­çš„ç›¸åº”åˆ—
+  #æ³¨æ„æ·»åŠ å¯¹åº”çš„è·¯å¾„
   perl PAT_setIP_big.pl -in "$file" -skip 0 -suf "" -flds 0:5:2 -chr "$chrfa"
-  ##cp $file $oname ##DEBUG£¬Êµ¼ÊÔËĞĞÒª×¢ÊÍµôÕâ¾ä
+  ##cp $file $oname ##DEBUGï¼Œå®é™…è¿è¡Œè¦æ³¨é‡Šæ‰è¿™å¥
   echo "$file >>> $oname"
   realfiles+=($oname)
 done
@@ -172,7 +179,7 @@ done
 #################################################
 # PA2PAC
 #################################################
-#ºÏ²¢ËùÓĞÑù±¾µÄPA,ÓÃchr/strand/coord½øĞĞsort²¢È¡uniq
+#åˆå¹¶æ‰€æœ‰æ ·æœ¬çš„PA,ç”¨chr/strand/coordè¿›è¡Œsortå¹¶å–uniq
 echo "real files: ${#realfiles[*]}"
 echo ">>> $(date) - merge realPA files (cat>awk) >> all.PA.bed >> all.PA.uniq.bed"
 cat ${realfiles[@]} > all.PA.bed
@@ -180,19 +187,19 @@ cat ${realfiles[@]} > all.PA.bed
 sort-bed all.PA.bed > all.PA.bed.tmp
 mv all.PA.bed.tmp  all.PA.bed
 
-#¼ÆËãËùÓĞÑù±¾PAµÄ×ÜtagÊı£º´¦Àí³ÉÕâÖÖĞÎÊ½ chr1,100,101,+  1 , ÔÙ½«µÚ2ÁĞÀÛ¼Ó
+#è®¡ç®—æ‰€æœ‰æ ·æœ¬PAçš„æ€»tagæ•°ï¼šå¤„ç†æˆè¿™ç§å½¢å¼ chr1,100,101,+  1 , å†å°†ç¬¬2åˆ—ç´¯åŠ 
 awk -vOFS="\t" '{print $1","$2","$3","$6,$5}' all.PA.bed > all.PA.bed.tmp 
 awk -F"\t" -vOFS="\t" '{a[$1]+=$2;}END{for(i in a)print i", "a[i];}' all.PA.bed.tmp > all.PA.bed.tmp2
-#ÔÙ»¹Ô­³Ébed¸ñÊ½
+#å†è¿˜åŸæˆbedæ ¼å¼
 awk -F'[,\t]' -vOFS="\t" '{print $1,$2,$3,".",$5,$4}' all.PA.bed.tmp2 |  sort-bed - > all.PA.uniq.bed
 rm all.PA.bed all.PA.bed.tmp all.PA.bed.tmp2
 
 #[szhou@login01 test1]$ cat all.PA.uniq.bed
-#chr1    96      97      .        1      -  µÚ5ÁĞÊÇscore
+#chr1    96      97      .        1      -  ç¬¬5åˆ—æ˜¯score
 
 echo ">>> $(date) - PA2PAC (bedtools merge) >> all.PAC.bed"
-## PA2PAC: ÒÔdist¾àÀëºÏ²¢
-# ÒÔÏÂÁ½¸ö½á¹ûÒ»Ñù
+## PA2PAC: ä»¥distè·ç¦»åˆå¹¶
+# ä»¥ä¸‹ä¸¤ä¸ªç»“æœä¸€æ ·
 #bedtools merge -i all.PA.bed -s -d $dist > all.PAC.bed
 bedtools merge -i all.PA.uniq.bed -s -d $dist -c 6 -o distinct > all.PAC.bed
 #bedtools merge -i all.PA.uniq.bed -s -d 24 -c 6 -o distinct > all.PAC.bed
@@ -206,9 +213,9 @@ bedtools merge -i all.PA.uniq.bed -s -d $dist -c 6 -o distinct > all.PAC.bed
 
 #################################################
 # countPA
-# ±È¶ÔÃ¿¸öÑù±¾µÄPAµ½PACÇøÓòÖĞ
+# æ¯”å¯¹æ¯ä¸ªæ ·æœ¬çš„PAåˆ°PACåŒºåŸŸä¸­
 #################################################
-#ÏÈ½«Ã¿¸öPAÑù±¾°´·½Ïò»®·Ö
+#å…ˆå°†æ¯ä¸ªPAæ ·æœ¬æŒ‰æ–¹å‘åˆ’åˆ†
 echo ">>> $(date) - split paBEDfiles by strand"
 for file in "${realfiles[@]}";
 do
@@ -218,43 +225,43 @@ done
 
 
 
-#PACÒ²°´·½Ïò»®·Ö
+#PACä¹ŸæŒ‰æ–¹å‘åˆ’åˆ†
 echo ">>> $(date) - split all.PAC.bed by strand"
 grep "+$" all.PAC.bed > all.PAC.bed.for
 grep "\\-$" all.PAC.bed > all.PAC.bed.rev
 rm all.PAC.bed
 
-#×ÜµÄuniq.PAÒ²°´·½Ïò»®·Ö
+#æ€»çš„uniq.PAä¹ŸæŒ‰æ–¹å‘åˆ’åˆ†
 echo ">>> $(date) - split all.PA.uniq.bed by strand"
 grep "+$" all.PA.uniq.bed > all.PA.uniq.bed.for
 grep "\\-$" all.PA.uniq.bed > all.PA.uniq.bed.rev
 
 
 ## ----------------------------------------
-#¼ÆËãPACµÄĞÅÏ¢£º×ÜPAÊı¡¢×ÜPATÊı¡¢PAC×ø±ê¡¢refPAµÄPATÊı
+#è®¡ç®—PACçš„ä¿¡æ¯ï¼šæ€»PAæ•°ã€æ€»PATæ•°ã€PACåæ ‡ã€refPAçš„PATæ•°
 echo ">>> $(date) - PACinfo (bedmap --max-element) >> all.PAC.info"
 bedmap --echo --count --delim  "\t" --sum --prec 0  --max-element all.PAC.bed.for all.PA.uniq.bed.for | awk -vOFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.for
 bedmap --echo --count --delim  "\t" --sum --prec 0  --max-element all.PAC.bed.rev all.PA.uniq.bed.rev | awk -vOFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.rev
-## ²ÎÊı--countÊÇuniqPAÊı£»--sumÊÇPAT×ÜÊı
+## å‚æ•°--countæ˜¯uniqPAæ•°ï¼›--sumæ˜¯PATæ€»æ•°
 rm all.PA.uniq.bed.for all.PA.uniq.bed.rev
-## chr1    98      103     +       5(PAÊı)       25(PATÊı)      chr1    99      100(È¡µÃÕâ1ÁĞ¾ÍÊÇPACµÄ×ø±ê)     .       12(refPAµÄPATÊıÁ¿)      +
-#ºÏ²¢Õı·´Ïò
+## chr1    98      103     +       5(PAæ•°)       25(PATæ•°)      chr1    99      100(å–å¾—è¿™1åˆ—å°±æ˜¯PACçš„åæ ‡)     .       12(refPAçš„PATæ•°é‡)      +
+#åˆå¹¶æ­£åå‘
 cat all.PAC.info.for all.PAC.info.rev > all.PAC.info
 rm all.PAC.info.for all.PAC.info.rev
 
 ##[szhou@login01 test1]$ cat all.PAC.info.for
-##chr1    98+1(Ê×1)      103     +       5(uniqPAÊı)        25 (PATÊı)     100(PAC×ø±ê)     12(refPAµÄPATÊıÁ¿)
+##chr1    98+1(é¦–1)      103     +       5(uniqPAæ•°)        25 (PATæ•°)     100(PACåæ ‡)     12(refPAçš„PATæ•°é‡)
 
-##Í³¼ÆPACÔÚÃ¿¸öÑù±¾ÏÂµÄPA¸öÊı
-#°´·½Ïò±È¶ÔPAµ½PAC £¨×¢ÒâPAºÍPAC¶¼ÒÑ¾­sorted£©
+##ç»Ÿè®¡PACåœ¨æ¯ä¸ªæ ·æœ¬ä¸‹çš„PAä¸ªæ•°
+#æŒ‰æ–¹å‘æ¯”å¯¹PAåˆ°PAC ï¼ˆæ³¨æ„PAå’ŒPACéƒ½å·²ç»sortedï¼‰
 echo ">>> $(date) - countPAinPAC (bedmap --count)"
 PAinPACfiles=()
 for file in "${realfiles[@]}";
 do
   bedmap --echo --count --delim "\t" all.PAC.bed.for "$file".for  > "$file".for.PAinPAC.bed
   bedmap --echo --count --delim "\t" all.PAC.bed.rev "$file".rev  > "$file".rev.PAinPAC.bed
-  ##²ÎÊı --count  The number of overlapping elements in <map-file>.
-  ##ºÏ²¢Õı·´Ïò
+  ##å‚æ•° --count  The number of overlapping elements in <map-file>.
+  ##åˆå¹¶æ­£åå‘
   cat "$file".for.PAinPAC.bed "$file".rev.PAinPAC.bed > "$file".PAinPAC.bed
   rm "$file".for.PAinPAC.bed "$file".rev.PAinPAC.bed  
   echo ">>> ""$file".PAinPAC.bed
@@ -265,7 +272,7 @@ done
 
 
 
-#È¡µÃËùÓĞPAinPACµÄµÚ5ÁĞ£¨¼ÆÊıÁĞ£©
+#å–å¾—æ‰€æœ‰PAinPACçš„ç¬¬5åˆ—ï¼ˆè®¡æ•°åˆ—ï¼‰
 echo ">>> $(date) - mergeCount (awk) >>> all.PAC.PAcount"
 awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  ${PAinPACfiles[@]} | awk '{$1=$1}1' OFS="\t" > all.PAcount
 
@@ -273,31 +280,31 @@ awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a
 
 
 
-#Á¬½ÓPAC.infoºÍall.PAcount
+#è¿æ¥PAC.infoå’Œall.PAcount
 paste all.PAC.info all.PAcount > all.PAC.PAcount 
 rm all.PAcount
 
-#ÒÔÏÂcode²»ÓÃ
-#È¡µÃÇ°4ÁĞ£¬²¢½«startÖØĞÂ±ä³Éstart+1£¨ÒòÎªbedÎÄ¼şÊÇ0×ø±ê£¬Òª¸Ä³É1×ø±ê£©
+#ä»¥ä¸‹codeä¸ç”¨
+#å–å¾—å‰4åˆ—ï¼Œå¹¶å°†starté‡æ–°å˜æˆstart+1ï¼ˆå› ä¸ºbedæ–‡ä»¶æ˜¯0åæ ‡ï¼Œè¦æ”¹æˆ1åæ ‡ï¼‰
 #awk -vOFS="\t" '{ print $1,$2+1,$3,$4}' ${PAinPACfiles[0]}  > all.PAC.coord
-#Á¬½ÓµÚ1¸öÎÄ¼şµÄÇ°4ÁĞºÍall.PAcount
+#è¿æ¥ç¬¬1ä¸ªæ–‡ä»¶çš„å‰4åˆ—å’Œall.PAcount
 ##paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PAcount) > all.PAC.PAcount 
 #paste all.PAC.coord all.PAcount > all.PAC.PAcount 
 
 #################################################
 # countPAT
-# ±È¶ÔÃ¿¸öÑù±¾µÄPATµ½PACÇøÓòÖĞ
+# æ¯”å¯¹æ¯ä¸ªæ ·æœ¬çš„PATåˆ°PACåŒºåŸŸä¸­
 #################################################
-##Í³¼ÆPATµÄ¸öÊı
-#°´·½Ïò±È¶ÔPAµ½PAC £¨×¢ÒâPAºÍPAC¶¼Òªsorted£©
+##ç»Ÿè®¡PATçš„ä¸ªæ•°
+#æŒ‰æ–¹å‘æ¯”å¯¹PAåˆ°PAC ï¼ˆæ³¨æ„PAå’ŒPACéƒ½è¦sortedï¼‰
 echo ">>> $(date) - countPATinPAC (bedmap --sum)"
 PAinPACfiles=()
 for file in "${realfiles[@]}";
 do
   bedmap --echo --sum --prec 0 --delim "\t" all.PAC.bed.for "$file".for  > "$file".for.PATinPAC.bed
   bedmap --echo --sum --prec 0 --delim "\t" all.PAC.bed.rev "$file".rev  > "$file".rev.PATinPAC.bed
-  ##²ÎÊı --sum¶ÔscoreÁĞÇóºÍ£¬-prec±£Áô0Î»Ğ¡Êı
-  ##ºÏ²¢Õı·´Ïò
+  ##å‚æ•° --sumå¯¹scoreåˆ—æ±‚å’Œï¼Œ-precä¿ç•™0ä½å°æ•°
+  ##åˆå¹¶æ­£åå‘
   cat "$file".for.PATinPAC.bed "$file".rev.PATinPAC.bed > "$file".PATinPAC.bed
   rm "$file".for.PATinPAC.bed "$file".rev.PATinPAC.bed  "$file".for "$file".rev
   echo ">>> ""$file".PATinPAC.bed
@@ -307,30 +314,30 @@ done
 rm all.PAC.bed.for all.PAC.bed.rev 
 
 
-#È¡µÃËùÓĞPAinPACµÄµÚ5ÁĞ¼ÆÊıÁĞ
+#å–å¾—æ‰€æœ‰PAinPACçš„ç¬¬5åˆ—è®¡æ•°åˆ—
 echo ">>> $(date) - mergeCount (awk) >>> all.PAC.PATcount"
 awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  ${PAinPACfiles[@]} | awk '{$1=$1}1' OFS="\t" > all.PATcount
 
 #awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  *.PATinPAC.bed | awk '{$1=$1}1' OFS="\t" > all.PATcount
 
 
-#Á¬½ÓPAC.infoºÍall.PAcount
+#è¿æ¥PAC.infoå’Œall.PAcount
 paste all.PAC.info all.PATcount > all.PAC.PATcount 
 rm all.PATcount
 
-#ÒÔÏÂcode²»ÓÃ
-#Á¬½ÓµÚ1¸öÎÄ¼şµÄÇ°4ÁĞºÍall.PAcount
+#ä»¥ä¸‹codeä¸ç”¨
+#è¿æ¥ç¬¬1ä¸ªæ–‡ä»¶çš„å‰4åˆ—å’Œall.PAcount
 ##paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PATcount) > all.PAC.PATcount 
 #paste all.PAC.coord all.PATcount > all.PAC.PATcount 
 
-#½«Í³¼ÆÊ±bedmap²úÉúµÄNANÌæ»»Îª0
+#å°†ç»Ÿè®¡æ—¶bedmapäº§ç”Ÿçš„NANæ›¿æ¢ä¸º0
 sed "s/NAN/0/g" all.PAC.PATcount > all.PAC.PATcount1
 mv all.PAC.PATcount1 all.PAC.PATcount
 
 #################################################
-# Êä³öÕ¹Ê¾
+# è¾“å‡ºå±•ç¤º
 #################################################
-#Êä³öheaderÎÄ¼ş£º±êÌâĞĞ£¬¶ÔÓ¦PAC¾ØÕóµÄ±êÌâ
+#è¾“å‡ºheaderæ–‡ä»¶ï¼šæ ‡é¢˜è¡Œï¼Œå¯¹åº”PACçŸ©é˜µçš„æ ‡é¢˜
 echo ">>> $(date) - output header >>> all.PAC.header"
 OLDIFS="$IFS"; IFS=$'\t'
 header=(chr UPA_start UPA_end strand PAnum tot_tagnum coord refPAnum)
@@ -340,10 +347,10 @@ IFS="$OLDIFS"
 
 echo " ---------------------------------------------------- "
 echo "[$odir]"
-echo ">>> all.PAC.info     PAC×ø±êĞÅÏ¢(1-base)"
-echo ">>> all.PAC.PATcount PACÔÚËùÓĞÑù±¾ÏÂµÄPAT¼ÆÊı"
-echo ">>> all.PAC.PAcount  PACÔÚËùÓĞÑù±¾ÏÂµÄPA¼ÆÊı(²»³£ÓÃ)"
-echo ">>> all.PAC.header   PAC¾ØÕóµÄ±êÌâĞĞ"
-echo ">>> all.PA.uniq.bed (0-base)   ËùÓĞÑù±¾µÄPA×Ü¼¯bed¸ñÊ½×ø±ê´Ó0¿ªÊ¼"
-echo ">>> µ¥Ñù±¾ÖĞ¼äÎÄ¼ş --- *.PAT | .PA | PA.bed (0-base) | .real (0-base) | .IP (0-base) | .PAinPAC.bed (0-base)"
+echo ">>> all.PAC.info     PACåæ ‡ä¿¡æ¯(1-base)"
+echo ">>> all.PAC.PATcount PACåœ¨æ‰€æœ‰æ ·æœ¬ä¸‹çš„PATè®¡æ•°"
+echo ">>> all.PAC.PAcount  PACåœ¨æ‰€æœ‰æ ·æœ¬ä¸‹çš„PAè®¡æ•°(ä¸å¸¸ç”¨)"
+echo ">>> all.PAC.header   PACçŸ©é˜µçš„æ ‡é¢˜è¡Œ"
+echo ">>> all.PA.uniq.bed (0-base)   æ‰€æœ‰æ ·æœ¬çš„PAæ€»é›†bedæ ¼å¼åæ ‡ä»0å¼€å§‹"
+echo ">>> å•æ ·æœ¬ä¸­é—´æ–‡ä»¶ --- *.PAT | .PA | PA.bed (0-base) | .real (0-base) | .IP (0-base) | .PAinPAC.bed (0-base)"
 
