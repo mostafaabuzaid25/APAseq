@@ -234,155 +234,171 @@ while(!eof $fh1) {
 		     }
 	     }
 	     
-	     if(!$haveT & $review){#Find in degree depth, as long as it matchesTTTTTTTT的,judgement mper、ml
-	     	   $seqT=$e1{'seq'};
-	     	   my $deepmod="T{$mp,}([^T]{0,$mm}T{$mr,}){0,}";
-	     	   if($seqT=~ m/$deepmod/){
-	     	   	
-	     	     #print "1$seqT\n";
-	     	     my $pos_start=$-[0];#返回匹配的首位置，从0开始计数
-	     	     my $match_length =length$&;#返回第一个匹配的长度 TTTTTT，或TTTTTTXXTTTXXTTTT
-             my $pos_end = $pos_start+$match_length;#返回首次匹配的末index，从0开始计数
-  
-	     	   	 $seqT =substr($seqT,$pos_end,length($seqT)-$pos_end);
-	     	   	 #print "2$seqT\n";
-	     	   	 my $length=length($seqT);
-	     	   	 
-	     	   	 my $Ts=substr($e1{'seq'},$bar,$pos_end-$bar);#polyT的序列
-	     	   	 #print "3$Ts\n";
-	     	   	 my $Tcnt = $Ts =~ tr/T/T/; #计算T数
-	     	   	 #print "3$Tcnt\n";
-	     	   	 if(length($Ts)>=$mtail and $Tcnt/length($Ts)>=$mper and $length>=$ml){
-	     	   	 	  #print "####yes\n";
-	     	   	 	  ++$md3;
-	     	   	 	  $haveT=1;
-	     	   	 	  $qualT=substr($e1{'qual'},$pos_end,length($e1{'qual'})-$pos_end);
-                                  if($debug){
-                                    print TESTT $Ts."***DEPSEVEN***".$seqT."\n"  if $review;
-                                  }
-	     	   	 	  
-				        $badTailT=0;
-				        $shortT=0;
-				        #print "$seqT\n";
-	     	   	 	}
-	     	   	}
-	     	
-	     	}
+	    # Check if conditions are met for processing DNA sequence data
+if (!$haveT && $review) {  # If not already processed and review is true
+    # Find in-depth degree of depth, as long as it matches specific criteria
+    $seqT = $e1{'seq'};
+    my $deepmod = "T{$mp,}([^T]{0,$mm}T{$mr,}){0,}";  # Regular expression pattern
+    
+    # Check if the pattern matches in the sequence
+    if ($seqT =~ m/$deepmod/) {
+        my $pos_start = $-[0];  # Start position of the match
+        my $match_length = length $&;  # Length of the matched portion
+        my $pos_end = $pos_start + $match_length;  # End position of the match
+        
+        # Extract the portion after the match in the sequence
+        $seqT = substr($seqT, $pos_end, length($seqT) - $pos_end);
+        
+        my $length = length($seqT);  # Length of the remaining sequence
+        
+        # Extract the portion before the match in the 'seq' of the hash 'e1'
+        my $Ts = substr($e1{'seq'}, $bar, $pos_end - $bar);  # Extracted sequence
+        
+        # Count the occurrences of 'T' in the extracted sequence
+        my $Tcnt = $Ts =~ tr/T/T/;  # Count of 'T' occurrences
+        
+        # Check if conditions are met for further processing
+        if (length($Ts) >= $mtail && $Tcnt / length($Ts) >= $mper && $length >= $ml) {
+            ++$md3;  # Increment counter
+            $haveT = 1;  # Set flag indicating 'T' sequence is present
+            
+            # Extract the portion after the match in the 'qual' of the hash 'e1'
+            $qualT = substr($e1{'qual'}, $pos_end, length($e1{'qual'}) - $pos_end);
+            
+            # Debugging: print the sequences to a file
+            if ($debug) {
+                print TESTT $Ts . "***DEPSEVEN***" . $seqT . "\n" if $review;
+            }
+            
+            $badTailT = 0;  # Initialize variables
+            $shortT = 0;
+        }
+    }
+}
+
 	     
 
-	   if (!$haveT) {
-		  $notailT=1;	
-		  if($debug){
-		   # print TESTT "****NOT***$e1{'seq'}\n";#seven
-		  }	  		  
-	   } elsif ($debug) {
-		  # print TESTT "****YES***$e1{'seq'}\n";
-	   }
-	}#end find poly(T)
+	  if (!$haveT) {
+    $notailT = 1;
+    if ($debug) {
+        # print TESTT "****NOT***$e1{'seq'}\n";#seven
+    }
+} elsif ($debug) {
+    # print TESTT "****YES***$e1{'seq'}\n";
+}
+# End the process of finding poly(T)
 
-	if ($findA) {
-	    $seqA=$e1{'seq'};
-		if ($seqA=~s/$regA//) {
-	      my $length=length($seqA);
-		  print TESTA "$seqA*******".substr($e1{'seq'},$length,length($e1{'seq'})-$length)."\n" if $debug;
-		  my $As=substr($e1{'seq'},$length,length($e1{'seq'})-$length); #截取下来的A片段
-		  my $Acnt = $As =~ tr/A/A/; #计算A数
-		  if (length($e1{'seq'})-$length<$mtail or $Acnt/length($As)<$mper) { #tail过短
-			$badTailA=1;
-		  } elsif ($length<$ml) {
-			 $shortA=1;
-		  } else {
-			$haveA=1;
-			$qualA=substr($e1{'qual'},0,$length);
-		  }
-		} else {
-		  $notailA=1;
-		  print TESTA "*******$e1{'seq'}\n" if $debug;
-		}
-	} #~findA
+if ($findA) {
+    $seqA = $e1{'seq'};
+    if ($seqA =~ s/$regA//) {
+        my $length = length($seqA);
+        print TESTA "$seqA*******" . substr($e1{'seq'}, $length, length($e1{'seq'}) - $length) . "\n" if $debug;
+        my $As = substr($e1{'seq'}, $length, length($e1{'seq'}) - $length); # Extracted A segment
+        my $Acnt = $As =~ tr/A/A/; # Count the occurrences of A
+        if (length($e1{'seq'}) - $length < $mtail or $Acnt / length($As) < $mper) { # If tail is too short
+            $badTailA = 1;
+        } elsif ($length < $ml) {
+            $shortA = 1;
+        } else {
+            $haveA = 1;
+            $qualA = substr($e1{'qual'}, 0, $length);
+        }
+    } else {
+        $notailA = 1;
+        print TESTA "*******$e1{'seq'}\n" if $debug;
+    }
+}
+# Process for finding A sequence
+
+# Note: The code snippet provided is incomplete and lacks context, so certain variables and conditions may not be explained accurately.
 
 
-      #输出reads结果
-      if ($poly eq 'A|T') {
-		  		if ($haveA and $haveT) { #若同时有A和T，则lenA>=lenT时，保留A的结果；
-			 				if (length($seqT)<length($seqA)) {
-									print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
-									$cntFinalT++;
-									$cntMissA++;
-									if ($oraw) {
-				  				print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-									}
-			 				} else {
-								print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
-								if ($oraw) {
-				  				print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-								}
-								$cntFinalA++;
-								$cntMissT++;
-						 }
-		  		}elsif ($shortA or $shortT) { #有A或T太短，则都不输出
-			  				$cntShortA++;
-			 					$cntShortT++;
-		 			}elsif ($badTailT or $badTailA) { #有A或T太短，则都不输出
-			 					 $cntBadA++;
-			  				 $cntBadT++;
-		      }elsif ($haveA and !$haveT) { #有一方没有，则只输出相应方
-			  				 print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
-								if ($oraw) {
-				  					print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-								}
-			   				$cntFinalA++;
-			          $cntNotailT++;
-		     }elsif ($haveT and !$haveA) { #有一方没有，则只输出相应方
-			   				print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
-				        if ($oraw) {
-				  				print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-								}
-			         $cntFinalT++;
-			         $cntNotailA++;
-		     } elsif (!$haveT and !$haveA) {
-			  		 $cntNotailA++;
-			   			$cntNotailT++;
-		     }
-      } else {
-         if ($haveA) {
-						print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
-			     if ($oraw) {
-							print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-						}
-					 $cntFinalA++;
-         } elsif ($shortA) {
-			      $cntShortA++;
-         }elsif ($badTailA) {
-			      $cntBadA++;
-         }elsif ($notailA) {
-			      $cntNotailA++;
-         }#for poly A tail #seven
-         
-         if ($haveT) {
-						print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
-			     if ($oraw) {
-				    #print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
-				    print RAWT "$e1{'seq'}\n";
-			     }
-			    $cntFinalT++;
-         } elsif ($shortT) {
-			      $cntShortT++;
-			      #print SHORTT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug; #seven
-			      print SHORTT "$e1{'seq'}\n" if $debug; #seven
-         }elsif ($badTailT) {
-		       	$cntBadT++;
-             #print BEDT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug; #seven
-             print BEDT "$e1{'seq'}\n" if $debug; #seven
-         }	elsif ($notailT) {
-           # print NOT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug; #seven
-           print NOT "$e1{'seq'}\n" if $debug; #seven
-		       	$cntNotailT++;
-         }  
-	    }
-
+      # Output 'reads' results
+if ($poly eq 'A|T') {
+    if ($haveA and $haveT) {
+        # If both A and T are present, keep A's result if lenA >= lenT
+        if (length($seqT) < length($seqA)) {
+            print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
+            $cntFinalT++;
+            $cntMissA++;
+            if ($oraw) {
+                print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+            }
+        } else {
+            print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
+            if ($oraw) {
+                print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+            }
+            $cntFinalA++;
+            $cntMissT++;
+        }
+    } elsif ($shortA or $shortT) {
+        # If A or T is too short, don't output anything
+        $cntShortA++;
+        $cntShortT++;
+    } elsif ($badTailT or $badTailA) {
+        # If A or T has a bad tail, don't output anything
+        $cntBadA++;
+        $cntBadT++;
+    } elsif ($haveA and !$haveT) {
+        # If one side is missing, only output the corresponding side
+        print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
+        if ($oraw) {
+            print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+        }
+        $cntFinalA++;
+        $cntNotailT++;
+    } elsif ($haveT and !$haveA) {
+        # If one side is missing, only output the corresponding side
+        print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
+        if ($oraw) {
+            print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+        }
+        $cntFinalT++;
+        $cntNotailA++;
+    } elsif (!$haveT and !$haveA) {
+        $cntNotailA++;
+        $cntNotailT++;
+    }
+} else {
+    if ($haveA) {
+        print OA "$e1{'id'}\n$seqA\n$e1{'pl'}\n$qualA\n";
+        if ($oraw) {
+            print RAWA "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+        }
+        $cntFinalA++;
+    } elsif ($shortA) {
+        $cntShortA++;
+    } elsif ($badTailA) {
+        $cntBadA++;
+    } elsif ($notailA) {
+        $cntNotailA++;
+    }
+    
+    if ($haveT) {
+        print OT "$e1{'id'}\n$seqT\n$e1{'pl'}\n$qualT\n";
+        if ($oraw) {
+            #print RAWT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n";
+            print RAWT "$e1{'seq'}\n";
+        }
+        $cntFinalT++;
+    } elsif ($shortT) {
+        $cntShortT++;
+        #print SHORTT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug;
+        print SHORTT "$e1{'seq'}\n" if $debug;
+    } elsif ($badTailT) {
+        $cntBadT++;
+        #print BEDT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug;
+        print BEDT "$e1{'seq'}\n" if $debug;
+    } elsif ($notailT) {
+        # print NOT "$e1{'id'}\n$e1{'seq'}\n$e1{'pl'}\n$e1{'qual'}\n" if $debug;
+        print NOT "$e1{'seq'}\n" if $debug;
+        $cntNotailT++;
+    }
+}
 }#end while 
 close($fh1);
+
 
 if($findA){
    close(OA);
