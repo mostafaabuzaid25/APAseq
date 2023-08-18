@@ -161,45 +161,63 @@ cd "$odir"
 #################################################
 # setIP
 #################################################
+
+# Print the number of elements in the 'paBEDfiles' array
 echo "paBED files: ${#paBEDfiles[*]}"
+
+# Print the current date and message
 echo ">>> $(date) - setIP (PAT_setIP_big.pl)"
+
+# Create an empty array to hold real file names
 realfiles=()
-for file in "${paBEDfiles[@]}";
-do
+
+# Loop through each file in the 'paBEDfiles' array
+for file in "${paBEDfiles[@]}"; do
+  # Create a new filename with '.real' extension
   oname=${file}.real
-  #flds为chr,strand,coord的列下标（0为第1列）
-  #0:5:2 对应bed中的相应列
-  #注意添加对应的路径
+  
+  # Perform some operations using the 'perl' interpreter and a script named 'PAT_setIP_big.pl'
+  # The '-in' flag specifies an input file, '-skip' skips lines, '-suf' adds a suffix to the output file,
+  # '-flds' specifies field indices, and '-chr' specifies a chromosome value
   perl PAT_setIP_big.pl -in "$file" -skip 0 -suf "" -flds 0:5:2 -chr "$chrfa"
-  ##cp $file $oname ##DEBUG，实际运行要注释掉这句
+  
+  # Debug statement (copies the input file to the new filename)
+  # This line is commented out in the actual execution
+  # cp $file $oname ##DEBUG
+  
+  # Print a message indicating the conversion
   echo "$file >>> $oname"
+  
+  # Add the new filename to the 'realfiles' array
   realfiles+=($oname)
 done
+
 
 #################################################
 # PA2PAC
 #################################################
-#合并所有样本的PA,用chr/strand/coord进行sort并取uniq
+# Merge all PA (Peak Annotation) files from samples using chr/strand/coord for sorting and obtaining unique entries.
 echo "real files: ${#realfiles[*]}"
-echo ">>> $(date) - merge realPA files (cat>awk) >> all.PA.bed >> all.PA.uniq.bed"
+echo ">>> $(date) - merging realPA files (cat > awk) >> all.PA.bed >> all.PA.uniq.bed"
 cat ${realfiles[@]} > all.PA.bed
 #cat *.PA.bed.real > all.PA.bed
 sort-bed all.PA.bed > all.PA.bed.tmp
-mv all.PA.bed.tmp  all.PA.bed
+mv all.PA.bed.tmp all.PA.bed
 
-#计算所有样本PA的总tag数：处理成这种形式 chr1,100,101,+  1 , 再将第2列累加
-awk -vOFS="\t" '{print $1","$2","$3","$6,$5}' all.PA.bed > all.PA.bed.tmp 
-awk -F"\t" -vOFS="\t" '{a[$1]+=$2;}END{for(i in a)print i", "a[i];}' all.PA.bed.tmp > all.PA.bed.tmp2
-#再还原成bed格式
-awk -F'[,\t]' -vOFS="\t" '{print $1,$2,$3,".",$5,$4}' all.PA.bed.tmp2 |  sort-bed - > all.PA.uniq.bed
+# Calculate the total tag count for all sample PAs (Peak Annotations):
+# Convert to this format: chr1,100,101,+ 1, then accumulate the second column.
+awk -v OFS="\t" '{print $1","$2","$3","$6,$5}' all.PA.bed > all.PA.bed.tmp
+awk -F"\t" -v OFS="\t" '{a[$1]+=$2;} END {for(i in a) print i", "a[i];}' all.PA.bed.tmp > all.PA.bed.tmp2
+# Convert back to bed format
+awk -F'[,\t]' -v OFS="\t" '{print $1,$2,$3,".",$5,$4}' all.PA.bed.tmp2 | sort-bed - > all.PA.uniq.bed
 rm all.PA.bed all.PA.bed.tmp all.PA.bed.tmp2
 
 #[szhou@login01 test1]$ cat all.PA.uniq.bed
-#chr1    96      97      .        1      -  第5列是score
+#chr1    96      97      .        1      -  The 5th column is the score
 
 echo ">>> $(date) - PA2PAC (bedtools merge) >> all.PAC.bed"
-## PA2PAC: 以dist距离合并
-# 以下两个结果一样
+## PA2PAC: Merge based on a distance (dist) threshold
+# The following two results are equivalent
 #bedtools merge -i all.PA.bed -s -d $dist > all.PAC.bed
 bedtools merge -i all.PA.uniq.bed -s -d $dist -c 6 -o distinct > all.PAC.bed
 #bedtools merge -i all.PA.uniq.bed -s -d 24 -c 6 -o distinct > all.PAC.bed
@@ -213,98 +231,86 @@ bedtools merge -i all.PA.uniq.bed -s -d $dist -c 6 -o distinct > all.PAC.bed
 
 #################################################
 # countPA
-# 比对每个样本的PA到PAC区域中
+# Compare each sample's PA to the PAC region.
 #################################################
-#先将每个PA样本按方向划分
+
+# First, divide each PA sample based on direction.
 echo ">>> $(date) - split paBEDfiles by strand"
-for file in "${realfiles[@]}";
-do
+for file in "${realfiles[@]}"; do
   grep "+$" $file > "$file".for
   grep "\\-$" $file > "$file".rev
 done
 
-
-
-#PAC也按方向划分
+# Divide PAC based on direction as well.
 echo ">>> $(date) - split all.PAC.bed by strand"
 grep "+$" all.PAC.bed > all.PAC.bed.for
 grep "\\-$" all.PAC.bed > all.PAC.bed.rev
 rm all.PAC.bed
 
-#总的uniq.PA也按方向划分
+# Also divide overall uniq.PA based on direction.
 echo ">>> $(date) - split all.PA.uniq.bed by strand"
 grep "+$" all.PA.uniq.bed > all.PA.uniq.bed.for
 grep "\\-$" all.PA.uniq.bed > all.PA.uniq.bed.rev
 
-
 ## ----------------------------------------
-#计算PAC的信息：总PA数、总PAT数、PAC坐标、refPA的PAT数
+# Calculate PAC information: total number of PA, total number of PAT, PAC coordinates, and refPA's PAT count.
 echo ">>> $(date) - PACinfo (bedmap --max-element) >> all.PAC.info"
-bedmap --echo --count --delim  "\t" --sum --prec 0  --max-element all.PAC.bed.for all.PA.uniq.bed.for | awk -vOFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.for
-bedmap --echo --count --delim  "\t" --sum --prec 0  --max-element all.PAC.bed.rev all.PA.uniq.bed.rev | awk -vOFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.rev
-## 参数--count是uniqPA数；--sum是PAT总数
+bedmap --echo --count --delim "\t" --sum --prec 0 --max-element all.PAC.bed.for all.PA.uniq.bed.for | awk -v OFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.for
+bedmap --echo --count --delim "\t" --sum --prec 0 --max-element all.PAC.bed.rev all.PA.uniq.bed.rev | awk -v OFS="\t" '{print $1,$2+1,$3,$4,$5,$6,$9,$11}' > all.PAC.info.rev
+## Parameters: --count for unique PA count; --sum for total PAT count
 rm all.PA.uniq.bed.for all.PA.uniq.bed.rev
-## chr1    98      103     +       5(PA数)       25(PAT数)      chr1    99      100(取得这1列就是PAC的坐标)     .       12(refPA的PAT数量)      +
-#合并正反向
+
+# Merge positive and reverse strand PAC info.
 cat all.PAC.info.for all.PAC.info.rev > all.PAC.info
 rm all.PAC.info.for all.PAC.info.rev
 
-##[szhou@login01 test1]$ cat all.PAC.info.for
-##chr1    98+1(首1)      103     +       5(uniqPA数)        25 (PAT数)     100(PAC坐标)     12(refPA的PAT数量)
+## [szhou@login01 test1]$ cat all.PAC.info.for
+## chr1    98+1(1st base) 103 +   5 (uniqPA count) 25 (PAT count) 100 (PAC coordinate) 12 (refPA's PAT count)
 
-##统计PAC在每个样本下的PA个数
-#按方向比对PA到PAC （注意PA和PAC都已经sorted）
+## Count the number of PA for each PAC in each sample.
 echo ">>> $(date) - countPAinPAC (bedmap --count)"
 PAinPACfiles=()
-for file in "${realfiles[@]}";
-do
-  bedmap --echo --count --delim "\t" all.PAC.bed.for "$file".for  > "$file".for.PAinPAC.bed
-  bedmap --echo --count --delim "\t" all.PAC.bed.rev "$file".rev  > "$file".rev.PAinPAC.bed
-  ##参数 --count  The number of overlapping elements in <map-file>.
-  ##合并正反向
+for file in "${realfiles[@]}"; do
+  bedmap --echo --count --delim "\t" all.PAC.bed.for "$file".for > "$file".for.PAinPAC.bed
+  bedmap --echo --count --delim "\t" all.PAC.bed.rev "$file".rev > "$file".rev.PAinPAC.bed
+  ## Parameters: --count for the number of overlapping elements in <map-file>.
+  ## Merge positive and reverse strand counts.
   cat "$file".for.PAinPAC.bed "$file".rev.PAinPAC.bed > "$file".PAinPAC.bed
-  rm "$file".for.PAinPAC.bed "$file".rev.PAinPAC.bed  
+  rm "$file".for.PAinPAC.bed "$file".rev.PAinPAC.bed
   echo ">>> ""$file".PAinPAC.bed
   PAinPACfiles+=("$file".PAinPAC.bed)
 done
 
-
-
-
-
-#取得所有PAinPAC的第5列（计数列）
+# Get the 5th column (count column) of all PAinPAC files.
 echo ">>> $(date) - mergeCount (awk) >>> all.PAC.PAcount"
-awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  ${PAinPACfiles[@]} | awk '{$1=$1}1' OFS="\t" > all.PAcount
+awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}' ${PAinPACfiles[@]} | awk '{$1=$1}1' OFS="\t" > all.PAcount
 
-#awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  *.PAinPAC.bed | awk '{$1=$1}1' OFS="\t" > all.PAcount
-
-
-
-#连接PAC.info和all.PAcount
-paste all.PAC.info all.PAcount > all.PAC.PAcount 
+# Connect PAC.info and all.PAcount.
+paste all.PAC.info all.PAcount > all.PAC.PAcount
 rm all.PAcount
 
-#以下code不用
-#取得前4列，并将start重新变成start+1（因为bed文件是0坐标，要改成1坐标）
-#awk -vOFS="\t" '{ print $1,$2+1,$3,$4}' ${PAinPACfiles[0]}  > all.PAC.coord
-#连接第1个文件的前4列和all.PAcount
-##paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PAcount) > all.PAC.PAcount 
-#paste all.PAC.coord all.PAcount > all.PAC.PAcount 
+# The following code is not used.
+# Get the first 4 columns and adjust start to start+1 (as the bed file uses 0-based coordinates and needs to be converted to 1-based).
+# awk -v OFS="\t" '{ print $1,$2+1,$3,$4}' ${PAinPACfiles[0]}  > all.PAC.coord
+# Connect the first 4 columns of the first file with all.PAcount.
+# paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PAcount) > all.PAC.PAcount
+# paste all.PAC.coord all.PAcount > all.PAC.PAcount
 
-#################################################
+
+##############################################
 # countPAT
-# 比对每个样本的PAT到PAC区域中
+# Compare the PAT of each sample to the PAC region.
 #################################################
-##统计PAT的个数
-#按方向比对PA到PAC （注意PA和PAC都要sorted）
+## Count the number of PATs
+# Compare PA to PAC by direction (both PA and PAC should be sorted)
 echo ">>> $(date) - countPATinPAC (bedmap --sum)"
 PAinPACfiles=()
 for file in "${realfiles[@]}";
 do
   bedmap --echo --sum --prec 0 --delim "\t" all.PAC.bed.for "$file".for  > "$file".for.PATinPAC.bed
   bedmap --echo --sum --prec 0 --delim "\t" all.PAC.bed.rev "$file".rev  > "$file".rev.PATinPAC.bed
-  ##参数 --sum对score列求和，-prec保留0位小数
-  ##合并正反向
+  ## Parameters --sum sum the score column, -prec keeps 0 decimal places
+  ## Merge forward and reverse directions
   cat "$file".for.PATinPAC.bed "$file".rev.PATinPAC.bed > "$file".PATinPAC.bed
   rm "$file".for.PATinPAC.bed "$file".rev.PATinPAC.bed  "$file".for "$file".rev
   echo ">>> ""$file".PATinPAC.bed
@@ -313,31 +319,27 @@ done
 
 rm all.PAC.bed.for all.PAC.bed.rev 
 
-
-#取得所有PAinPAC的第5列计数列
+# Get the count column (5th column) of all PAinPAC files
 echo ">>> $(date) - mergeCount (awk) >>> all.PAC.PATcount"
 awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  ${PAinPACfiles[@]} | awk '{$1=$1}1' OFS="\t" > all.PATcount
 
-#awk '{ a[FNR] = (a[FNR] ? a[FNR] FS : "") $5 } END { for(i=1;i<=FNR;i++) print a[i]}'  *.PATinPAC.bed | awk '{$1=$1}1' OFS="\t" > all.PATcount
-
-
-#连接PAC.info和all.PAcount
+# Connect PAC.info and all.PAcount
 paste all.PAC.info all.PATcount > all.PAC.PATcount 
 rm all.PATcount
 
-#以下code不用
-#连接第1个文件的前4列和all.PAcount
-##paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PATcount) > all.PAC.PATcount 
-#paste all.PAC.coord all.PATcount > all.PAC.PATcount 
+# The following code is not used
+# Connect the first 4 columns of the first file and all.PAcount
+## paste <(cut -f1,2,3,4 ${PAinPACfiles[0]}) <(cat all.PATcount) > all.PAC.PATcount 
+# paste all.PAC.coord all.PATcount > all.PAC.PATcount 
 
-#将统计时bedmap产生的NAN替换为0
+# Replace NAN generated by bedmap during statistics with 0
 sed "s/NAN/0/g" all.PAC.PATcount > all.PAC.PATcount1
 mv all.PAC.PATcount1 all.PAC.PATcount
 
 #################################################
-# 输出展示
+# Output display
 #################################################
-#输出header文件：标题行，对应PAC矩阵的标题
+# Output header file: title row corresponding to the title of the PAC matrix
 echo ">>> $(date) - output header >>> all.PAC.header"
 OLDIFS="$IFS"; IFS=$'\t'
 header=(chr UPA_start UPA_end strand PAnum tot_tagnum coord refPAnum)
@@ -347,10 +349,9 @@ IFS="$OLDIFS"
 
 echo " ---------------------------------------------------- "
 echo "[$odir]"
-echo ">>> all.PAC.info     PAC坐标信息(1-base)"
-echo ">>> all.PAC.PATcount PAC在所有样本下的PAT计数"
-echo ">>> all.PAC.PAcount  PAC在所有样本下的PA计数(不常用)"
-echo ">>> all.PAC.header   PAC矩阵的标题行"
-echo ">>> all.PA.uniq.bed (0-base)   所有样本的PA总集bed格式坐标从0开始"
-echo ">>> 单样本中间文件 --- *.PAT | .PA | PA.bed (0-base) | .real (0-base) | .IP (0-base) | .PAinPAC.bed (0-base)"
-
+echo ">>> all.PAC.info     PAC coordinate information (1-based)"
+echo ">>> all.PAC.PATcount PAT count for PAC across all samples"
+echo ">>> all.PAC.PAcount  PA count for PAC across all samples (not commonly used)"
+echo ">>> all.PAC.header   Header row for the PAC matrix"
+echo ">>> all.PA.uniq.bed (0-based)   Union of all samples' PA in bed format starting from 0"
+echo ">>> Single-sample intermediate files --- *.PAT | .PA | PA.bed (0-based) | .real (0-based) | .IP (0-based) | .PAinPAC.bed (0-based)"
