@@ -90,6 +90,7 @@ use DBI;
 use Time::Local;
 use Text::NSP::Measures::2D::Fisher::twotailed;
 
+our $TMPDIR = $ENV{TMPDIR} // '/tmp'; # Default to '/tmp' if $ENV{TMPDIR} is not set
 
 
 #############################################################################
