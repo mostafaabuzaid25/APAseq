@@ -424,8 +424,6 @@ if($findT){
    	}
 }
 
-
-
 print "\ntotal\t$cntTotal\n";
 if ($findA) {
   print "[polyA]\nfinal\t$cntFinalA\nnotail\t$cntNotailA\ntooshort\t$cntShortA\nbadTail\t$cntBadA\nmissby(A|T)\t$cntMissA\n";
@@ -433,6 +431,7 @@ if ($findA) {
 	print "cntTotal!=cntFinalA+cntNotailA+cntShortA+cntMissA+cntBadA\n";
   }
 }
+
 if ($findT) {
   print "[polyT]\nfinal\t$cntFinalT\nnotail\t$cntNotailT\ntooshort\t$cntShortT\nbadTail\t$cntBadT\nmissby(A|T)\t$cntMissT\n";
   print "region\t$md1\ndeep\t$md2\nreview\t$md3\n";
@@ -440,7 +439,6 @@ if ($findT) {
 	print "cntTotal!=cntFinalT+cntNotailT+cntShortT+cntMissT+cntBadT\n";
   }
 }
-
 
 ###############################################
 sub readfq {
@@ -452,4 +450,3 @@ sub readfq {
         }
         return @entry;
 }
-
