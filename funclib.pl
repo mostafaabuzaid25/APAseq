@@ -99,7 +99,7 @@ use Text::NSP::Measures::2D::Fisher::twotailed;
 #****************************************************************************
 # Public Variables
 #****************************************************************************
-# Used for 'type' in findOverlap
+# Used for 'type' in finding overlap
 our ($ANY, $WITHIN, $CONTAIN, $EQUAL, $OVP) = (1, 2, 3, 4, 5);
 our %convertor = (
     'TCA' => 'S', # Serine
@@ -336,7 +336,7 @@ sub getSep {
 
 #############################################################################
 ## $nc=ncolFile($file)
-## 取得文件的列数,只判断第1行
+## Get the number of columns of the file and only judge the first row
 #############################################################################
 sub ncolFile {
   my $file=shift;
@@ -358,8 +358,8 @@ sub ncolFile {
 #############################################################################
 #  isFileEmptyOrNotExist(afilename) 
 #  useage: isFileEmptyOrNotExist('xx/xx.txt'):0/1       
-#  说明: 文件为空或不存在时返回1
-#  NOTE: 即使文件名中带空格 $f="c:/dir dir/h h.txt"也可以判断正确.
+#  Description: Returns 1 when the file is empty or does not exist
+#  NOTE: NOTE: Even if there are spaces in the file name $f="c:/dir dir/h h.txt" can still be judged correctly.
 #############################################################################
 sub isFileEmptyOrNotExist {
   my $f=shift;
@@ -370,7 +370,7 @@ sub isFileEmptyOrNotExist {
 #############################################################################
 #  getFileName(afilename,noExt=0/1) 
 #  useage: getFileName('xx/xx.txt'); getFileName('xx/xx.txt',1)        
-#  说明: 返回文件名（不含路径）
+#  Description: Returns the file name (without path)
 #############################################################################
 sub getFileName {
   my $f=shift;
