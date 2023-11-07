@@ -32,7 +32,7 @@ conda install -n base -c conda-forge mamba
 
 3.  Once mamba is installed, you can use it to install the required tools by running the following command:
 ```
-mamba install -n base -c bioconda fastqc multiqc trimmomatic star bedtools bedmap samtools
+mamba install -n base -c bioconda fastqc multiqc trimmomatic star bedtools bedops samtools perl-xml-parser
 ```
 
 4.  This will install all the required tools in one line without creating an environment.
