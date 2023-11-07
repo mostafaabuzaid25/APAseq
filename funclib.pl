@@ -170,26 +170,6 @@ our %convertor = (
 
 
 
-#****************************************************************************
-# APA
-#****************************************************************************
-## Determine whether it's the RICE series based on the sample field. If not, return the original string.
-sub getOptionSmp {
-  my $smp = shift;
-  # RICEJPCOLS, INDICACOLS, RICETWOCOLS
-  if ($smp =~ /^RICEJPCOLS$/i) {
-    $smp = $RICEJPCOLS;
-  } elsif ($smp =~ /^INDICACOLS$/i) {
-    $smp = $INDICACOLS;
-  } elsif ($smp =~ /^RICETWOCOLS$/i) {
-    $smp = $RICETWOCOLS;
-  } elsif ($smp =~ /^RICEJPCOLSj$/i) {
-    $smp = $RICEJPCOLSj;
-  } elsif ($smp =~ /^INDICACOLSi$/i) {
-    $smp = $INDICACOLSi;
-  }
-  return ($smp);
-}
 
 #****************************************************************************
 # Stat
