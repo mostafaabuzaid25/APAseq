@@ -450,3 +450,4 @@ sub readfq {
         }
         return @entry;
 }
+}
